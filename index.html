@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Servicio profesional de reparación de hardware informático, aparatos electrónicos, venta e instalación de ordenadores, configuración de redes y sistemas de backup">
+    <meta name="keywords" content="reparación ordenadores, servicio técnico informático, instalación redes, copias seguridad, reparación hardware, soporte remoto, mantenimiento informático, venta ordenadores">
+    <title>TechRepair - Servicio Técnico Informático Profesional</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Cookie Notice -->
+    <div id="cookieConsent" class="cookie-notice">
+        <p>Utilizamos cookies para mejorar su experiencia. ¿Acepta el uso de cookies?</p>
+        <div class="cookie-buttons">
+            <button onclick="acceptCookies()">Aceptar</button>
+            <button onclick="rejectCookies()">Rechazar</button>
+            <button onclick="showCookieInfo()">Más información</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="https://via.placeholder.com/300x100?text=LOGO+PRINCIPAL" alt="Logo Principal" class="main-logo">
+            <img src="https://via.placeholder.com/200x80?text=LOGO+SECUNDARIO" alt="Logo Secundario" class="secondary-logo">
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#dispositivos">Dispositivos</a></li>
+                <li><a href="#nosotros">Quiénes Somos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#ubicacion">Dónde Estamos</a></li>
+                <li><a href="#remoto">Asistencia Remota</a></li>
+            </ul>
+        </nav>
+
+        <div class="contact-header">
+            <a href="tel:+34900000000"><i class="fas fa-phone"></i> 900 000 000</a>
+            <a href="mailto:info@techrepair.es"><i class="fas fa-envelope"></i> info@techrepair.es</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Servicios -->
+        <section id="servicios" class="section-animate">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-laptop fa-3x"></i>
+                    <h3>Reparación de Ordenadores</h3>
+                    <p>Reparamos todo tipo de ordenadores y portátiles con técnicos certificados.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-network-wired fa-3x"></i>
+                    <h3>Redes Informáticas</h3>
+                    <p>Instalación y configuración de redes empresariales y domésticas.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-database fa-3x"></i>
+                    <h3>Copias de Seguridad</h3>
+                    <p>Sistemas profesionales de backup para proteger sus datos.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-desktop fa-3x"></i>
+                    <h3>Venta de Equipos</h3>
+                    <p>Ordenadores y componentes de las mejores marcas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dispositivos -->
+        <section id="dispositivos" class="section-animate">
+            <h2>Dispositivos que Reparamos</h2>
+            <div class="devices-grid">
+                <div class="device-card">
+                    <img src="https://via.placeholder.com/200x200?text=PC" alt="Ordenadores">
+                    <h3>Ordenadores</h3>
+                </div>
+                <div class="device-card">
+                    <img src="https://via.placeholder.com/200x200?text=Laptop" alt="Portátiles">
+                    <h3>Portátiles</h3>
+                </div>
+                <div class="device-card">
+                    <img src="https://via.placeholder.com/200x200?text=Mobile" alt="Móviles">
+                    <h3>Móviles</h3>
+                </div>
+                <div class="device-card">
+                    <img src="https://via.placeholder.com/200x200?text=Tablet" alt="Tablets">
+                    <h3>Tablets</h3>
+                </div>
+                <div class="device-card">
+                    <img src="https://via.placeholder.com/200x200?text=Printer" alt="Impresoras">
+                    <h3>Impresoras</h3>
+                </div>
+                <div class="device-card">
+                    <img src="https://via.placeholder.com/200x200?text=Server" alt="Servidores">
+                    <h3>Servidores</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quienes Somos -->
+        <section id="nosotros" class="section-animate">
+            <h2>Quiénes Somos</h2>
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/800x400?text=Nuestro+Equipo" alt="Nuestro Equipo">
+                </div>
+                <div class="about-text">
+                    <p>Somos un equipo de profesionales especializados en la reparación y mantenimiento de equipos informáticos con más de 15 años de experiencia en el sector.</p>
+                    <p>Nuestros técnicos certificados utilizan las últimas herramientas y tecnologías para garantizar reparaciones de calidad y duraderas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" class="section-animate">
+            <h2>Contacto</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="nombre" required>
+                    <label for="nombre">Nombre *</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Email *</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="mensaje" required></textarea>
+                    <label for="mensaje">Mensaje *</label>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="gdpr" required>
+                    <label for="gdpr">Acepto la política de protección de datos *</label>
+                </div>
+                <button type="submit" disabled>Enviar Mensaje</button>
+            </form>
+        </section>
+
+        <!-- Ubicación -->
+        <section id="ubicacion" class="section-animate">
+            <h2>Dónde Estamos</h2>
+            <div class="location-container">
+                <div class="map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.67890!2d-3.7037902!3d40.4167754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422997800a3c81%3A0xc436dec1618c2269!2sMadrid!5e0!3m2!1ses!2ses!4v1234567890"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="location-info">
+                    <h3>Dirección</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Calle Ejemplo, 123</p>
+                    <p>28001 Madrid</p>
+                    <p><i class="fas fa-phone"></i> 900 000 000</p>
+                    <p><i class="fas fa-envelope"></i> info@techrepair.es</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Asistencia Remota -->
+        <section id="remoto" class="section-animate">
+            <h2>Asistencia Remota</h2>
+            <div class="remote-support">
+                <img src="https://via.placeholder.com/400x300?text=Soporte+Remoto" alt="Soporte Remoto" class="hover-effect">
+                <p>Descargue nuestro software de asistencia remota para recibir ayuda inmediata</p>
+                <a href="#" class="download-button">
+                    <i class="fas fa-download"></i> Descargar Software
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Información Legal</h3>
+                <ul>
+                    <li><a href="#" onclick="showModal('privacy')">Política de Privacidad</a></li>
+                    <li><a href="#" onclick="showModal('terms')">Términos y Condiciones</a></li>
+                    <li><a href="#" onclick="showModal('cookies')">Política de Cookies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Horario</h3>
+                <p>Lunes a Viernes: 9:00 - 20:00</p>
+                <p>Sábados: 10:00 - 14:00</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>900 000 000</p>
+                <p>info@techrepair.es</p>
+                <p>Calle Ejemplo, 123</p>
+                <p>28001 Madrid</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
