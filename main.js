@@ -239,6 +239,22 @@ function validarFormulario() {
     campo.addEventListener('input', validarFormulario);
 });
 
+// Botón de descarga de software
+document.querySelector('.download-button').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevenir comportamiento predeterminado del enlace
+
+    // Crear un enlace dinámico para descargar el archivo
+    const link = document.createElement('a');
+    link.href = '/sites/default/files/Soporte%20Infus.exe'; // Cambia esta ruta a la ruta real del archivo
+    link.download = 'Soporte_Infus.exe'; // Nombre del archivo que se descargará
+    document.body.appendChild(link);
+    link.click(); // Simular clic para iniciar la descarga
+    document.body.removeChild(link); // Eliminar el enlace dinámico después de la descarga
+
+    // Mostrar mensaje de aviso después de la descarga
+    alert('El software ha sido descargado. Para ejecutarlo, busque el archivo "software-remoto.exe" en su carpeta de descargas y haga doble clic para abrirlo.');
+});
+
 // Inicializar la validación al cargar la página
 validarFormulario();
 
