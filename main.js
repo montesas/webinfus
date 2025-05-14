@@ -63,10 +63,11 @@ document.querySelectorAll('nav a').forEach(anchor => {
         const targetSection = document.querySelector(targetId);
 
         if (targetSection) {
-            const headerHeight = document.querySelector('header').offsetHeight || 0; // Altura del header
-            const targetPosition = targetSection.offsetTop - headerHeight; // Ajustar el desplazamiento
+            const headerHeight = document.querySelector('header').getBoundingClientRect().height || 0; // Altura precisa del header
+            const additionalOffset = 10; // Margen adicional para mayor claridad
+            const targetPosition = targetSection.offsetTop - headerHeight - additionalOffset;
 
-            // Desplazar a la sección con el ajuste
+            // Desplazar suavemente a la posición calculada
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
