@@ -210,39 +210,37 @@ document.addEventListener('DOMContentLoaded', function() {
     showCookieConsent();
 });
 
-// Formulario de contacto
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Validación del formulario
-        const nombre = document.getElementById('nombre').value;
-        const email = document.getElementById('email').value;
-        const mensaje = document.getElementById('mensaje').value;
-        const acepta = document.getElementById('acepta').checked;
-        
-        if (!nombre || !email || !mensaje || !acepta) {
-            alert('Por favor, rellene todos los campos y acepte la política de privacidad.');
-            return;
-        }
-        
-        if (!validateEmail(email)) {
-            alert('Por favor, introduzca un email válido.');
-            return;
-        }
-        
-        // Aquí iría el código para enviar el formulario
-        alert('Mensaje enviado correctamente. Nos pondremos en contacto con usted lo antes posible.');
-        this.reset();
-    });
+// Formulario de contacto actualizado
+const nombreInput = document.getElementById('nombre');
+const emailInput = document.getElementById('email');
+const mensajeInput = document.getElementById('mensaje');
+const gdprCheckbox = document.getElementById('gdpr');
+const enviarBtn = document.querySelector('.contact-form button');
+
+// Función para validar el email
+function esEmailValido(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
 }
 
-// Función para validar email
-function validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+// Función para validar si el formulario está completo
+function validarFormulario() {
+    const nombreValido = nombreInput.value.trim() !== '';
+    const emailValido = esEmailValido(emailInput.value.trim());
+    const mensajeValido = mensajeInput.value.trim() !== '';
+    const gdprAceptado = gdprCheckbox.checked;
+
+    // Activar o desactivar el botón según la validez del formulario
+    enviarBtn.disabled = !(nombreValido && emailValido && mensajeValido && gdprAceptado);
 }
+
+// Añadir eventos de escucha a los campos del formulario
+[nombreInput, emailInput, mensajeInput, gdprCheckbox].forEach(campo => {
+    campo.addEventListener('input', validarFormulario);
+});
+
+// Inicializar la validación al cargar la página
+validarFormulario();
 
 // Animación suave para los enlaces del menú
 document.querySelectorAll('nav a').forEach(anchor => {
