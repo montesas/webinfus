@@ -128,6 +128,7 @@ main {
 }
 
 section {
+     position: relative;
      scroll-margin-top: var(--header-height);
      padding: var(--section-padding) 2rem;
      min-height: 100vh;
@@ -136,6 +137,8 @@ section {
      align-items: center;
      background: var(--white);
      margin-bottom: 2rem;
+     padding-top: calc(var(--header-height) + 20px); /* Ajusta este valor según sea necesario */
+     margin-top: -var(--header-height); /* Corrige cualquier solapamiento */
 }
 
 section:nth-child(even) {
