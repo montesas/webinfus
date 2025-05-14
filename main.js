@@ -64,7 +64,7 @@ document.querySelectorAll('nav a').forEach(anchor => {
 
         if (targetSection) {
             const headerHeight = document.querySelector('header').getBoundingClientRect().height || 0; // Altura precisa del header
-            const additionalOffset = 10; // Margen adicional para mayor claridad
+            const additionalOffset = 20; // Margen adicional para mayor claridad
             const targetPosition = targetSection.offsetTop - headerHeight - additionalOffset;
 
             // Desplazar suavemente a la posición calculada
