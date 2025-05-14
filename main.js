@@ -54,6 +54,27 @@ backToTopButton.addEventListener('click', function() {
     });
 });
 
+// Ajustar el desplazamiento al hacer clic en los enlaces del menú
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+
+        if (targetSection) {
+            const headerHeight = document.querySelector('header').offsetHeight || 0; // Altura del header
+            const targetPosition = targetSection.offsetTop - headerHeight; // Ajustar el desplazamiento
+
+            // Desplazar a la sección con el ajuste
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
 // Gestión de Modales
 function showModal(type) {
     const modal = document.getElementById('modal');
