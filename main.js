@@ -75,9 +75,9 @@ document.querySelectorAll('nav a').forEach(anchor => {
             );
 
             // Verifica si ya estamos en la posición deseada
-            if (Math.abs(window.scrollY - targetPosition) < 1) {
-                return; // No hacer nada si ya estamos en la posición exacta
-            }
+          //  if (Math.abs(window.scrollY - targetPosition) < 1) {
+          //      return; // No hacer nada si ya estamos en la posición exacta
+          //  }
 
             // Desplázate suavemente
             window.scrollTo({
