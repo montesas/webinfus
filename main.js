@@ -63,18 +63,23 @@ document.querySelectorAll('nav a').forEach(anchor => {
         const targetSection = document.querySelector(targetId);
 
         if (targetSection) {
-            const headerHeight = document.querySelector('header').offsetHeight || 0; // Altura del header
-            const additionalOffset = 20; // Margen adicional opcional
+            // Altura precisa del header (incluyendo posibles bordes o sombras)
+            const headerHeight = document.querySelector('header').getBoundingClientRect().height;
 
-            // Calcula la posición precisa de la sección
-            const targetPosition = Math.round(targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset);
+            // Ajuste adicional opcional para mayor claridad
+            const additionalOffset = 20;
 
-            // Verifica si ya estamos en la posición deseada
+            // Cálculo preciso de la posición de la sección
+            const targetPosition = Math.floor(
+                targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset
+            );
+
+            // Verificar si ya estamos en la posición exacta
             if (Math.abs(window.scrollY - targetPosition) < 1) {
-                return; // No hace nada si ya estamos en la posición exacta
+                return; // No hacer nada si ya estamos en la posición
             }
 
-            // Desplázate a la posición calculada
+            // Desplazarse suavemente a la posición calculada
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
