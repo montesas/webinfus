@@ -128,11 +128,17 @@ main {
 }
 
 section {
-     position: relative; /* Asegura un posicionamiento consistente */
-    scroll-margin-top: 0; /* Desactiva cualquier ajuste automático del navegador */
-    padding-top: calc(var(--header-height) + 20px); /* Espaciado interno compensando el header */
-    margin-top: 0; /* Elimina márgenes negativos */
-    min-height: 100vh; /* Garantiza que cada sección tenga altura suficiente */
+    position: relative;
+    scroll-margin-top: calc(var(--header-height) + 20px); /* Ajuste para el desplazamiento */
+    padding-top: calc(var(--header-height) + 20px); /* Espaciado interno superior */
+    padding: var(--section-padding) 2rem; /* Espaciado general */
+    min-height: 100vh; /* Asegura que cada sección ocupe al menos el alto de la ventana */
+    display: flex; /* Flexbox para centrar contenido */
+    flex-direction: column; /* Alinea elementos en columna */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    background: var(--white); /* Fondo blanco */
+    margin-bottom: 2rem; /* Espaciado inferior */
 }
 
 section:nth-child(even) {
