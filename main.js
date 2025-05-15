@@ -57,7 +57,7 @@ backToTopButton.addEventListener('click', function() {
 // Ajustar el desplazamiento al hacer clic en los enlaces del menú
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); // Evita el comportamiento predeterminado del navegador
 
         const targetId = this.getAttribute('href'); // Obtén el id de la sección
         const targetSection = document.querySelector(targetId);
@@ -67,7 +67,12 @@ document.querySelectorAll('nav a').forEach(anchor => {
             const additionalOffset = 20; // Margen adicional opcional
 
             // Calcula la posición precisa de la sección
-            const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset;
+            const targetPosition = Math.round(targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset);
+
+            // Verifica si ya estamos en la posición deseada
+            if (Math.abs(window.scrollY - targetPosition) < 1) {
+                return; // No hace nada si ya estamos en la posición exacta
+            }
 
             // Desplázate a la posición calculada
             window.scrollTo({
