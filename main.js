@@ -79,7 +79,7 @@ document.querySelectorAll('nav a').forEach(anchor => {
                 return; // No hacer nada si ya estamos en la posición exacta
             }
 
-            // Desplazarse suavemente
+            // Desplázate suavemente
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
