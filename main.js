@@ -355,24 +355,27 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // Inicialización cuando el DOM está cargado
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('Iniciando aplicación...');
-    
+
     // Forzar scroll al inicio
     window.scrollTo(0, 0);
-    
+
     // Mostrar el aviso de cookies
     showCookieConsent();
-    
+
     // Activar animaciones de las secciones visibles inicialmente
     sections.forEach(section => {
         const rect = section.getBoundingClientRect();
+        console.log('Posición de sección:', rect.top, rect.bottom, 'Viewport:', window.innerHeight);
         if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) {
             section.classList.add('visible');
-            console.log('Sección visible añadida en la inicialización');
+            console.log('Clase "visible" añadida a: ', section.id || 'sección sin id');
+        } else {
+            console.log('Sección fuera del viewport:', section.id || 'sección sin id');
         }
     });
-    
+
     // Comprobar modo oscuro
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark-mode');
