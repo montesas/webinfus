@@ -8,7 +8,6 @@ const backToTopButton = document.getElementById('backToTop');
 const sections = document.querySelectorAll('.section-animate');
 
 // Debug inicial
-console.log('Elementos con clase section-animate encontrados:', sections.length);
 
 // Asegurar que la página siempre cargue al principio
 if (history.scrollRestoration) {
@@ -33,10 +32,8 @@ window.addEventListener('scroll', function() {
     // Animación de secciones al hacer scroll
     sections.forEach(section => {
         const rect = section.getBoundingClientRect();
-        console.log('Posición de sección:', rect.top, 'Viewport:', window.innerHeight * 0.75);
         if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) {
             section.classList.add('visible');
-            console.log('Sección visible añadida');
         }
     });
 
@@ -192,24 +189,22 @@ function showCookieConsent() {
     if (!cookieConsent) {
         // Solo mostrar si no hay decisión previa
         cookieNotice.style.display = 'block';
-        console.log('Mostrando aviso de cookies - no hay decisión previa');
     } else {
         // Ocultar si ya hay una decisión
         cookieNotice.style.display = 'none';
-        console.log('Ocultando aviso de cookies - decisión previa:', cookieConsent);
     }
 }
 
 function acceptCookies() {
     localStorage.setItem('cookieConsent', 'accepted');
     document.querySelector('.cookie-notice').style.display = 'none';
-    console.log('Cookies aceptadas');
+    console.info('Cookies aceptadas');
 }
 
 function rejectCookies() {
     localStorage.setItem('cookieConsent', 'rejected');
     document.querySelector('.cookie-notice').style.display = 'none';
-    console.log('Cookies rechazadas');
+    console.info('Cookies rechazadas');
 }
 
 // Gestión de enlaces del footer para modales
@@ -240,7 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Mostrar el aviso de cookies
-    console.log('DOM cargado, mostrando aviso de cookies...');
     showCookieConsent();
 });
 
@@ -355,27 +349,23 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // Inicialización cuando el DOM está cargado
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('Iniciando aplicación...');
-
+document.addEventListener('DOMContentLoaded', function() {
+    console.info('Iniciando aplicación...');
+    
     // Forzar scroll al inicio
     window.scrollTo(0, 0);
-
+    
     // Mostrar el aviso de cookies
     showCookieConsent();
-
+    
     // Activar animaciones de las secciones visibles inicialmente
     sections.forEach(section => {
         const rect = section.getBoundingClientRect();
-        console.log('Posición de sección:', rect.top, rect.bottom, 'Viewport:', window.innerHeight);
         if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) {
             section.classList.add('visible');
-            console.log('Clase "visible" añadida a: ', section.id || 'sección sin id');
-        } else {
-            console.log('Sección fuera del viewport:', section.id || 'sección sin id');
         }
     });
-
+    
     // Comprobar modo oscuro
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark-mode');
