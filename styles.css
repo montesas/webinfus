@@ -60,10 +60,10 @@ header {
 }
 
 .secondary-logo-container {
-    position: relative; /* Cambiar de absolute a relative */
-    display: flex; /* Permitir flexbox para alinear contenido */
-    align-items: center;
-    justify-content: space-between; /* Espaciado entre logo e información */
+    position: absolute;
+    left: 0;
+    bottom: -40px;
+    z-index: 1;
 }
 
 .main-logo {
@@ -115,7 +115,8 @@ nav a:hover {
 .contact-header a {
     color: var(--dark-gray);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    transition: var(--transition);
 }
 
 .contact-header a:hover {
@@ -647,15 +648,11 @@ footer {
         padding-bottom: 0.5rem;
     }
 
- .secondary-logo-container {
-        flex-direction: column; /* Colocar en columna en lugar de fila */
-        align-items: flex-start;
-    }
-
-    .contact-header {
+    .secondary-logo-container {
+        position: static;
         text-align: left;
-        margin-left: 0;
-    }
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
 
     .main-logo {
