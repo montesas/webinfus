@@ -64,6 +64,8 @@ header {
     display: flex; /* Permitir flexbox para alinear contenido */
     align-items: center;
     justify-content: space-between; /* Espaciado entre logo e información */
+    margin-bottom: 0; /* Ajusta a 0 o un valor menor */
+    padding-bottom: 0; /* Ajusta a 0 o un valor menor */
 }
 
 .main-logo {
