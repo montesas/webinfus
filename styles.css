@@ -60,10 +60,10 @@ header {
 }
 
 .secondary-logo-container {
-    position: absolute;
-    left: 0;
-    bottom: -40px;
-    z-index: 1;
+    position: relative; /* Cambiar de absolute a relative */
+    display: flex; /* Permitir flexbox para alinear contenido */
+    align-items: center;
+    justify-content: space-between; /* Espaciado entre logo e información */
 }
 
 .main-logo {
@@ -115,8 +115,7 @@ nav a:hover {
 .contact-header a {
     color: var(--dark-gray);
     text-decoration: none;
-    font-size: 1.1rem;
-    transition: var(--transition);
+    font-size: 0.9rem;
 }
 
 .contact-header a:hover {
