@@ -116,7 +116,6 @@ nav a:hover {
     color: var(--dark-gray);
     text-decoration: none;
     font-size: 0.9rem;
-    transition: var(--transition);
 }
 
 .contact-header a:hover {
