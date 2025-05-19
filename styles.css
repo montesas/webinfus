@@ -52,7 +52,7 @@ header {
     margin: 0 auto;
     position: relative;
     padding: 0.5rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
 }
 
 .main-logo-container {
@@ -64,8 +64,6 @@ header {
     display: flex; /* Permitir flexbox para alinear contenido */
     align-items: center;
     justify-content: space-between; /* Espaciado entre logo e información */
-    margin-bottom: 0; /* Ajusta a 0 o un valor menor */
-    padding-bottom: 0; /* Ajusta a 0 o un valor menor */
 }
 
 .main-logo {
@@ -657,7 +655,7 @@ footer {
     .contact-header {
         text-align: left;
         margin-left: 0;
-        }
+    }
     }
 
     .main-logo {
