@@ -137,9 +137,8 @@ section h2 {
 section {
     position: relative;
     scroll-margin-top: calc(var(--header-height) + 20px); /* Ajuste para el desplazamiento */
-/*    padding: calc(var(--header-height) + 20px) 2rem;*/ /* Espaciado general */
-    padding: 8rem;
-    min-height: 100vh; /* Asegura que cada sección ocupe al menos el alto de la ventana */
+    padding: 4rem;
+    min-height: 80vh; /* Asegura que cada sección ocupe al menos el alto de la ventana */
     display: flex; /* Flexbox para centrar contenido */
     flex-direction: column; /* Alinea elementos en columna */
     justify-content: flex-start; /* Comienza desde la parte superior */
