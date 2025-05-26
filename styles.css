@@ -518,6 +518,10 @@ footer {
     color: var(--light-gray);
 }
 
+.footer-section {
+    text-align: left;
+}
+
 .footer-section h3 {
     margin-bottom: 1rem;
     color: var(--accent-orange);
