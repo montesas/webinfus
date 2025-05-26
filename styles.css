@@ -196,8 +196,14 @@ h2::after {
 
 .service-card i {
     color: var(--primary-blue);
+    transition: color 0.3s ease; /* Transición suave para el cambio de color */
     margin-bottom: 1rem;
     font-size: 3rem;
+}
+
+/* Efecto hover */
+.service-card:hover i {
+    color: var(--accent-orange); /* Cambia el color al pasar el ratón */
 }
 
 .service-card h3 {
