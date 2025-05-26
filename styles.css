@@ -511,6 +511,13 @@ footer {
     gap: 2rem;
 }
 
+.footer-copyright {
+    text-align: center;
+    margin-top: 2rem; /* Espacio entre las secciones y el copyright */
+    font-size: 0.9rem;
+    color: var(--light-gray);
+}
+
 .footer-section h3 {
     margin-bottom: 1rem;
     color: var(--accent-orange);
