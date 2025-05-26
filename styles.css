@@ -443,15 +443,15 @@ button[type="submit"]:not(:disabled):hover {
 
 .remote-support img {
     max-width: 400px;
-    width: 100%;
+    width: 25%;
     height: auto;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border-radius: 8px;
     transition: var(--transition);
 }
 
 .remote-support img:hover {
-    transform: scale(1.05);
+/*    transform: scale(1.05);*/
 }
 
 .download-button {
@@ -500,7 +500,7 @@ button[type="submit"]:not(:disabled):hover {
 footer {
     background: var(--dark-gray);
     color: var(--white);
-    padding: 3rem 2rem;
+    padding: 1rem 2rem;
 }
 
 .footer-content {
