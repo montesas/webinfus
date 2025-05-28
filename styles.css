@@ -268,6 +268,7 @@ h2::after {
 
 .about-image img {
     width: 100%;
+    max-width: 150px;
     height: auto;
     transition: var(--transition);
 }
