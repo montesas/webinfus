@@ -519,6 +519,9 @@ footer {
     color: var(--light-gray);
     border-top: 1px solid rgba(255, 107, 53, 0.2); /* Línea tenue con el color de acento */
     padding-top: 1rem; /* Espacio entre la línea y el texto */
+    max-width: fit-content; /* Ajusta el ancho al contenido */
+    margin-left: auto; /* Centrar horizontalmente */
+    margin-right: auto; /* Centrar horizontalmente */
 }
 
 .footer-section {
