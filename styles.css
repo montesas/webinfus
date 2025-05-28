@@ -517,6 +517,8 @@ footer {
     margin-top: 2rem; /* Espacio entre las secciones y el copyright */
     font-size: 0.9rem;
     color: var(--light-gray);
+    border-top: 1px solid rgba(255, 107, 53, 0.2); /* Línea tenue con el color de acento */
+    padding-top: 1rem; /* Espacio entre la línea y el texto */
 }
 
 .footer-section {
