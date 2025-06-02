@@ -24,7 +24,8 @@ html {
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700; /* Ajusta el grosor de la fuente */
     line-height: 1.6;
     color: var(--dark-gray);
     background-color: var(--light-gray);
