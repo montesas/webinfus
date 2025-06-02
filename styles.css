@@ -137,7 +137,7 @@ section h2 {
 section {
     position: relative;
     scroll-margin-top: calc(var(--header-height) + 20px); /* Ajuste para el desplazamiento */
-    padding: 4rem;
+    padding: 4rem 2rem; /* Incrementa el relleno general para dar más espacio */
     min-height: 80vh; /* Asegura que cada sección ocupe al menos el alto de la ventana */
     display: flex; /* Flexbox para centrar contenido */
     flex-direction: column; /* Alinea elementos en columna */
@@ -175,7 +175,7 @@ h2::after {
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: 3rem; /* Incrementa el espacio entre los elementos del grid */
     max-width: 1200px;
     width: 100%;
 }
@@ -509,7 +509,7 @@ footer {
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: 3rem; /* Incrementa el espacio entre columnas en el footer */
 }
 
 .footer-copyright {
@@ -659,6 +659,10 @@ footer {
     :root {
         --section-padding: 60px;
     }
+    section {
+        padding: 3rem 1.5rem; /* Reduce ligeramente el relleno en pantallas pequeñas */
+        margin-bottom: 2rem; /* Ajusta el espacio entre secciones */
+    }
 
     .header-top {
         padding: 0.5rem;
@@ -708,7 +712,7 @@ footer {
     .services-grid,
     .devices-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 2rem;
     }
 
     .contact-form {
@@ -717,6 +721,7 @@ footer {
 
     .footer-content {
         grid-template-columns: 1fr;
+        gap: 2rem; /* Reduce el espacio entre columnas en el footer */
         text-align: center;
     }
 
