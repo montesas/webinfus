@@ -771,4 +771,23 @@ footer {
     .form-group.checkbox label {
         font-size: 0.8rem;
     }
+        section {
+        padding: 2rem 1rem; /* Reduce aún más el relleno en pantallas muy pequeñas */
+        margin-bottom: 1.5rem; /* Ajusta el espacio entre secciones */
+    }
+
+    .footer-content {
+        gap: 1.5rem; /* Reduce el espacio entre columnas del footer */
+        text-align: center; /* Centra el texto del footer */
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr; /* Asegura que haya una sola columna */
+        gap: 1.5rem; /* Ajusta el espacio entre los elementos */
+    }
+
+    .footer-copyright {
+        font-size: 0.8rem; /* Reduce el tamaño del texto del copyright */
+        padding-top: 0.5rem; /* Ajusta el espacio entre la línea y el texto */
+    }
 }
