@@ -152,18 +152,6 @@ section:nth-child(even) {
     background: var(--light-gray);
 }
 
-/* Aplicar Lora a los títulos */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lora', serif; /* Aplica la fuente Lora */
-    font-weight: 700; /* Ajusta el grosor de la fuente */
-}
-
-/* Opcional: Personaliza el espaciado y estilo adicional */
-h1, h2 {
-    line-height: 1.4; /* Mejora la legibilidad */
-    margin-bottom: 1rem; /* Espaciado inferior para separación */
-}
-
 h2 {
     margin: 0; /* Elimina márgenes superiores e inferiores */
     padding: 1rem 0; /* Espaciado interno opcional para claridad */
@@ -523,8 +511,6 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 3rem; /* Incrementa el espacio entre columnas en el footer */
-    padding-bottom: 2rem; /* Separación inferior */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria tenue */
 }
 
 .footer-copyright {
