@@ -250,7 +250,7 @@ h2::after {
     font-size: 1.3rem;
 }
 
-/* About Section */
+/* Nosotros */
 .about-container {
     max-width: 1000px;
     width: 100%;
@@ -269,9 +269,10 @@ h2::after {
 
 .about-image img {
     width: 100%;
-    max-width: 150px;
+    max-width: 125px;
     height: auto;
     transition: var(--transition);
+    padding-top: 3px;
 }
 
 .about-image img:hover {
