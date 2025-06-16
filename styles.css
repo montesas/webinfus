@@ -112,7 +112,7 @@ nav a:hover {
 }
 
 .contact-header a {
-    color: var(--dark-gray); /* O el color que prefieras */
+    color: var(--primary-blue); /* O el color que prefieras */
     text-decoration: none;
     font-size: 1rem;
     display: flex;
