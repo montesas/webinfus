@@ -106,21 +106,29 @@ nav a:hover {
 }
 
 .contact-header {
-    text-align: right; /* Alinear texto a la derecha */
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-left: auto; /* Empujar hacia la derecha */
+    align-items: center;
+    gap: 1.5rem; /* Espacio horizontal entre teléfono y contacto */
 }
 
 .contact-header a {
-    color: var(--dark-gray);
+    color: var(--dark-gray); /* O el color que prefieras */
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5em; /* Espacio entre icono y texto */
 }
 
 .contact-header a:hover {
-    color: var(--accent-orange);
+    color: var(--accent-orange); /* Efecto hover */
+}
+
+@media (max-width: 480px) {
+    .contact-header {
+        gap: 0.75rem;
+        font-size: 0.95rem;
+    }
 }
 
 /* Main Content */
