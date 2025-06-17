@@ -510,7 +510,7 @@ button[type="submit"]:not(:disabled):hover {
 
 /* Footer */
 footer {
-    background: var(--dark-gray);
+    background: var(--secondary-color);
     color: var(--white);
     padding: 1rem 2rem;
 }
