@@ -1,28 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<!-- Fin Google Analytics -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidad - Infus</title>
     <meta name="robots" content="noindex, follow">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <!-- Incluye aquí cualquier otra fuente, favicon o CSS de tu index.html -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
+    <!-- Cookie Notice (opcional, si lo deseas) -->
+    <div id="cookieConsent" class="cookie-notice" style="display:none">
+        <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
+        <div class="cookie-buttons">
+            <button onclick="acceptCookies()">Aceptar</button>
+            <button onclick="rejectCookies()">Rechazar</button>
+            <button class="more-info">Más información</button>
+        </div>
+    </div>
+
+    <!-- Header idéntico al index.html -->
     <header>
-        <div class="header-container">
-            <a href="/" class="logo">
-                <img src="infus.png" alt="Infus - Servicio Técnico Informático" style="max-height:60px;">
-            </a>
-            <nav class="nav">
+        <div class="header-top">
+            <div class="logos-wrapper">
+                <div class="main-logo-container">
+                    <img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo">
+                </div>
+                <div class="secondary-logo-container">
+                    <img src="montella.png" alt="Montella-Infus Servicios Informáticos" class="secondary-logo">
+                    <div class="contact-header">
+                        <a href="tel:+34981928212"><i class="fas fa-phone"></i>981 928 212</a>
+                        <a href="#contacto"><i class="fas fa-envelope"></i>Contacto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <nav>
                 <ul>
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/#servicios">Servicios</a></li>
-                    <li><a href="/#contacto">Contacto</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <!-- <li><a href="#dispositivos">Dispositivos</a></li> -->
+                    <li><a href="#nosotros">Quiénes Somos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#ubicacion">Dónde Estamos</a></li>
+                    <li><a href="#remoto">Soporte Remoto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
     <main class="container" style="max-width: 800px; margin: 2rem auto; font-size:1.1em; line-height:1.7;">
         <h2 style="margin-bottom:2rem;">Política de privacidad</h2>
         <h3>1. Responsable del tratamiento de los datos</h3>
@@ -57,6 +98,7 @@
             Puedes consultar información adicional y detallada sobre protección de datos solicitándola a nuestro email de contacto.
         </p>
     </main>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -83,5 +125,6 @@
             <p>&copy; 2025 Infus - Todos los derechos reservados | Diseñado con <i class="fas fa-heart" style="color: var(--accent-orange);"></i> para ofrecer el mejor servicio</p>
         </div>
     </footer>
+    <script src="main.js"></script>
 </body>
 </html>
