@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<!-- Fin Google Analytics -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Servicio técnico profesional de hardware informático en A Coruña, aparatos electrónicos, venta e instalación de ordenadores, configuración de redes y sistemas de backup en A Coruña">
-    <meta name="keywords" content="reparación ordenadores, servicio técnico informático, instalación redes, copias seguridad, reparación hardware, soporte remoto, mantenimiento informático, venta equipos, A Coruña">
+    
+   <!-- SEO Metadatos -->
+    <title>Infus - Servicio Técnico Informático en A Coruña</title>
+    <meta name="description" content="Servicio técnico informático en A Coruña. Reparación e instalación de ordenadores, aparatos electrónicos, redes, copias de seguridad, soporte remoto y más. Atención rápida y eficaz para particulares y empresas.">
+    <meta name="keywords" content="servicio técnico, informática, reparación ordenadores, redes, soporte remoto, A Coruña, mantenimiento, sistemas de backup">
     <meta name="robots" content="index, follow">
-    <title>Infus - Servicio Técnico Informático Profesional</title>
+    <link rel="canonical" href="https://infus.es/">  
+    
+<!-- Favicon y Manifest -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+
+ <!--   <meta name="description" content="Servicio técnico profesional de hardware informático en A Coruña, aparatos electrónicos, venta e instalación de ordenadores, configuración de redes y sistemas de backup en A Coruña">
+    <meta name="keywords" content="reparación ordenadores, servicio técnico informático, instalación redes, copias seguridad, reparación hardware, soporte remoto, mantenimiento informático, venta equipos, A Coruña">
+    <meta name="robots" content="index, follow">-->
+  
     <!-- Integración de Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Integración de Google Fonts -->
@@ -14,9 +37,33 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Datos estructurados Schema.org (LocalBusiness) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Infus Servicio Técnico Informático",
+      "image": "https://infus.es/infus.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rafael Alberti, 8",
+        "addressLocality": "Fonteculler, A Coruña",
+        "addressRegion": "GA",
+        "postalCode": "15174",
+        "addressCountry": "ES"
+      },
+      "url": "https://infus.es/",
+      "telephone": "+34 981 928 212",
+      "openingHours": "Mo-Fr 09:00-19:00",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.3258613,
+        "longitude": -8.3843803
+      }
+    }
+    </script>
+
 </head>
 <body>
     <!-- Cookie Notice -->
@@ -61,7 +108,7 @@
 </header>
 
     <main>
-        <h1>Infus - Servicio Técnico Informático en La Coruña</h1>
+        <h1 class="visually-hidden">Servicio Técnico Informático en A Coruña</h1>
         <!-- Servicios -->
         <section id="servicios" class="section-animate">
             <h2>Nuestros Servicios</h2>
