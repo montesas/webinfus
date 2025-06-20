@@ -1,14 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-<!-- Fin Google Analytics -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,22 +15,12 @@
     <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
-    <!-- Cookie Notice (opcional, si lo deseas) -->
-    <div id="cookieConsent" class="cookie-notice" style="display:none">
-        <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
-        <div class="cookie-buttons">
-            <button onclick="acceptCookies()">Aceptar</button>
-            <button onclick="rejectCookies()">Rechazar</button>
-            <button class="more-info">Más información</button>
-        </div>
-    </div>
-
-    <!-- Header idéntico al index.html -->
+    <!-- Header superior SÓLO con logo y contacto, SIN menú -->
     <header>
         <div class="header-top">
             <div class="logos-wrapper">
                 <div class="main-logo-container">
-                    <img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo">
+                    <a href="/"><img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo"></a>
                 </div>
                 <div class="secondary-logo-container">
                     <img src="montella.png" alt="Montella-Infus Servicios Informáticos" class="secondary-logo">
@@ -49,18 +30,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="header-bottom">
-            <nav>
-                <ul>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <!-- <li><a href="#dispositivos">Dispositivos</a></li> -->
-                    <li><a href="#nosotros">Quiénes Somos</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                    <li><a href="#ubicacion">Dónde Estamos</a></li>
-                    <li><a href="#remoto">Soporte Remoto</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
@@ -104,9 +73,9 @@
             <div class="footer-section">
                 <h3>Información Legal</h3>
                 <ul>
-                    <li><a href="/privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a></li>
-                    <li><a href="/terminos.html" target="_blank" rel="noopener">Términos y Condiciones</a></li>
-                    <li><a href="/cookies.html" target="_blank" rel="noopener">Política de Cookies</a></li>
+                    <li><a href="/privacidad.html">Política de Privacidad</a></li>
+                    <li><a href="/terminos.html">Términos y Condiciones</a></li>
+                    <li><a href="/cookies.html">Política de Cookies</a></li>
                 </ul>
             </div>
             <div class="footer-section">
