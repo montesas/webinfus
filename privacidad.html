@@ -54,7 +54,7 @@
         </div>
     </header>
 
-    <!-- NO pongas margin-top ni padding-top aquí -->
+    <!-- NO pongas margin-top ni padding-top inline aquí -->
     <main class="container" style="max-width: 800px; margin: 0 auto; font-size:1.1em; line-height:1.7; padding-bottom:120px;">
         <h2 style="margin-bottom:2rem;">Política de Privacidad</h2>
         <h3>1. Responsable del tratamiento de los datos</h3>
@@ -117,5 +117,15 @@
         </div>
     </footer>
     <script src="main.js"></script>
+    <!-- Script para ajustar el margin-top dinámicamente al alto real del header -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var header = document.querySelector('header');
+        var main = document.querySelector('main.container');
+        if(header && main) {
+            main.style.marginTop = header.offsetHeight + "px";
+        }
+    });
+    </script>
 </body>
 </html>
