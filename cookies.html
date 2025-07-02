@@ -5,16 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Cookies - Infus</title>
     <meta name="robots" content="noindex, follow">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/webinfus/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/webinfus/apple-touch-icon.png">
+    <link rel="manifest" href="/webinfus/site.webmanifest">
 </head>
 <body>
+    <div id="cookieConsent" class="cookie-notice" style="display:none">
+        <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
+        <div class="cookie-buttons">
+            <button onclick="acceptCookies()">Aceptar</button>
+            <button onclick="rejectCookies()">Rechazar</button>
+            <button class="more-info">Más información</button>
+        </div>
+    </div>
+
     <header>
-        <a href="/" class="logo">
-            <img src="infus.png" alt="Infus - Servicio Técnico Informático" style="max-height:60px;">
-        </a>
+        <div class="header-top">
+            <div class="logos-wrapper">
+                <div class="main-logo-container">
+                    <img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo">
+                </div>
+                <div class="secondary-logo-container">
+                    <img src="montella.png" alt="Montella-Infus Servicios Informáticos" class="secondary-logo">
+                    <div class="contact-header">
+                        <a href="tel:+34981928212"><i class="fas fa-phone"></i>981 928 212</a>
+                        <a href="index.html#contacto"><i class="fas fa-envelope"></i>Contacto</a>
+                    </div>                
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <nav>
+                <ul>
+                    <li><a href="index.html#servicios">Servicios</a></li>
+                    <!-- <li><a href="index.html#dispositivos">Dispositivos</a></li> -->
+                    <li><a href="index.html#nosotros">Quiénes Somos</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                    <li><a href="index.html#ubicacion">Dónde Estamos</a></li>
+                    <li><a href="index.html#remoto">Soporte Remoto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main class="container">
-        <h1>Política de Cookies</h1>
+
+    <main class="container" style="max-width: 800px; margin: 0 auto; font-size:1.1em; line-height:1.7; padding-bottom:120px;">
+        <h1 style="margin-bottom:2rem;">Política de Cookies</h1>
         <section>
             <h3>¿Qué son las cookies?</h3>
             <p>
@@ -60,14 +100,15 @@
             </p>
         </section>
     </main>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Información Legal</h3>
                 <ul>
-                    <li><a href="/privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a></li>
-                    <li><a href="/terminos.html" target="_blank" rel="noopener">Términos y Condiciones</a></li>
-                    <li><a href="/cookies.html" target="_blank" rel="noopener">Política de Cookies</a></li>
+                    <li><a href="privacidad.html">Política de Privacidad</a></li>
+                    <li><a href="terminos.html">Términos y Condiciones</a></li>
+                    <li><a href="cookies.html">Política de Cookies</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -86,5 +127,15 @@
             <p>&copy; 2025 Infus - Todos los derechos reservados | Diseñado con <i class="fas fa-heart" style="color: var(--accent-orange);"></i> para ofrecer el mejor servicio</p>
         </div>
     </footer>
+    <script src="main.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var header = document.querySelector('header');
+        var main = document.querySelector('main.container');
+        if(header && main) {
+            main.style.marginTop = header.offsetHeight + "px";
+        }
+    });
+    </script>
 </body>
 </html>
