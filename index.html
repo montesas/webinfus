@@ -227,11 +227,13 @@
                     <textarea id="mensaje" name="mensaje" required></textarea>
                     <label for="mensaje">Mensaje *</label>
                   </div>
-                  <div class="form-group checkbox">
-                    <input type="checkbox" id="gdpr" name="gdpr" required>
-                    <label for="gdpr">Acepto la política de protección de datos *</label>
-                  </div>
-                  <div class="g-recaptcha" data-sitekey="TU_NUEVA_CLAVE_DEL_SITIO"></div>
+                  <<div class="form-group checkbox">
+                      <label for="gdpr" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="gdpr" name="gdpr" required>
+                        Acepto la política de protección de datos *
+                      </label>
+                </div>
+                  <div class="g-recaptcha" data-sitekey="6LfKCBwUAAAAAGBcrCEeP8bxEil1hdyyMf6mllKE"></div>
                   <button type="submit" id="btnEnviar" disabled>Enviar Mensaje</button>
                   <div id="formStatus" style="margin-top:10px"></div>
                 </form>
@@ -241,56 +243,56 @@
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <script>
         // Habilitar/deshabilitar el botón según el checkbox GDPR
-        const btnEnviar = document.getElementById('btnEnviar');
-        const gdpr = document.getElementById('gdpr');
-        gdpr.addEventListener('change', function() {
-          btnEnviar.disabled = !this.checked;
-        });
-
-        // Gestión del envío y reCAPTCHA
-        document.getElementById("contactForm").addEventListener("submit", async function(event) {
-          event.preventDefault();
-
-          var status = document.getElementById("formStatus");
-          status.textContent = "";
-
-          // Verifica que el captcha esté resuelto
-          var recaptchaResponse = grecaptcha.getResponse();
-          if (!recaptchaResponse) {
-            status.textContent = "Por favor, marca que no eres un robot.";
-            status.style.color = "red";
-            return;
-          }
-
-          // Prepara los datos del formulario
-          const form = event.target;
-          const formData = new FormData(form);
-          formData.append("g-recaptcha-response", recaptchaResponse);
-
-          // Envía los datos a Formspree
-          try {
-            const response = await fetch(form.action, {
-              method: "POST",
-              body: formData,
-              headers: { 'Accept': 'application/json' }
+            const btnEnviar = document.getElementById('btnEnviar');
+            const gdpr = document.getElementById('gdpr');
+            gdpr.addEventListener('change', function() {
+              btnEnviar.disabled = !this.checked;
             });
 
-            if (response.ok) {
-              status.textContent = "¡Mensaje enviado correctamente!";
-              status.style.color = "green";
-              form.reset();
-              grecaptcha.reset();
-              btnEnviar.disabled = true; // Volver a deshabilitar el botón hasta que marque el checkbox de nuevo
-            } else {
-              status.textContent = "Ocurrió un error al enviar el formulario. Intenta más tarde.";
-              status.style.color = "red";
-            }
-          } catch (err) {
-            status.textContent = "No se pudo conectar con el servidor. Intenta más tarde.";
-            status.style.color = "red";
-          }
-        });
-        </script>
+            // Gestión del envío y reCAPTCHA
+            document.getElementById("contactForm").addEventListener("submit", async function(event) {
+              event.preventDefault();
+
+              var status = document.getElementById("formStatus");
+              status.textContent = "";
+
+              // Verifica que el captcha esté resuelto
+              var recaptchaResponse = grecaptcha.getResponse();
+              if (!recaptchaResponse) {
+                status.textContent = "Por favor, marca que no eres un robot.";
+                status.style.color = "red";
+                return;
+              }
+
+          // Prepara los datos del formulario
+              const form = event.target;
+              const formData = new FormData(form);
+              formData.append("g-recaptcha-response", recaptchaResponse);
+
+              // Envía los datos a Formspree
+              try {
+                const response = await fetch(form.action, {
+                  method: "POST",
+                  body: formData,
+                  headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                  status.textContent = "¡Mensaje enviado correctamente!";
+                  status.style.color = "green";
+                  form.reset();
+                  grecaptcha.reset();
+                  btnEnviar.disabled = true; // Volver a deshabilitar el botón hasta que marque el checkbox de nuevo
+                } else {
+                  status.textContent = "Ocurrió un error al enviar el formulario. Inténtalo más tarde.";
+                  status.style.color = "red";
+                }
+              } catch (err) {
+                status.textContent = "No se pudo conectar con el servidor. Inténtalo más tarde.";
+                status.style.color = "red";
+              }
+            });
+            </script>
         </section>
 
         <!-- Ubicación -->
