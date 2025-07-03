@@ -393,6 +393,21 @@ h2::after {
     flex: 1;
 }
 
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox-label input[type="checkbox"] {
+  accent-color: var(--accent-orange);
+  width: 1.1em;
+  height: 1.1em;
+  margin: 0;
+  cursor: pointer;
+}
+
 button[type="submit"] {
     background: var(--accent-orange);
     color: var(--white);
