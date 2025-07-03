@@ -213,27 +213,71 @@
         <!-- Contacto -->
         <section id="contacto" class="section-animate">
             <h2>Contacto</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" id="nombre" required>
-                    <label for="nombre">Nombre *</label>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" required>
-                    <label for="email">Email *</label>
-                </div>
-                <div class="form-group">
-                    <textarea id="mensaje" required></textarea>
-                    <label for="mensaje">Mensaje *</label>
-                </div>
-                <div class="form-group checkbox">
-                    <input type="checkbox" id="gdpr" required>
-                    <label for="gdpr">Acepto la política de protección de datos *</label>
-                </div>
-                <div class="g-recaptcha" data-sitekey="6LfKCBwUAAAAAGBcrCEeP8bxEil1hdyyMf6mllKE"></div>
-                <!-- Botón de enviar desactivado por defecto -->
-                <button type="submit" disabled>Enviar Mensaje</button>
+            <form id="contactForm" action="https://formspree.io/f/mqabjlvb" method="POST">
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" name="nombre" required>
+
+              <label for="email">Correo electrónico:</label>
+              <input type="email" id="email" name="email" required>
+
+              <label for="mensaje">Mensaje:</label>
+              <textarea id="mensaje" name="mensaje" required></textarea>
+
+              <label>
+                <input type="checkbox" name="gdpr" required>
+                Acepto la política de privacidad
+              </label>
+
+              <div class="g-recaptcha" data-sitekey="6LfKCBwUAAAAAGBcrCEeP8bxEil1hdyyMf6mllKE"></div>
+
+              <button type="submit">Enviar</button>
+              <div id="formStatus"></div>
             </form>
+
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            <script>
+            document.getElementById("contactForm").addEventListener("submit", async function(event) {
+              event.preventDefault();
+
+              var status = document.getElementById("formStatus");
+              status.textContent = "";
+
+              // Verifica que el captcha esté resuelto
+              var recaptchaResponse = grecaptcha.getResponse();
+              if (!recaptchaResponse) {
+                status.textContent = "Por favor, marca que no eres un robot.";
+                status.style.color = "red";
+                return;
+              }
+
+              // Prepara los datos del formulario
+              const form = event.target;
+              const formData = new FormData(form);
+              formData.append("g-recaptcha-response", recaptchaResponse);
+
+              // Envía los datos a Formspree
+              try {
+                const response = await fetch(form.action, {
+                  method: "POST",
+                  body: formData,
+                  headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                  status.textContent = "¡Mensaje enviado correctamente!";
+                  status.style.color = "green";
+                  form.reset();
+                  grecaptcha.reset();
+                } else {
+                  status.textContent = "Ocurrió un error al enviar el formulario. Intenta más tarde.";
+                  status.style.color = "red";
+                }
+              } catch (err) {
+                status.textContent = "No se pudo conectar con el servidor. Intenta más tarde.";
+                status.style.color = "red";
+              }
+            });
+            </script>
         </section>
 
         <!-- Ubicación -->
