@@ -499,6 +499,18 @@ button[type="submit"]:not(:disabled):hover {
 /*    transform: scale(1.05);*/
 }
 
+.contact-form-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.contact-form-wrapper form {
+    width: 100%;
+    max-width: 800px; /* O el ancho que prefieras */
+}
+
+
 /* Remote Support Section (ajustado para móviles) */
 .remote-support {
     text-align: center;
