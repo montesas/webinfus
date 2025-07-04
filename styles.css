@@ -385,14 +385,6 @@ h2::after {
     cursor: pointer;
 }
 
-.form-group.checkbox label {
-    position: static;
-    font-size: 0.9rem;
-    color: var(--dark-gray);
-    cursor: pointer;
-    flex: 1;
-}
-
 .checkbox-label {
   display: flex;
   align-items: center;
@@ -406,6 +398,18 @@ h2::after {
   height: 1.1em;
   margin: 0;
   cursor: pointer;
+}
+
+.form-group.checkbox label {
+    position: static !important;
+    pointer-events: auto !important;
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+    cursor: pointer;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 button[type="submit"] {
@@ -890,17 +894,7 @@ footer {
         padding: 1rem;
     }
 
-    .form-group.checkbox label {
-       position: static !important;
-       pointer-events: auto !important;
-       font-size: 0.9rem;
-       color: var(--dark-gray);
-       cursor: pointer;
-       flex: 1;
-       display: flex;
-       align-items: center;
-       gap: 10px;
-    }
+
     section {
         padding: 2rem 1rem; /* Reduce aún más el relleno en pantallas muy pequeñas */
         margin-bottom: 1.5rem; /* Ajusta el espacio entre secciones */
