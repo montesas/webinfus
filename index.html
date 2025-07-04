@@ -247,10 +247,14 @@
 
             function checkFormReady() {
               const gdprOk = gdpr.checked;
-              const captchaOk = typeof grecaptcha !== "undefined" && grecaptcha.getResponse && grecaptcha.getResponse().length > 0;
+              const captchaOk =
+                typeof grecaptcha !== "undefined" &&
+                grecaptcha.getResponse &&
+                grecaptcha.getResponse().length > 0;
               btnEnviar.disabled = !(gdprOk && captchaOk);
             }
 
+            // Llama tras validar el captcha
             window.recaptchaCallback = function() { checkFormReady(); }
             gdpr.addEventListener('change', checkFormReady);
             document.addEventListener('DOMContentLoaded', checkFormReady);
@@ -271,7 +275,7 @@
                 // Verifica que el captcha esté resuelto
                 var recaptchaResponse = grecaptcha.getResponse();
                 if (!recaptchaResponse) {
-                  status.textContent = "Por favor, marca que no eres un robot.";
+                  status.textContent = "Por favor, marque que no es un robot.";
                   status.style.color = "red";
                   return;
                 }
