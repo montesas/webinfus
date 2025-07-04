@@ -15,7 +15,7 @@
     
    <!-- SEO Metadatos -->
     <title>Infus - Servicio Técnico Informático en A Coruña</title>
-    <meta name="description" content="Servicio técnico informático en A Coruña. Reparación e instalación de ordenadores, aparatos electrónicos, redes, copias de seguridad, soporte remoto y más. Atención rápida y eficaz para particulares y empresas.">
+    <meta name="description" content="Servicio técnico informático en A Coruña. Reparación e instalación de ordenadores, aparatos electrónicos, redes, copias de seguridad, soporte remoto y mucho más.">
     <meta name="keywords" content="servicio técnico, informática, reparación ordenadores, redes, soporte remoto, A Coruña, mantenimiento, sistemas de backup">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://infus.es/">  
@@ -25,7 +25,6 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
 
-  
     <!-- Integración de Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Integración de Google Fonts -->
@@ -82,10 +81,13 @@
         </div>
     </div>
     <div class="header-bottom" style="position:relative;">
-        <div class="menu-toggle" id="menu-toggle">
+        <button class="menu-toggle" id="menu-toggle"
+            aria-label="Abrir menú de navegación"
+            aria-controls="main-navigation"
+            aria-expanded="false">
             <i class="fas fa-bars"></i>
-        </div>
-        <nav>
+        </button>
+        <nav id="main-navigation">
             <ul>
                 <li><a href="#servicios">Servicios</a></li>
                 <!-- <li><a href="#dispositivos">Dispositivos</a></li> -->
@@ -226,8 +228,8 @@
                     <img src="ok!infus.png" alt="Nosotros">
                 </div>
                 <div class="about-text">
-                    <p>En <strong>Infus</strong> llevamos desde el año 2008 ofreciendo soluciones tecnológicas integrales a empresas y particulares. Nuestro equipo está formado por profesionales certificados con amplia experiencia en el sector informático.</p>
-                    <p>Nos caracterizamos por ofrecer un servicio personalizado, rápido y eficiente, adaptándonos a las necesidades específicas de cada cliente. Trabajamos con las mejores marcas y utilizamos herramientas de diagnóstico avanzadas para garantizar la máxima calidad en nuestros servicios.</p>
+                    <p>En <strong>Infus</strong> llevamos desde el año 2008 ofreciendo soluciones tecnológicas integrales a empresas y particulares. Nuestro equipo está formado por profesionales con amplia experiencia en el sector.</p>
+                    <p>Nos caracterizamos por ofrecer un servicio personalizado, rápido y eficiente, adaptándonos a las necesidades específicas de cada cliente. Trabajamos con las mejores marcas y tecnologías del mercado.</p>
                     <p>Nuestra misión es mantener sus equipos y sistemas funcionando de manera óptima para que pueda centrarse en lo que realmente importa: su negocio o sus actividades diarias.</p>
                 </div>
             </div>
@@ -262,7 +264,6 @@
                  </form>
             </div>
         </section>
-
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <script>
             const btnEnviar = document.getElementById('btnEnviar');
@@ -340,7 +341,7 @@
             <div class="location-container">
                 <div class="map">
                     <iframe 
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCIWwObWndHNq9FOQGYnqRgG--r8-JPMjY&q=INFUS+Montella+Soluciones+Informáticas,Rafael+Alberti+8,Fonteculler,A+Coruña&zoom=17"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCIWwObWndHNq9FOQGYnqRgG--r8-JPMjY&q=INFUS+Montella+Soluciones+Informáticas,Rafael+Alberti+8,Fonteculler,A+Coruña,España"
                         width="100%" 
                         height="450" 
                         style="border:0;" 
