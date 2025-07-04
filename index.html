@@ -62,15 +62,6 @@
 
 </head>
 <body>
-    <!-- Cookie Notice -->
-    <div id="cookieConsent" class="cookie-notice">
-        <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
-        <div class="cookie-buttons">
-            <button onclick="acceptCookies()">Aceptar</button>
-            <button onclick="rejectCookies()">Rechazar</button>
-            <button class="more-info">Más información</button>
-        </div>
-    </div>
 
 <!-- Header -->
 <header>
@@ -106,6 +97,38 @@
         </nav>
     </div>
 </header>
+
+    <!-- Banner de cookies accesible -->
+    <div id="cookieConsent" class="cookie-notice" role="dialog" aria-label="Aviso de cookies" aria-modal="true" aria-live="polite">
+      <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
+      <div class="cookie-buttons">
+        <button onclick="acceptCookies()" aria-label="Aceptar cookies">Aceptar</button>
+        <button onclick="rejectCookies()" aria-label="Rechazar cookies">Rechazar</button>
+        <button class="more-info" aria-label="Más información sobre cookies">Más información</button>
+      </div>
+    </div>
+
+    <script>
+    // Menú hamburguesa accesible
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-navigation');
+    const navList = nav.querySelector('ul');
+
+    menuToggle.addEventListener('click', function() {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      navList.classList.toggle('show');
+    });
+
+    // Opcional: cerrar el menú con ESC y mejorar el foco en móviles
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        menuToggle.click();
+        menuToggle.focus();
+      }
+    });
+    </script>
+
 
     <main>
         <h1 class="visually-hidden">Servicio Técnico Informático en A Coruña</h1>

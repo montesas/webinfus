@@ -757,15 +757,45 @@ footer {
 
 /* Menú hamburguesa responsive */
 .menu-toggle {
-    display: none;
-    font-size: 2em;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    z-index: 1002;
+    /* ya tienes display: none; y display: block en media queries, asegúrate de que sea un botón */
+    min-width: 48px;
+    min-height: 48px;
+    background: none;
+    border: none;
     color: var(--main-blue, #2c3e50);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+/* Mejora el foco visible para accesibilidad */
+.menu-toggle:focus {
+    outline: 3px solid var(--accent-orange);
+    outline-offset: 2px;
+}
+
+nav ul {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul.show {
+  display: block;
+}
+.cookie-buttons button:focus {
+  outline: 3px solid orange;
+  outline-offset: 2px;
+}
+
+
+/* Banner de cookies accesible: opcional, mejora el foco de los botones */
+.cookie-buttons button:focus {
+    outline: 3px solid var(--accent-orange);
+    outline-offset: 2px;
+}
+
 @media (max-width: 800px) {
     .header-bottom nav ul {
         display: none;
