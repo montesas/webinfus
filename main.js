@@ -126,30 +126,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 9. Enlaces del menú con scroll ajustado y cierre menú hamburguesa
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const targetSection = document.querySelector(href);
-                if (targetSection) {
-                    const headerHeight = header ? header.offsetHeight : 0;
-                    const additionalOffset = 20;
-                    const targetPosition = Math.round(
-                        targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset
-                    );
-                    if (Math.abs(window.scrollY - targetPosition) >= 1) {
-                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                    }
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const targetSection = document.querySelector(href);
+            if (targetSection) {
+                const headerHeight = header ? header.offsetHeight : 0;
+                const additionalOffset = 20;
+                const targetPosition = Math.round(
+                    targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset
+                );
+                if (Math.abs(window.scrollY - targetPosition) >= 1) {
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                 }
+                // Actualiza el hash de la URL sin recargar la página
+                history.pushState(null, '', href);
             }
-            // Cierre menú hamburguesa si está activo
-            const navList = document.querySelector('.header-bottom nav ul');
-            if (navList && navList.classList.contains('show')) {
-                navList.classList.remove('show');
-            }
-        });
+        }
+        // Cierre menú hamburguesa si está activo
+        const navList = document.querySelector('.header-bottom nav ul');
+        if (navList && navList.classList.contains('show')) {
+            navList.classList.remove('show');
+        }
     });
+});
 
     // 10. Menú hamburguesa responsive
     var toggle = document.getElementById("menu-toggle");
