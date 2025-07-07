@@ -47,17 +47,31 @@ function showCookieConsent() {
         return;
     }
     const cookieConsent = localStorage.getItem('cookieConsent');
-    cookieNotice.style.display = !cookieConsent ? 'block' : 'none';
+    if (!cookieConsent) {
+        cookieNotice.style.display = 'block';
+        cookieNotice.setAttribute('aria-hidden', 'false');
+    } else {
+        cookieNotice.style.display = 'none';
+        cookieNotice.setAttribute('aria-hidden', 'true');
+    }
 }
 
 function acceptCookies() {
     localStorage.setItem('cookieConsent', 'accepted');
-    document.querySelector('.cookie-notice').style.display = 'none';
+    const cookieNotice = document.querySelector('.cookie-notice');
+    if (cookieNotice) {
+        cookieNotice.style.display = 'none';
+        cookieNotice.setAttribute('aria-hidden', 'true');
+    }
     console.info('Cookies aceptadas');
 }
 function rejectCookies() {
     localStorage.setItem('cookieConsent', 'rejected');
-    document.querySelector('.cookie-notice').style.display = 'none';
+    const cookieNotice = document.querySelector('.cookie-notice');
+    if (cookieNotice) {
+        cookieNotice.style.display = 'none';
+        cookieNotice.setAttribute('aria-hidden', 'true');
+    }
     console.info('Cookies rechazadas');
 }
 
