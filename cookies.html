@@ -29,12 +29,12 @@
     <div class="header-bottom" style="position:relative;">
         <button class="menu-toggle" id="menu-toggle"
             aria-label="Abrir menú de navegación"
-            aria-controls="main-navigation"
+            aria-controls="main-menu"
             aria-expanded="false">
-            <i class="fas fa-bars"></i>
+            <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
-        <nav id="main-navigation">
-            <ul>
+        <nav>
+            <ul id="main-menu">
                 <li><a href="index.html#servicios">Servicios</a></li>
                 <li><a href="index.html#nosotros">Quiénes Somos</a></li>
                 <li><a href="index.html#contacto">Contacto</a></li>
@@ -46,22 +46,24 @@
 </header>
 <script>
     // Menú hamburguesa accesible
-    const menuToggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-navigation');
-    const navList = nav.querySelector('ul');
-
-    menuToggle.addEventListener('click', function() {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', !expanded);
-      navList.classList.toggle('show');
-    });
-
-    // Cerrar el menú con ESC y mejorar el foco en móviles
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
-        menuToggle.click();
-        menuToggle.focus();
-      }
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('main-menu');
+        if(menuToggle && menu) {
+            menuToggle.addEventListener('click', function() {
+                const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', !expanded);
+                menu.classList.toggle('show');
+            });
+            // Cerrar el menú con ESC y devolver el foco
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && menu.classList.contains('show')) {
+                    menu.classList.remove('show');
+                    menuToggle.setAttribute('aria-expanded', false);
+                    menuToggle.focus();
+                }
+            });
+        }
     });
 </script>
 
