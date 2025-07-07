@@ -4,120 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Cookies - Infus</title>
+    <meta name="robots" content="noindex, follow">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/webinfus/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/webinfus/apple-touch-icon.png">
+    <link rel="manifest" href="/webinfus/site.webmanifest">
 </head>
 <body>
-<header>
-    <div class="header-top">
-        <div class="logos-wrapper">
-            <div class="main-logo-container">
-                <a href="index.html">
-                    <img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo">
-                </a>
-            </div>
-            <div class="secondary-logo-container">
-                <img src="montella.png" alt="Montella-Infus Soluciones Informáticas" class="secondary-logo">
-                <div class="contact-header">
-                    <a href="tel:+34981928212"><i class="fas fa-phone"></i>981 928 212</a>
-                    <a href="index.html#contacto"><i class="fas fa-envelope"></i>Contacto</a>
+    <div id="cookieConsent" class="cookie-notice" style="display:none">
+        <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
+        <div class="cookie-buttons">
+            <button onclick="acceptCookies()">Aceptar</button>
+            <button onclick="rejectCookies()">Rechazar</button>
+            <button class="more-info">Más información</button>
+        </div>
+    </div>
+
+<!-- Header accesible y menú hamburguesa -->
+    <header>
+        <div class="header-top">
+            <div class="logos-wrapper">
+                <div class="main-logo-container">
+                    <a href="index.html#top">
+                        <img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo">
+                    </a>
+                </div>
+                <div class="secondary-logo-container">
+                    <img src="montella.png" alt="Montella-Infus Soluciones Informáticas" class="secondary-logo">
+                    <div class="contact-header">
+                        <a href="tel:+34981928212"><i class="fas fa-phone"></i>981 928 212</a>
+                        <a href="#contacto"><i class="fas fa-envelope"></i>Contacto</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="header-bottom" style="position:relative;">
-        <button class="menu-toggle" id="menu-toggle"
-            aria-label="Abrir menú de navegación"
-            aria-controls="main-menu"
-            aria-expanded="false">
-            <i class="fas fa-bars" aria-hidden="true"></i>
-        </button>
-        <nav>
-            <ul id="main-menu">
-              <li><a href="index.html#servicios">Servicios</a></li>
-              <li><a href="index.html#nosotros">Quiénes Somos</a></li>
-              <li><a href="index.html#contacto">Contacto</a></li>
-              <li><a href="index.html#ubicacion">Dónde Estamos</a></li>
-              <li><a href="index.html#remoto">Soporte Remoto</a></li>
+        <div class="header-bottom" style="position:relative;">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú de navegación" aria-controls="main-menu" aria-expanded="false">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <nav>
+                <ul id="main-menu">
+                  <li><a href="index.html#servicios">Servicios</a></li>
+                  <li><a href="index.html#nosotros">Quiénes Somos</a></li>
+                  <li><a href="index.html#contacto">Contacto</a></li>
+                  <li><a href="index.html#ubicacion">Dónde Estamos</a></li>
+                  <li><a href="index.html#remoto">Soporte Remoto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 800px; margin: 0 auto; font-size:1.1em; line-height:1.7; padding-bottom:120px;">
+        <h2 style="margin-bottom:2rem;">Política de Cookies</h2>
+            <h3>¿Qué son las cookies?</h3>
+            <p>
+                Una cookie es un archivo de información que el servidor de este sitio web envía al dispositivo (ordenador, smartphone, tablet, etc.) del usuario para almacenar y recuperar información sobre la navegación que se efectúa desde dicho equipo.
+            </p>
+            <h3>¿Qué tipos de cookies utiliza esta web?</h3>
+            <ul>
+                <li>
+                    <strong>Cookies técnicas:</strong> Permiten al usuario la navegación a través de la página web y la utilización de las diferentes opciones o servicios que en ella existan.
+                </li>
+                <li>
+                    <strong>Cookies de análisis:</strong> Utilizadas para cuantificar el número de usuarios y así realizar la medición y análisis estadístico de la utilización que hacen los usuarios del servicio. Para ello se analiza su navegación en nuestra página web con el fin de mejorar la oferta de productos o servicios que ofrecemos.
+                </li>
+                <li>
+                    <strong>Cookies de personalización:</strong> Permiten al usuario acceder al servicio con algunas características de carácter general predefinidas en función de una serie de criterios en el terminal del usuario.
+                </li>
             </ul>
-        </nav>
-    </div>
-</header>
-<script>
-    // Menú hamburguesa accesible
+            <h3>¿Cómo desactivar las cookies?</h3>
+            <p>
+                El usuario puede permitir, bloquear o eliminar las cookies instaladas en su equipo mediante la configuración de las opciones del navegador instalado en su dispositivo. Consulte la ayuda de su navegador para saber cómo hacerlo.
+            </p>
+            <h3>Cookies de terceros</h3>
+            <p>
+                Este sitio web utiliza servicios de terceros para recopilar información con fines estadísticos y de uso de la web. En concreto, utilizamos Google Analytics, un servicio analítico de web prestado por Google, Inc.
+            </p>
+            <h3>Actualización de la política de cookies</h3>
+            <p>
+                Es posible que actualicemos la Política de Cookies de nuestra web, por ello le recomendamos revisar esta política cada vez que acceda a nuestra web.
+            </p>
+            <h3>Contacto</h3>
+            <p>
+                Si tiene dudas sobre nuestra política de cookies, puede contactar con nosotros a través de nuestro <a href="index.html#contacto">Formulario de Contacto</a>.
+            </p>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Información Legal</h3>
+                <ul>
+                    <li><a href="privacidad.html">Política de Privacidad</a></li>
+                    <li><a href="terminos.html">Términos y Condiciones</a></li>
+                    <li><a href="cookies.html">Política de Cookies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Horario</h3>
+                <p>Lunes a Jueves: 9:00 - 14:00 y 16:00 - 19:00</p>
+                <p>Viernes: 09:00 - 14:00</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>981 928 212</p>
+                <p>Rafael Alberti, 8</p>
+                <p>15174 Fonteculler (La Coruña)</p>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2025 Infus - Todos los derechos reservados | Diseñado con <i class="fas fa-heart" style="color: var(--accent-orange);"></i> para ofrecer el mejor servicio</p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+    <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('main-menu');
-        if(menuToggle && menu) {
-            menuToggle.addEventListener('click', function() {
-                const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-                menuToggle.setAttribute('aria-expanded', !expanded);
-                menu.classList.toggle('show');
-            });
-            // Cerrar el menú con ESC y devolver el foco
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && menu.classList.contains('show')) {
-                    menu.classList.remove('show');
-                    menuToggle.setAttribute('aria-expanded', false);
-                    menuToggle.focus();
-                }
-            });
+        var header = document.querySelector('header');
+        var main = document.querySelector('main.container');
+        if(header && main) {
+            main.style.marginTop = header.offsetHeight + "px";
         }
     });
-</script>
-
-<main>
-    <section class="section-animate visible">
-        <h1>Política de Cookies</h1>
-        <p>En <strong>Infus</strong> utilizamos cookies para mejorar la experiencia de usuario, analizar el tráfico y personalizar el contenido. Al navegar por nuestro sitio web, usted acepta el uso de cookies en los términos establecidos en esta política.</p>
-
-        <h2>¿Qué son las cookies?</h2>
-        <p>Las cookies son pequeños archivos de texto que se almacenan en su dispositivo cuando visita sitios web. Son ampliamente utilizadas para que los sitios funcionen correctamente y para proporcionar información a los propietarios del sitio.</p>
-
-        <h2>¿Qué tipos de cookies utiliza esta web?</h2>
-        <ul>
-            <li><strong>Cookies técnicas:</strong> necesarias para el funcionamiento básico del sitio web.</li>
-            <li><strong>Cookies de análisis:</strong> nos permiten analizar el uso que hacen los usuarios del sitio web.</li>
-            <li><strong>Cookies de personalización:</strong> permiten recordar sus preferencias.</li>
-        </ul>
-
-        <h2>¿Cómo puede gestionar las cookies?</h2>
-        <p>Puede configurar su navegador para aceptar o rechazar cookies. También puede eliminar las cookies almacenadas en su dispositivo en cualquier momento. Tenga en cuenta que la desactivación de cookies puede afectar al funcionamiento de la web.</p>
-
-        <h2>Cookies de terceros</h2>
-        <p>Utilizamos servicios de terceros, como Google Analytics, que pueden instalar cookies para recopilar estadísticas anónimas sobre el uso del sitio.</p>
-
-        <h2>Actualizaciones y cambios en la política de cookies</h2>
-        <p>Podremos modificar esta Política de Cookies en función de exigencias legislativas o por cambios en nuestro sitio web. Se recomienda revisarla periódicamente.</p>
-    </section>
-</main>
-
-<footer>
-    <div class="footer-content">
-        <div class="footer-section">
-            <h3>Información Legal</h3>
-            <ul>
-                <li><a href="privacidad.html">Política de Privacidad</a></li>
-                <li><a href="terminos.html">Términos y Condiciones</a></li>
-                <li><a href="cookies.html">Política de Cookies</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Horario</h3>
-            <p>Lunes a Jueves: 9:00 - 14:00 y 16:00 - 19:00</p>
-            <p>Viernes: 09:00 - 14:00</p>
-        </div>
-        <div class="footer-section">
-            <h3>Contacto</h3>
-            <p>981 928 212</p>
-            <p>Rafael Alberti, 8</p>
-            <p>15174 Fonteculler (La Coruña)</p>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <p>&copy; 2025 Infus - Todos los derechos reservados | Diseñado con <i class="fas fa-heart" style="color: var(--accent-orange);"></i> para ofrecer el mejor servicio</p>
-    </div>
-</footer>
+    </script>
 </body>
 </html>
