@@ -33,6 +33,17 @@
   border: 0;
 }
 
+.visually-hidden.focusable:focus {
+  position: static !important;
+  width: auto; height: auto;
+  margin: 0; padding: 1em;
+  clip: auto;
+  background: #ff6b35;
+  color: #fff;
+  z-index: 10000;
+}
+
+
 html {
     scroll-behavior: smooth;
 }
