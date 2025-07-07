@@ -18,13 +18,13 @@
 <a href="#main" class="visually-hidden focusable">Saltar al contenido principal</a>
 
 <body>
-    <div id="cookieConsent" class="cookie-notice" style="display:none">
-        <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
-        <div class="cookie-buttons">
-            <button onclick="acceptCookies()">Aceptar</button>
-            <button onclick="rejectCookies()">Rechazar</button>
-            <button onclick="window.location.href='cookies.html'" class="more-info" aria-label="Más información sobre cookies">Más información</button>
-        </div>
+    <<div id="cookieConsent" class="cookie-notice" role="dialog" aria-label="Aviso de cookies" aria-modal="true" aria-live="polite" aria-hidden="true">
+      <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
+    <div class="cookie-buttons">
+        <button onclick="acceptCookies()" aria-label="Aceptar cookies">Aceptar</button>
+        <button onclick="rejectCookies()" aria-label="Rechazar cookies">Rechazar</button>
+        <button onclick="window.location.href='cookies.html'" class="more-info" aria-label="Más información sobre cookies">Más información</button>
+    </div>
     </div>
 
 <!-- Header accesible y menú hamburguesa -->
