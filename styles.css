@@ -2,7 +2,7 @@
 :root {
     --primary-blue: #1a4b8c;
     --secondary-blue: #2c7ac9;
-    --Tertiary-blue: #2c3e50;
+    --tertiary-blue: #2c3e50;
     --accent-orange: #ff6b35;
     --light-gray: #f5f5f5;
     --dark-gray: #333333;
@@ -50,7 +50,6 @@ html {
 
 body {
     font-family: 'Roboto', sans-serif;
-/*  font-weight: 700; /* Ajusta el grosor de la fuente */
     line-height: 1.6;
     color: var(--dark-gray);
     background-color: var(--light-gray);
@@ -219,22 +218,12 @@ nav a:hover {
 }
 
 /* Main Content */
-main {
-    margin-top: var(--header-height);
-}
-
-section h2 {
-    margin-bottom: 2rem; /* Espaciado entre el título y el contenido */
-    font-size: 2.5rem;
-    text-align: center;
-    color: var(--primary-blue);
-}
 
 section {
     position: relative;
     scroll-margin-top: calc(var(--header-height) + 20px); /* Ajuste para el desplazamiento */
     padding: 4rem 2rem; /* Incrementa el relleno general para dar más espacio */
-    min-height: 80vh; /* Asegura que cada sección ocupe al menos el alto de la ventana */
+ /* min-height: 80vh;  Asegura que cada sección ocupe al menos el alto de la ventana */
     display: flex; /* Flexbox para centrar contenido */
     flex-direction: column; /* Alinea elementos en columna */
     justify-content: flex-start; /* Comienza desde la parte superior */
@@ -549,14 +538,6 @@ button[type="submit"]:not(:disabled):hover {
 }
 
 /* Remote Support Section */
-.remote-support {
-    text-align: center;
-    max-width: 1000px;
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-small);
-}
 
 .remote-support img {
     max-width: 400px;
@@ -565,10 +546,6 @@ button[type="submit"]:not(:disabled):hover {
     margin-bottom: 1rem;
     border-radius: 8px;
     transition: var(--transition);
-}
-
-.remote-support img:hover {
- /*    transform: scale(1.05);*/
 }
 
 .contact-form-wrapper {
@@ -581,7 +558,6 @@ button[type="submit"]:not(:disabled):hover {
     width: 100%;
     max-width: 800px; /* O el ancho que prefieras */
 }
-
 
 /* Remote Support Section (ajustado para móviles) */
 .remote-support {
