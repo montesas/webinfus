@@ -223,7 +223,6 @@ section {
     position: relative;
     scroll-margin-top: calc(var(--header-height) + 20px); /* Ajuste para el desplazamiento */
     padding: 4rem 2rem; /* Incrementa el relleno general para dar más espacio */
- /* min-height: 80vh;  Asegura que cada sección ocupe al menos el alto de la ventana */
     display: flex; /* Flexbox para centrar contenido */
     flex-direction: column; /* Alinea elementos en columna */
     justify-content: flex-start; /* Comienza desde la parte superior */
@@ -237,7 +236,7 @@ section:nth-child(even) {
 }
 
 h2 {
-    margin: 0; /* Elimina márgenes superiores e inferiores */
+    margin: 0 0 2rem 0; /* Añadir margin-bottom aquí */
     padding: 1rem 0; /* Espaciado interno opcional para claridad */
     font-size: 2.5rem;
     text-align: center;
@@ -539,6 +538,19 @@ button[type="submit"]:not(:disabled):hover {
 
 /* Remote Support Section */
 
+.remote-support {
+    text-align: center;
+    max-width: 1000px;
+    width: 100%;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-small);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
 .remote-support img {
     max-width: 400px;
     width: 25%;
@@ -559,19 +571,6 @@ button[type="submit"]:not(:disabled):hover {
     max-width: 800px; /* O el ancho que prefieras */
 }
 
-/* Remote Support Section (ajustado para móviles) */
-.remote-support {
-    text-align: center;
-    max-width: 1000px; /* o el valor ancho que prefieras */
-    width: 100%;
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-small);
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
-}
 
 /* Ajustes responsivos para móviles */
 @media (max-width: 700px) {
