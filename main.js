@@ -2,7 +2,7 @@
 // Autor: montesas
 
 // Variables globales y utilidades generales
-let isScrolling;
+let isScrollingTimer; // Renombrado para mayor claridad, ya que es un timer
 const header = document.querySelector('header');
 const backToTopButton = document.getElementById('backToTop');
 const sections = document.querySelectorAll('.section-animate');
@@ -241,7 +241,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 8. Scroll + mostrar botón Back to Top + animaciones de sección
     window.addEventListener('scroll', function() {
-        clearTimeout(isScrolling);
+        // La variable isScrollingTimer se limpia y se podría usar si quisieras un efecto
+        // que solo ocurra *después* de que el usuario deje de hacer scroll.
+        // Como actualmente no hace nada, se ha eliminado la asignación para limpiar el código.
+        // Si necesitas una función que se dispare cuando el usuario termine de hacer scroll:
+        // clearTimeout(isScrollingTimer);
+        // isScrollingTimer = setTimeout(() => { /* Tu código aquí */ }, 100);
+
         if (backToTopButton) backToTopButton.style.display = window.scrollY > 300 ? 'flex' : 'none';
         sections.forEach(section => {
             const rect = section.getBoundingClientRect();
@@ -249,7 +255,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 section.classList.add('visible');
             }
         });
-        isScrolling = setTimeout(function() {}, 66);
     });
 
     // 9. Enlaces del menú con scroll ajustado y cierre menú hamburguesa
