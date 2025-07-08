@@ -109,28 +109,7 @@
         <button onclick="window.location.href='cookies.html'" class="more-info" aria-label="Más información sobre cookies">Más información</button>
       </div>
     </div>
-    <script>
-    // Menú hamburguesa accesible
-    const menuToggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-navigation');
-    const navList = nav.querySelector('ul');
-
-    menuToggle.addEventListener('click', function() {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', !expanded);
-      navList.classList.toggle('show');
-    });
-
-    // Opcional: cerrar el menú con ESC y mejorar el foco en móviles
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
-        menuToggle.click();
-        menuToggle.focus();
-      }
-    });
-    </script>
-
-
+   
     <main id="main">
         <h1 class="visually-hidden">Servicio Técnico Informático en A Coruña</h1>
         <!-- Servicios -->
@@ -179,45 +158,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Dispositivos -->
-   <!--      <section id="dispositivos" class="section-animate">
-            <h2>Dispositivos que Reparamos</h2>
-            <div class="devices-grid">
-                <div class="device-card">
-                    <img src="computadora-de-escritorio.png" alt="Ordenadores">
-                    <h3>Ordenadores</h3>
-                </div>
-                <div class="device-card">
-                    <img src="https://via.placeholder.com/200x200?text=Laptop" alt="Portátiles">
-                    <h3>Portátiles</h3>
-                </div>
-               <div class="device-card">
-                    <img src="https://via.placeholder.com/200x200?text=Server" alt="Servidores">
-                    <h3>Servidores</h3>
-                </div>                
-                <div class="device-card">
-                    <img src="https://via.placeholder.com/200x200?text=Tablet" alt="Tablets">
-                    <h3>Tablets</h3>
-                </div>
-                <div class="device-card">
-                    <img src="https://placeholder.co/200x200?text=Screen" alt="Pantallas">
-                    <h3>Pantallas, TVs</h3>
-                </div>
-                <div class="device-card">
-                    <img src="https://via.placeholder.com/200x200?text=Printer" alt="Sistemas de Impresión">
-                    <h3>Sistemas de Impresión</h3>
-                </div>
-                 <div class="device-card">
-                    <img src="https://via.placeholder.com/200x200?text=SAI" alt="Baterías de respaldo">
-                    <h3>SAI</h3>
-                </div>
-                <div class="device-card">
-                    <img src="https://via.placeholder.com/200x200?text=Welder" alt="Microelectrónica">
-                    <h3>Microelectrónica</h3>
-                </div>
-            </div>
-        </section> -->
 
         <!-- Quienes Somos -->
         <section id="nosotros" class="section-animate">
@@ -355,7 +295,7 @@
             <div class="remote-support">
                 <img src="Soporte_Infus.png" alt="Soporte Remoto" class="hover-effect">
                 <p>Permítenos ayudarle sin necesidad de desplazamientos. Con nuestra herramienta de asistencia remota, podremos solucionar muchos problemas directamente desde nuestras oficinas.</p>
-                <a href="#" class="download-button">
+                <a href="descargas/Soporte Infus.exe" class="download-button">
                     <i class="fas fa-download"></i> Descargar Software
                 </a>
             </div>
@@ -396,49 +336,6 @@
     </footer>
 
     <script src="main.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        document.getElementById("contactForm").addEventListener("submit", async function(event) {
-          event.preventDefault();
-
-          var status = document.getElementById("formStatus");
-          status.textContent = "";
-
-          // Verifica que el captcha esté resuelto
-          var recaptchaResponse = grecaptcha.getResponse();
-          if (!recaptchaResponse) {
-            status.textContent = "Por favor, marca que no eres un robot.";
-            status.style.color = "red";
-            return;
-          }
-
-          // Prepara los datos del formulario
-          const form = event.target;
-          const formData = new FormData(form);
-          formData.append("g-recaptcha-response", recaptchaResponse);
-
-          // Envía los datos a Formspree
-          try {
-            const response = await fetch(form.action, {
-              method: "POST",
-              body: formData,
-              headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-              status.textContent = "¡Mensaje enviado correctamente!";
-              status.style.color = "green";
-              form.reset();
-              grecaptcha.reset();
-            } else {
-              status.textContent = "Ocurrió un error al enviar el formulario. Intenta más tarde.";
-              status.style.color = "red";
-            }
-          } catch (err) {
-            status.textContent = "No se pudo conectar con el servidor. Intenta más tarde.";
-            status.style.color = "red";
-          }
-        });
-    </script>
+    
 </body>
 </html>
