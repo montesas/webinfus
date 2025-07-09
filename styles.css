@@ -680,6 +680,13 @@ footer {
 
 .footer-section ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem; /* Ajusta este valor según lo necesites, o a 0 si no quieres espacio vertical entre elementos */
+    line-height: 1.2; /* Un line-height más pequeño para los ítems de la lista */
 }
 
 .footer-section a {
@@ -930,5 +937,5 @@ footer {
     .footer-copyright {
         font-size: 0.8rem; /* Reduce el tamaño del texto del copyright */
         padding-top: 0.5rem; /* Ajusta el espacio entre la línea y el texto */
+        line-height: 1.4; /* Un line-height ligeramente menor para el copyright */
     }
-}
