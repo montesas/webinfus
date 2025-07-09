@@ -2,7 +2,7 @@
 // Autor: montesas
 
 // Variables globales y utilidades generales
-let isScrollingTimer; // Renombrado para mayor claridad, ya que es un timer
+//let isScrollingTimer; // Renombrado para mayor claridad, ya que es un timer
 const header = document.querySelector('header');
 const backToTopButton = document.getElementById('backToTop');
 const sections = document.querySelectorAll('.section-animate');
@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
         downloadBtn.addEventListener('click', function (event) {
             event.preventDefault();
             const link = document.createElement('a');
-            link.href = '/sites/default/files/Soporte%20Infus.exe'; // Asegúrate de que esta URL es correcta y accesible
+            link.href = '/descargas/Soporte%20Infus.exe'; // Asegúrate de que esta URL es correcta y accesible
             link.download = 'Soporte_Infus.exe';
             document.body.appendChild(link);
             link.click();
