@@ -22,13 +22,8 @@
             --light-gray: #f5f5f5;
             --dark-gray: #333333;
             --white: #ffffff;
-            /* ANTES: --header-height: 200px; */
-            /* CAMBIO: Define una altura adaptable para el encabezado
-               Ajusta --header-top-height y --header-bottom-height para tu diseño */
-            --header-top-height: 100px; /* Altura estimada de la sección superior del encabezado */
-            --header-bottom-height: 60px; /* Altura estimada de la sección inferior del encabezado */
-            --header-total-height: calc(var(--header-top-height) + var(--header-bottom-height)); /* Suma de ambas */
-
+            /* Eliminamos las variables de altura fija del header aquí.
+               El header se adaptará a su contenido. */
             --section-padding: 100px;
             --shadow-small: 0 2px 10px rgba(0,0,0,0.1);
             --shadow-medium: 0 4px 20px rgba(0,0,0,0.15)
@@ -36,7 +31,16 @@
         *{margin:0;padding:0;box-sizing:border-box}
         .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
         html{scroll-behavior:smooth}
-        body{font-family:'Roboto',sans-serif;line-height:1.6;color:var(--dark-gray);background-color:var(--light-gray)}
+        body{
+            font-family:'Roboto',sans-serif;
+            line-height:1.6;
+            color:var(--dark-gray);
+            background-color:var(--light-gray);
+            /* Establecemos un padding-top inicial para evitar que el contenido se vea por debajo del header
+               hasta que el JS lo calcule. Este valor debe ser lo suficientemente grande para cubrir el header
+               incluso antes de que las imágenes se carguen. Podrías necesitar ajustarlo si tu header es excepcionalmente alto. */
+            padding-top: 180px; /* Valor seguro inicial (ej: 2*80px logos + padding) */
+        }
         
         header{
             position:fixed;
@@ -45,22 +49,18 @@
             z-index:1000;
             background:var(--white);
             box-shadow:var(--shadow-medium);
-            /* CAMBIO CLAVE: Ajuste para que el encabezado no sea demasiado grande inicialmente */
-            /* Quitar alturas fijas si el contenido no las justifica */
-            /* min-height: var(--header-total-height); /* Esto puede ayudar si se contrae demasiado */
+            /* min-height: auto; para que se ajuste al contenido */
         }
         
-        /* Asegúrate de que el body tenga un padding-top para que el contenido no se oculte detrás del header */
-        body {
-            padding-top: var(--header-total-height); /* Ajusta esto si el header es más grande o más pequeño */
-        }
-
         .header-top{background:var(--white);padding:1rem;border-bottom:1px solid rgba(0,0,0,0.1)}
         .logos-wrapper{max-width:1200px;margin:0 auto;position:relative;padding:0.5rem}
         .main-logo-container{text-align:center}
         .secondary-logo-container{position:relative;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;padding-bottom:0}
-        .main-logo{max-width:200px;height:auto}
-        .secondary-logo{max-width:180px;height:auto}
+        
+        /* Aseguramos que los logos no se desborden si el tamaño es problemático */
+        .main-logo{max-width:200px;height:auto; display: block;} /* Añadido display: block */
+        .secondary-logo{max-width:180px;height:auto; display: block;} /* Añadido display: block */
+
         .header-bottom{background:linear-gradient(135deg,var(--primary-blue),var(--secondary-blue));color:var(--white);padding:1rem}
         .menu-toggle{min-width:48px;min-height:48px;background:none;border:none;color:var(--main-blue, #2c3e50);display:none;align-items:center;justify-content:center}
         nav ul{display:flex;justify-content:center;list-style:none;gap:2rem;margin:0.5rem 0;flex-wrap:wrap}
@@ -68,12 +68,11 @@
             .menu-toggle{display:flex}
             .header-bottom nav ul{display:none;flex-direction:column;background:#fff;position:absolute;width:100vw;left:0;top:100%;z-index:1001;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin:0;padding:0}
             .header-bottom nav ul li{text-align:left;padding:12px 20px;border-bottom:1px solid #eee}
-            /* CAMBIO: Ajustar la altura total para móviles, si tu diseño lo requiere */
-            :root {
-                --header-top-height: 80px; /* Ajusta según el tamaño de los logos en móvil */
-                --header-bottom-height: 50px; /* Altura de la navegación en móvil */
-                --header-total-height: calc(var(--header-top-height) + var(--header-bottom-height));
-            }
+            /* En móviles, ajustamos el padding-top del body si fuera necesario con media queries.
+               Si el JS lo gestiona, no es tan crítico aquí, pero puede servir de fallback. */
+            body { padding-top: 130px; } /* Ajuste para móvil si el header es más pequeño */
+            .main-logo{max-width:180px;} /* Ajuste de tamaño de logo en móvil */
+            .secondary-logo{max-width:120px;} /* Ajuste de tamaño de logo en móvil */
         }
         nav a{color:var(--white);text-decoration:none;font-weight:500;padding:0.5rem 1rem;border-radius:4px}
         .contact-header{display:flex;align-items:center;gap:1.5rem}
@@ -81,7 +80,8 @@
         @media (max-width:480px){
             .contact-header{gap:0.75rem;font-size:0.95rem}
         }
-        section{position:relative;scroll-margin-top:calc(var(--header-total-height) + 20px); /* Usar la nueva variable */
+        /* CAMBIO: scroll-margin-top usará la altura calculada por JS o el fallback inicial */
+        section{position:relative;scroll-margin-top: calc(var(--header-total-height, 180px) + 20px);
             padding:4rem 2rem;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;background:var(--white);margin-bottom:2rem}
         section:nth-child(even){background:var(--light-gray)}
         h2{margin:0 0 2rem 0;padding:1rem 0;font-size:2.5rem;text-align:center;color:var(--primary-blue);position:relative}
