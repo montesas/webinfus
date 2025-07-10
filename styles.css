@@ -7,24 +7,46 @@
     --light-gray: #f5f5f5;
     --dark-gray: #333333;
     --white: #ffffff;
-    --header-height: 200px;
-    --section-padding: 100px;
+    /* Reducimos la altura por defecto del encabezado. Es mejor dejar que el contenido lo defina,
+       pero si quieres un mínimo, 100-120px suele ser más razonable para el escritorio.
+       Ajusta este valor si tu diseño final necesita más espacio. */
+    --header-height: 120px; 
+    --section-padding-desktop: 4rem 2rem; /* Variable para el padding en escritorio */
+    --section-padding-mobile: 2rem 1rem; /* Variable para el padding en móvil */
     --shadow-small: 0 2px 10px rgba(0,0,0,0.1);
     --shadow-medium: 0 4px 20px rgba(0,0,0,0.15);
     --transition: all 0.3s ease;
 }
 
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-gray);
+    background-color: var(--light-gray);
+    /* Añadimos un padding-top al body para compensar el header fijo */
+    /* Esto es CRUCIAL para que el contenido no quede debajo del header */
+    padding-top: var(--header-height); 
+}
+
+/* Utilidad para centrar contenido o limitar ancho */
+.container {
+    max-width: 1200px; /* Aumentado para que los grids puedan usar más espacio */
+    margin: 0 auto;
+    padding: 0 1rem; /* Pequeño padding horizontal para que no se pegue a los bordes */
+}
+
+/* Clases de accesibilidad */
 .visually-hidden {
     position: absolute !important;
     width: 1px; height: 1px;
@@ -43,16 +65,7 @@
     z-index: 10000;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: var(--dark-gray);
-    background-color: var(--light-gray);
-}
+---
 
 /* Header Styles */
 header {
@@ -62,84 +75,90 @@ header {
     z-index: 1000;
     background: var(--white);
     box-shadow: var(--shadow-medium);
+    /* Min-height para asegurar que el header tenga un tamaño mínimo,
+       pero que crezca si su contenido lo necesita */
+    min-height: var(--header-height); 
+    display: flex; /* Usamos flexbox para alinear el contenido principal */
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el contenido del header */
 }
 
 .header-top {
     background: var(--white);
-    padding: 1rem;
+    padding: 1rem 0; /* Padding vertical, el horizontal lo manejará el .container */
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .logos-wrapper {
-    max-width: 1200px;
+    max-width: 1200px; /* Igual que .container */
     margin: 0 auto;
-    position: relative;
-    padding: 0.5rem;
+    display: flex; /* Usamos flexbox para organizar logos y contacto */
+    flex-wrap: wrap; /* Permite que los elementos salten de línea en pantallas pequeñas */
+    justify-content: space-between; /* Espacia los logos y el contacto */
+    align-items: center;
+    padding: 0.5rem 1rem; /* Pequeño padding interno */
 }
 
 .main-logo-container {
     text-align: center;
-    /* Nuevo: Añade un aspecto de ratio para reservar espacio de la imagen principal */
-    /* Calcula 70px (alto) / 200px (ancho) = 0.35 * 100 = 35% */
-    /* Esto es crucial para el CLS de la imagen principal */
-    aspect-ratio: 200 / 70; /* Ancho / Alto */
-    display: flex; /* Para centrar la imagen */
-    align-items: center;
-    justify-content: center;
+    flex-grow: 1; /* Permite que el contenedor crezca para ocupar espacio */
+    padding-bottom: 0.5rem; /* Ajuste para dar un poco de espacio debajo del logo principal */
 }
 
-
 .secondary-logo-container {
-    position: relative; /* Cambiar de absolute a relative */
-    display: flex; /* Permitir flexbox para alinear contenido */
+    /* Eliminamos position: relative aquí para simplificar el layout,
+       a menos que tengas elementos posicionados absolutamente DENTRO de él.
+       Si lo necesitas, añádelo de nuevo, pero no debería ser necesario para el layout básico. */
+    display: flex;
     align-items: center;
-    justify-content: space-between; /* Espaciado entre logo e información */
-    margin-bottom: 0; /* Ajusta a 0 o un valor menor */
-    padding-bottom: 0; /* Ajusta a 0 o un valor menor */
-    /* Nuevo: Añade un aspecto de ratio para la imagen secundaria también */
-    /* Para 180px ancho / 33px alto = ~5.45:1 */
-    aspect-ratio: 180 / 33; /* Ancho / Alto */
+    gap: 1rem; /* Espacio entre el logo secundario y la info de contacto */
+    justify-content: flex-end; /* Alinea a la derecha en escritorio */
+    flex-grow: 1;
+    min-width: 250px; /* Asegura que no se haga demasiado pequeño */
+}
+
+.main-logo, .secondary-logo {
+    height: auto;
+    display: block; /* Asegura que no haya espacio extra debajo de la imagen */
+    object-fit: contain; /* Para que la imagen se ajuste dentro del contenedor sin recortarse */
+    transition: var(--transition);
 }
 
 .main-logo {
     max-width: 200px;
-    height: auto;
-    /* Nuevo: Asegúrate de que la imagen no tenga un "height: 0" inicial que cause el salto */
-    display: block; /* Asegura que no haya espacio extra debajo de la imagen */
-    width: 100%; /* Asegura que use el ancho disponible en el contenedor */
-    height: 100%; /* Asegura que use el alto disponible en el contenedor */
-    object-fit: contain; /* Para que la imagen se ajuste dentro del contenedor sin recortarse */
+    width: 100%; /* Ocupa el 100% del contenedor main-logo-container */
+    /* El aspect-ratio lo debería dar el contenedor si es un elemento block,
+       o la imagen misma si tiene atributos width/height. Aquí lo ajustamos si es necesario. */
 }
 
 .secondary-logo {
     max-width: 180px;
-    height: auto;
-    /* Nuevo: Similar al main-logo para consistencia */
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 100%; /* Ocupa el 100% del espacio disponible */
 }
 
 .header-bottom {
     background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
     color: var(--white);
-    padding: 1rem;
+    padding: 0.5rem 1rem; /* Ajustado para que sea un poco más compacto */
+    display: flex; /* Usa flexbox para centrar la navegación */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Para que los elementos del menú se envuelvan */
 }
 
 /* --- ACCESIBLE MENÚ HAMBURGUESA --- */
 
-/* El botón hamburguesa siempre existe, pero solo es visible en móvil */
 .menu-toggle {
     min-width: 48px;
     min-height: 48px;
     background: none;
     border: none;
-    color: var(--main-blue, #2c3e50);
+    color: var(--main-blue, #2c3e50); /* Usar --primary-blue si es el color deseado para el icono */
     cursor: pointer;
     display: none; /* Oculto por defecto, visible en media query */
     align-items: center;
     justify-content: center;
+    font-size: 1.8rem; /* Tamaño del icono hamburguesa */
 }
 
 .menu-toggle:focus {
@@ -147,44 +166,111 @@ header {
     outline-offset: 2px;
 }
 
-/* Menú accesible: oculto por defecto en móvil, visible en escritorio */
 nav ul {
     display: flex;
     justify-content: center;
     list-style: none;
     gap: 2rem;
-    margin: 0.5rem 0;
+    margin: 0; /* Eliminar márgenes extra */
+    padding: 0; /* Eliminar padding extra */
     flex-wrap: wrap;
-    transition: all 0.3s;
+    transition: var(--transition);
 }
-nav ul.show {
-    display: block;
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: var(--transition);
+    display: block; /* Para que todo el área del padding sea clicable */
 }
+
+nav a:hover {
+    background-color: var(--accent-orange);
+}
+
+.contact-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en móvil */
+    justify-content: flex-end; /* Alinea a la derecha por defecto */
+}
+
+.contact-header a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.contact-header a:hover {
+    color: var(--accent-orange);
+}
+
 @media (max-width: 800px) {
     .menu-toggle {
-        display: flex;
+        display: flex; /* Muestra el botón de menú en móviles */
     }
-    /* El menú se muestra en columna y oculto por defecto */
+
+    .logos-wrapper {
+        flex-direction: column; /* Apila los logos y el contacto */
+        align-items: flex-start; /* Alinea a la izquierda en la columna */
+    }
+    
+    .main-logo-container, .secondary-logo-container {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        justify-content: flex-start; /* Alinea los logos a la izquierda */
+        text-align: left;
+    }
+    .secondary-logo-container {
+        margin-top: 1rem;
+    }
+
     .header-bottom nav ul {
-        display: none;
+        display: none; /* Oculto por defecto en móvil */
         flex-direction: column;
-        background: #fff;
-        position: absolute;
-        width: 100vw;
+        background: var(--tertiary-blue); /* Color de fondo del menú móvil */
+        position: absolute; /* Para que el menú se superponga */
+        width: 100%; /* Ajuste a 100% para evitar scroll horizontal en algunos casos */
         left: 0;
-        top: 100%;
+        top: var(--header-height); /* Coloca el menú justo debajo del header */
         z-index: 1001;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        margin: 0;
-        padding: 0;
+        padding-bottom: 1rem; /* Espaciado extra en la parte inferior del menú móvil */
     }
+
     .header-bottom nav ul.show {
-        display: flex;
+        display: flex; /* Muestra el menú cuando tiene la clase 'show' */
     }
+
     .header-bottom nav ul li {
-        text-align: left;
+        text-align: center; /* Centra los elementos del menú en móvil */
+        width: 100%;
         padding: 12px 20px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid rgba(255,255,255,0.1); /* Separador sutil */
+    }
+    .header-bottom nav ul li:last-child {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .main-logo {
+        max-width: 150px;
+    }
+    .secondary-logo {
+        max-width: 100px;
     }
 }
 
@@ -195,59 +281,23 @@ nav ul.show {
     outline-offset: 2px;
 }
 
-/* --------- */
+---
 
-nav a {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: var(--transition);
-}
-
-nav a:hover {
-    background-color: var(--accent-orange); /* Efecto hover */
-}
-
-.contact-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem; /* Espacio horizontal entre teléfono y contacto */
-}
-
-.contact-header a {
-    color: var(--primary-blue); /* O el color que prefieras */
-    text-decoration: none;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5em; /* Espacio entre icono y texto */
-}
-
-.contact-header a:hover {
-    color: var(--accent-orange); /* Efecto hover */
-}
-
-@media (max-width: 480px) {
-    .contact-header {
-        gap: 0.75rem;
-        font-size: 0.95rem;
-    }
-}
-
-/* Main Content */
-
+/* Main Content - Secciones Generales */
 section {
     position: relative;
-    scroll-margin-top: calc(var(--header-height) + 20px); /* Ajuste para el desplazamiento */
-    padding: 4rem 2rem; /* Incrementa el relleno general para dar más espacio */
-    display: flex; /* Flexbox para centrar contenido */
-    flex-direction: column; /* Alinea elementos en columna */
-    justify-content: flex-start; /* Comienza desde la parte superior */
-    align-items: center; /* Centra horizontalmente */
-    background: var(--white); /* Fondo blanco */
-    margin-bottom: 2rem; /* Espaciado inferior */
+    /* Ajuste para el desplazamiento: Usa el valor actual del header, más un extra.
+       Esto es crítico para que los enlaces internos no queden ocultos. */
+    scroll-margin-top: calc(var(--header-height) + 20px); 
+    padding: var(--section-padding-desktop); /* Usa la variable de escritorio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--white);
+    margin-bottom: 2rem;
+    border-radius: 12px; /* Añadimos border-radius a las secciones */
+    box-shadow: var(--shadow-small); /* Añadimos sombra para dar profundidad */
+    text-align: center; /* Centramos el texto por defecto en las secciones */
 }
 
 section:nth-child(even) {
@@ -255,12 +305,11 @@ section:nth-child(even) {
 }
 
 h2 {
-    margin: 0 0 2rem 0; /* Añadir margin-bottom aquí */
-    padding: 1rem 0; /* Espaciado interno opcional para claridad */
+    margin-bottom: 2rem;
     font-size: 2.5rem;
-    text-align: center;
     color: var(--primary-blue);
     position: relative;
+    padding-bottom: 0.5rem; /* Pequeño padding para la línea debajo del título */
 }
 
 h2::after {
@@ -274,85 +323,62 @@ h2::after {
     background: var(--accent-orange);
 }
 
-/* Services Section */
-.services-grid {
+/* Servicios y Dispositivos - Patrón de Grid */
+.services-grid, .devices-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem; /* Incrementa el espacio entre los elementos del grid */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Aumentado minmax para mejor tamaño */
+    gap: 3rem;
     max-width: 1200px;
     width: 100%;
 }
 
-.service-card {
+.service-card, .device-card {
     background: var(--white);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow-small);
     text-align: center;
     transition: var(--transition);
+    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura en el grid */
+    display: flex; /* Usa flexbox para alinear contenido dentro de la tarjeta */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.service-card:hover {
+.service-card:hover, .device-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-medium);
 }
 
 .service-card i {
     color: var(--primary-blue);
-    transition: color 0.3s ease; /* Transición suave para el cambio de color */
+    transition: color 0.3s ease;
     margin-bottom: 1rem;
     font-size: 3rem;
 }
 
-/* Efecto hover */
 .service-card:hover i {
-    color: var(--accent-orange); /* Cambia el color al pasar el ratón */
+    color: var(--accent-orange);
 }
 
-.service-card h3 {
+.service-card h3, .device-card h3 {
     color: var(--primary-blue);
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
 
-/* Devices Section */
-.devices-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    width: 100%;
-}
-
-.device-card {
-    background: var(--white);
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-small);
-    text-align: center;
-    transition: var(--transition);
-    overflow: hidden;
-}
-
-.device-card:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-medium);
-}
-
 .device-card img {
     width: 100%;
-    height: auto;
+    height: auto; /* Mantener auto, el contenedor con aspect-ratio ya reservará el espacio */
+    max-width: 250px; /* Limitar el ancho máximo de las imágenes dentro de las tarjetas */
     border-radius: 8px;
     transition: var(--transition);
+    object-fit: contain; /* Asegura que la imagen se ajuste */
+    margin-bottom: 1rem; /* Espacio entre imagen y título */
 }
 
-.device-card h3 {
-    margin-top: 1rem;
-    color: var(--primary-blue);
-    font-size: 1.3rem;
-}
-
-/* Nosotros */
+/* Sección Nosotros */
 .about-container {
     max-width: 1000px;
     width: 100%;
@@ -367,20 +393,21 @@ h2::after {
     margin-bottom: 2rem;
     overflow: hidden;
     border-radius: 12px;
-    /* Nuevo: Reservar espacio para la imagen "ok!infus.png" */
-    /* Basado en width="125" height="74" -> aspect-ratio: 125 / 74 = ~1.689 */
-    aspect-ratio: 125 / 74;
+    aspect-ratio: 125 / 74; /* Ya estaba bien, crucial para la imagen */
+    max-width: 400px; /* Limitar el tamaño del contenedor de la imagen si es demasiado grande */
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .about-image img {
-    width: 100%; /* Asegura que la imagen ocupe el espacio reservado */
-    height: 100%; /* Asegura que la imagen ocupe el espacio reservado */
-    object-fit: contain; /* Ajusta la imagen dentro del contenedor sin recortar */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     transition: var(--transition);
-    padding-top: 3px; /* Mantén el padding si es intencional */
+    /* padding-top: 3px; // Esto es inusual, considera si lo necesitas. Lo dejo comentado por ahora. */
 }
 
 .about-image img:hover {
@@ -398,7 +425,7 @@ h2::after {
     margin-top: 1.5rem;
 }
 
-/* Contact Form */
+/* Formulario de Contacto */
 .contact-form {
     background: var(--white);
     padding: 3rem;
@@ -414,6 +441,16 @@ h2::after {
     position: relative;
 }
 
+.form-group label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: var(--dark-gray);
+    font-size: 1rem;
+}
+
 .form-group input,
 .form-group textarea {
     width: 100%;
@@ -425,6 +462,12 @@ h2::after {
     background: var(--white);
 }
 
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+}
+
 .form-group input:focus ~ label,
 .form-group input:valid ~ label,
 .form-group textarea:focus ~ label,
@@ -434,6 +477,8 @@ h2::after {
     font-size: 0.8rem;
     color: var(--primary-blue);
     font-weight: 600;
+    background: var(--white); /* Para que el texto no se superponga al borde */
+    padding: 0 0.3rem;
 }
 
 .form-group.checkbox {
@@ -445,37 +490,21 @@ h2::after {
     border-radius: 4px;
 }
 
-.form-group.checkbox input[type="checkbox"] {
-    width: auto;
-    margin-top: 0.25rem;
-    cursor: pointer;
-}
-
 .checkbox-label {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
     user-select: none;
+    flex: 1; /* Permite que la etiqueta ocupe el espacio restante */
 }
+
 .checkbox-label input[type="checkbox"] {
     accent-color: var(--accent-orange);
     width: 1.1em;
     height: 1.1em;
     margin: 0;
     cursor: pointer;
-}
-
-.form-group.checkbox label {
-    position: static !important;
-    pointer-events: auto !important;
-    font-size: 0.9rem;
-    color: var(--dark-gray);
-    cursor: pointer;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 button[type="submit"] {
@@ -505,7 +534,7 @@ button[type="submit"]:not(:disabled):hover {
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
-/* Location Section */
+/* Sección Ubicación */
 .location-container {
     max-width: 1200px;
     width: 100%;
@@ -516,15 +545,13 @@ button[type="submit"]:not(:disabled):hover {
     overflow: hidden;
     box-shadow: var(--shadow-small);
     margin-bottom: 2rem;
-    /* Nuevo: Añade un aspecto de ratio para el iframe del mapa */
-    /* Un aspecto 16:9 es común para videos/mapas, o puedes calcularlo si el iframe tiene dimensiones fijas */
-    aspect-ratio: 16 / 9; /* o 600 / 450 = 4 / 3 */
+    aspect-ratio: 16 / 9; /* Mantener este aspect-ratio */
 }
 
 .map iframe {
     display: block;
     width: 100%;
-    height: 100%; /* Ocupa el espacio del contenedor con aspect-ratio */
+    height: 100%;
 }
 
 .location-info {
@@ -546,8 +573,7 @@ button[type="submit"]:not(:disabled):hover {
     font-size: 1.1rem;
 }
 
-/* Remote Support Section */
-
+/* Sección Soporte Remoto */
 .remote-support {
     text-align: center;
     max-width: 1000px;
@@ -556,17 +582,13 @@ button[type="submit"]:not(:disabled):hover {
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow-small);
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto; /* Centrar la sección */
     box-sizing: border-box;
 }
 
 .remote-support img {
-    max-width: 400px;
-    /* width: 25%; // Considera cambiar esto a un ancho fijo o un porcentaje con un max-width claro */
-    /* Para evitar cambios si 25% significa un ancho relativo antes de conocer el ancho del padre */
-    /* O mejor, usar aspect-ratio en un contenedor si la imagen tiene un tamaño fijo. */
-    width: 100%; /* Asegura que la imagen ocupe el ancho disponible */
+    max-width: 400px; /* Limitar el ancho máximo */
+    width: 100%;
     height: auto;
     margin-bottom: 1rem;
     border-radius: 8px;
@@ -581,35 +603,7 @@ button[type="submit"]:not(:disabled):hover {
 }
 .contact-form-wrapper form {
     width: 100%;
-    max-width: 800px; /* O el ancho que prefieras */
-}
-
-
-/* Ajustes responsivos para móviles */
-@media (max-width: 700px) {
-    .remote-support {
-        max-width: 98vw;
-        padding: 1rem;
-    }
-    .remote-support img {
-        max-width: 90vw;
-        width: 100%;
-    }
-}
-
-@media (max-width: 450px) {
-    .remote-support {
-        border-radius: 6px;
-        padding: 0.5rem;
-    }
-    .remote-support form .form-group {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .remote-support button[type="submit"] {
-        font-size: 1rem;
-        padding: 0.6rem 1rem;
-    }
+    max-width: 800px;
 }
 
 .download-button {
@@ -629,7 +623,7 @@ button[type="submit"]:not(:disabled):hover {
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
-/* Back to Top Button */
+/* Botón "Volver arriba" */
 #backToTop {
     position: fixed;
     bottom: 2rem;
@@ -641,7 +635,7 @@ button[type="submit"]:not(:disabled):hover {
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    display: none;
+    display: none; /* Controlado por JS */
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
@@ -654,35 +648,39 @@ button[type="submit"]:not(:disabled):hover {
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
+---
+
 /* Footer */
 footer {
     background: var(--tertiary-blue);
     color: var(--white);
-    padding: 1rem 2rem;
+    padding: 2rem; /* Aumentado el padding para más espacio */
+    text-align: center; /* Centrar por defecto el texto del footer */
 }
 
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem; /* Incrementa el espacio entre columnas en el footer */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Ajustado minmax */
+    gap: 2rem; /* Reducido un poco para no ser excesivo */
 }
 
 .footer-copyright {
     text-align: center;
-    margin-top: 2rem; /* Espacio entre las secciones y el copyright */
+    margin-top: 2rem;
     font-size: 0.9rem;
     color: var(--light-gray);
-    border-top: 1px solid rgba(255, 107, 53, 0.2); /* Línea tenue con el color de acento */
-    padding-top: 1rem; /* Espacio entre la línea y el texto */
-    max-width: fit-content; /* Ajusta el ancho al contenido */
-    margin-left: auto; /* Centrar horizontalmente */
-    margin-right: auto; /* Centrar horizontalmente */
+    border-top: 1px solid rgba(255, 107, 53, 0.2);
+    padding-top: 1rem;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
 }
 
 .footer-section {
-    text-align: left;
+    text-align: center; /* Centrar las secciones del footer en general */
 }
 
 .footer-section h3 {
@@ -698,8 +696,8 @@ footer {
 }
 
 .footer-section ul li {
-    margin-bottom: 0.5rem; /* Ajusta este valor según lo necesites, o a 0 si no quieres espacio vertical entre elementos */
-    line-height: 1.2; /* Un line-height más pequeño para los ítems de la lista */
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
 .footer-section a {
@@ -712,7 +710,7 @@ footer {
 
 .footer-section a:hover {
     color: var(--accent-orange);
-    transform: translateX(5px);
+    transform: translateX(0); /* Eliminado el translateX para un hover más sutil */
 }
 
 /* Modal */
@@ -725,17 +723,19 @@ footer {
     height: 100%;
     background: rgba(0,0,0,0.5);
     z-index: 2000;
+    display: flex; /* Usamos flexbox para centrar el modal */
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
     background: var(--white);
-    margin: 15% auto;
     padding: 2rem;
     width: 90%;
     max-width: 600px;
     border-radius: 12px;
     position: relative;
-    max-height: 70vh;
+    max-height: 80vh; /* Aumentado max-height para dar más espacio */
     overflow-y: auto;
     box-shadow: var(--shadow-medium);
 }
@@ -764,8 +764,13 @@ footer {
     color: var(--white);
     padding: 1.5rem;
     z-index: 1500;
-    display: none;
+    display: none; /* Controlado por JS */
     box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    text-align: center; /* Centrar el texto del aviso de cookies */
+}
+
+.cookie-notice p {
+    margin-bottom: 1rem;
 }
 
 .cookie-buttons {
@@ -800,7 +805,7 @@ footer {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-/* Section Animation */
+/* Section Animation (Mantengo tu código original, está bien) */
 .section-animate {
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     will-change: opacity, transform;
@@ -814,101 +819,37 @@ footer {
     transform: translateY(30px) translateX(30px);
 }
 
+---
+
 /* Responsive Design */
 
-/* Menú hamburguesa: ya incluido arriba */
-
-/* Ajustes responsivos para todo el sitio */
 @media (max-width: 768px) {
     :root {
-        --section-padding: 60px;
+        --header-height: 100px; /* Reducimos el header para tabletas */
+        --section-padding-desktop: 3rem 1.5rem; /* Ajustado para tabletas */
     }
+    body {
+        padding-top: var(--header-height); /* Actualizar padding del body */
+    }
+
     section {
-        padding: 3rem 1.5rem; /* Reduce ligeramente el relleno en pantallas pequeñas */
-        margin-bottom: 2rem; /* Ajusta el espacio entre secciones */
+        padding: var(--section-padding-desktop);
+        margin-bottom: 1.5rem; /* Ajusta el espacio entre secciones */
     }
 
     .header-top {
-        padding: 0.5rem;
-        padding-bottom: 1rem;
+        padding: 0.5rem 0;
     }
 
     .logos-wrapper {
         padding: 0.5rem;
-        padding-bottom: 0.5rem;
     }
 
     .secondary-logo-container {
-        position: static;
+        /* position: static; ya no es necesario aquí si lo quitamos del global */
         text-align: left;
         margin-top: 1rem;
         margin-bottom: 0.5rem;
-    }
-
-    .main-logo {
-        max-width: 200px;
-    }
-
-    .secondary-logo {
-        max-width: 150px;
-    }
-
-    .header-bottom {
-        padding: 0.5rem;
-    }
-
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .contact-header {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    .services-grid,
-    .devices-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .contact-form {
-        padding: 1.5rem;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem; /* Reduce el espacio entre columnas en el footer */
-        text-align: center;
-    }
-
-    .footer-section a:hover {
-        transform: none;
-    }
-
-    #backToTop {
-        bottom: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
-    }
-
-    .modal-content {
-        margin: 10% auto;
-        width: 95%;
-    }
-}
-
-@media (max-width: 480px) {
-    .header-top {
-        padding: 0.5rem;
     }
 
     .main-logo {
@@ -919,8 +860,76 @@ footer {
         max-width: 120px;
     }
 
+    .header-bottom {
+        padding: 0.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .services-grid,
+    .devices-grid {
+        grid-template-columns: 1fr; /* Una sola columna en tabletas */
+        gap: 2rem;
+    }
+
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem; /* Reduce el espacio entre columnas en el footer */
+    }
+
+    .footer-section a:hover {
+        transform: none; /* Eliminar transform en hover para móvil, evita problemas táctiles */
+    }
+
+    #backToTop {
+        bottom: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --header-height: 80px; /* Reducimos el header aún más para móviles */
+        --section-padding-mobile: 1.5rem 0.8rem; /* Ajustado para móviles pequeños */
+    }
+    body {
+        padding-top: var(--header-height); /* Actualizar padding del body */
+    }
+
+    section {
+        padding: var(--section-padding-mobile);
+        margin-bottom: 1rem; /* Espacio más compacto entre secciones */
+    }
+
+    .header-top {
+        padding: 0.5rem 0;
+    }
+
+    .main-logo {
+        max-width: 150px;
+    }
+
+    .secondary-logo {
+        max-width: 100px;
+    }
+
     h2 {
         font-size: 1.8rem;
+        margin-bottom: 1.5rem;
     }
 
     .service-card,
@@ -932,24 +941,13 @@ footer {
         padding: 1rem;
     }
 
-    section {
-        padding: 2rem 1rem; /* Reduce aún más el relleno en pantallas muy pequeñas */
-        margin-bottom: 1.5rem; /* Ajusta el espacio entre secciones */
-    }
-
     .footer-content {
-        gap: 1.5rem; /* Reduce el espacio entre columnas del footer */
-        text-align: center; /* Centra el texto del footer */
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr; /* Asegura que haya una sola columna */
-        gap: 1.5rem; /* Ajusta el espacio entre los elementos */
+        gap: 1rem; /* Más compacto en móvil */
     }
 
     .footer-copyright {
-        font-size: 0.8rem; /* Reduce el tamaño del texto del copyright */
-        padding-top: 0.5rem; /* Ajusta el espacio entre la línea y el texto */
-        line-height: 1.4; /* Un line-height ligeramente menor para el copyright */
+        font-size: 0.8rem;
+        padding-top: 0.5rem;
+        line-height: 1.3;
     }
 }
