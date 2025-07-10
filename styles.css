@@ -21,28 +21,27 @@
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .visually-hidden {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0,0,0,0);
-  border: 0;
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    border: 0;
 }
 
 .visually-hidden.focusable:focus {
-  position: static !important;
-  width: auto; height: auto;
-  margin: 0; padding: 1em;
-  clip: auto;
-  background: #ff6b35;
-  color: #fff;
-  z-index: 10000;
+    position: static !important;
+    width: auto; height: auto;
+    margin: 0; padding: 1em;
+    clip: auto;
+    background: #ff6b35;
+    color: #fff;
+    z-index: 10000;
 }
-
 
 html {
     scroll-behavior: smooth;
@@ -54,7 +53,6 @@ body {
     color: var(--dark-gray);
     background-color: var(--light-gray);
 }
-
 
 /* Header Styles */
 header {
@@ -81,7 +79,15 @@ header {
 
 .main-logo-container {
     text-align: center;
+    /* Nuevo: Añade un aspecto de ratio para reservar espacio de la imagen principal */
+    /* Calcula 70px (alto) / 200px (ancho) = 0.35 * 100 = 35% */
+    /* Esto es crucial para el CLS de la imagen principal */
+    aspect-ratio: 200 / 70; /* Ancho / Alto */
+    display: flex; /* Para centrar la imagen */
+    align-items: center;
+    justify-content: center;
 }
+
 
 .secondary-logo-container {
     position: relative; /* Cambiar de absolute a relative */
@@ -90,16 +96,29 @@ header {
     justify-content: space-between; /* Espaciado entre logo e información */
     margin-bottom: 0; /* Ajusta a 0 o un valor menor */
     padding-bottom: 0; /* Ajusta a 0 o un valor menor */
+    /* Nuevo: Añade un aspecto de ratio para la imagen secundaria también */
+    /* Para 180px ancho / 33px alto = ~5.45:1 */
+    aspect-ratio: 180 / 33; /* Ancho / Alto */
 }
 
 .main-logo {
     max-width: 200px;
     height: auto;
+    /* Nuevo: Asegúrate de que la imagen no tenga un "height: 0" inicial que cause el salto */
+    display: block; /* Asegura que no haya espacio extra debajo de la imagen */
+    width: 100%; /* Asegura que use el ancho disponible en el contenedor */
+    height: 100%; /* Asegura que use el alto disponible en el contenedor */
+    object-fit: contain; /* Para que la imagen se ajuste dentro del contenedor sin recortarse */
 }
 
 .secondary-logo {
     max-width: 180px;
     height: auto;
+    /* Nuevo: Similar al main-logo para consistencia */
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .header-bottom {
@@ -348,14 +367,20 @@ h2::after {
     margin-bottom: 2rem;
     overflow: hidden;
     border-radius: 12px;
+    /* Nuevo: Reservar espacio para la imagen "ok!infus.png" */
+    /* Basado en width="125" height="74" -> aspect-ratio: 125 / 74 = ~1.689 */
+    aspect-ratio: 125 / 74;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .about-image img {
-    width: 100%;
-    max-width: 125px;
-    height: auto;
+    width: 100%; /* Asegura que la imagen ocupe el espacio reservado */
+    height: 100%; /* Asegura que la imagen ocupe el espacio reservado */
+    object-fit: contain; /* Ajusta la imagen dentro del contenedor sin recortar */
     transition: var(--transition);
-    padding-top: 3px;
+    padding-top: 3px; /* Mantén el padding si es intencional */
 }
 
 .about-image img:hover {
@@ -400,25 +425,6 @@ h2::after {
     background: var(--white);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.1);
-    outline: none;
-}
-
-.form-group label {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    background: var(--white);
-    padding: 0 0.5rem;
-    font-size: 0.9rem;
-    color: var(--dark-gray);
-    transition: var(--transition);
-    pointer-events: none;
-}
-
 .form-group input:focus ~ label,
 .form-group input:valid ~ label,
 .form-group textarea:focus ~ label,
@@ -446,18 +452,18 @@ h2::after {
 }
 
 .checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
 }
 .checkbox-label input[type="checkbox"] {
-  accent-color: var(--accent-orange);
-  width: 1.1em;
-  height: 1.1em;
-  margin: 0;
-  cursor: pointer;
+    accent-color: var(--accent-orange);
+    width: 1.1em;
+    height: 1.1em;
+    margin: 0;
+    cursor: pointer;
 }
 
 .form-group.checkbox label {
@@ -510,11 +516,15 @@ button[type="submit"]:not(:disabled):hover {
     overflow: hidden;
     box-shadow: var(--shadow-small);
     margin-bottom: 2rem;
+    /* Nuevo: Añade un aspecto de ratio para el iframe del mapa */
+    /* Un aspecto 16:9 es común para videos/mapas, o puedes calcularlo si el iframe tiene dimensiones fijas */
+    aspect-ratio: 16 / 9; /* o 600 / 450 = 4 / 3 */
 }
 
 .map iframe {
     display: block;
     width: 100%;
+    height: 100%; /* Ocupa el espacio del contenedor con aspect-ratio */
 }
 
 .location-info {
@@ -553,7 +563,10 @@ button[type="submit"]:not(:disabled):hover {
 
 .remote-support img {
     max-width: 400px;
-    width: 25%;
+    /* width: 25%; // Considera cambiar esto a un ancho fijo o un porcentaje con un max-width claro */
+    /* Para evitar cambios si 25% significa un ancho relativo antes de conocer el ancho del padre */
+    /* O mejor, usar aspect-ratio en un contenedor si la imagen tiene un tamaño fijo. */
+    width: 100%; /* Asegura que la imagen ocupe el ancho disponible */
     height: auto;
     margin-bottom: 1rem;
     border-radius: 8px;
@@ -939,3 +952,4 @@ footer {
         padding-top: 0.5rem; /* Ajusta el espacio entre la línea y el texto */
         line-height: 1.4; /* Un line-height ligeramente menor para el copyright */
     }
+}
