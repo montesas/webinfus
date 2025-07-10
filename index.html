@@ -22,8 +22,6 @@
             --light-gray: #f5f5f5;
             --dark-gray: #333333;
             --white: #ffffff;
-            /* Eliminamos las variables de altura fija del header aquí.
-               El header se adaptará a su contenido. */
             --section-padding: 100px;
             --shadow-small: 0 2px 10px rgba(0,0,0,0.1);
             --shadow-medium: 0 4px 20px rgba(0,0,0,0.15)
@@ -36,10 +34,9 @@
             line-height:1.6;
             color:var(--dark-gray);
             background-color:var(--light-gray);
-            /* Establecemos un padding-top inicial para evitar que el contenido se vea por debajo del header
-               hasta que el JS lo calcule. Este valor debe ser lo suficientemente grande para cubrir el header
-               incluso antes de que las imágenes se carguen. Podrías necesitar ajustarlo si tu header es excepcionalmente alto. */
-            padding-top: 180px; /* Valor seguro inicial (ej: 2*80px logos + padding) */
+            /* Este padding-top será un fallback inicial, luego el JS lo refinará.
+               Es crucial que sea lo suficientemente grande para cubrir el header. */
+            padding-top: 180px; /* Mantener un valor seguro inicial */
         }
         
         header{
@@ -49,7 +46,7 @@
             z-index:1000;
             background:var(--white);
             box-shadow:var(--shadow-medium);
-            /* min-height: auto; para que se ajuste al contenido */
+            /* min-height: auto; para que se ajuste al contenido, como ya estaba */
         }
         
         .header-top{background:var(--white);padding:1rem;border-bottom:1px solid rgba(0,0,0,0.1)}
@@ -58,8 +55,8 @@
         .secondary-logo-container{position:relative;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;padding-bottom:0}
         
         /* Aseguramos que los logos no se desborden si el tamaño es problemático */
-        .main-logo{max-width:200px;height:auto; display: block;} /* Añadido display: block */
-        .secondary-logo{max-width:180px;height:auto; display: block;} /* Añadido display: block */
+        .main-logo{max-width:200px;height:auto; display: block;}
+        .secondary-logo{max-width:180px;height:auto; display: block;}
 
         .header-bottom{background:linear-gradient(135deg,var(--primary-blue),var(--secondary-blue));color:var(--white);padding:1rem}
         .menu-toggle{min-width:48px;min-height:48px;background:none;border:none;color:var(--main-blue, #2c3e50);display:none;align-items:center;justify-content:center}
@@ -68,11 +65,9 @@
             .menu-toggle{display:flex}
             .header-bottom nav ul{display:none;flex-direction:column;background:#fff;position:absolute;width:100vw;left:0;top:100%;z-index:1001;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin:0;padding:0}
             .header-bottom nav ul li{text-align:left;padding:12px 20px;border-bottom:1px solid #eee}
-            /* En móviles, ajustamos el padding-top del body si fuera necesario con media queries.
-               Si el JS lo gestiona, no es tan crítico aquí, pero puede servir de fallback. */
-            body { padding-top: 130px; } /* Ajuste para móvil si el header es más pequeño */
-            .main-logo{max-width:180px;} /* Ajuste de tamaño de logo en móvil */
-            .secondary-logo{max-width:120px;} /* Ajuste de tamaño de logo en móvil */
+            body { padding-top: 130px; } /* Ajuste de fallback para móvil */
+            .main-logo{max-width:180px;}
+            .secondary-logo{max-width:120px;}
         }
         nav a{color:var(--white);text-decoration:none;font-weight:500;padding:0.5rem 1rem;border-radius:4px}
         .contact-header{display:flex;align-items:center;gap:1.5rem}
@@ -80,7 +75,7 @@
         @media (max-width:480px){
             .contact-header{gap:0.75rem;font-size:0.95rem}
         }
-        /* CAMBIO: scroll-margin-top usará la altura calculada por JS o el fallback inicial */
+        /* scroll-margin-top usará la altura calculada por JS o el fallback inicial */
         section{position:relative;scroll-margin-top: calc(var(--header-total-height, 180px) + 20px);
             padding:4rem 2rem;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;background:var(--white);margin-bottom:2rem}
         section:nth-child(even){background:var(--light-gray)}
@@ -88,8 +83,7 @@
         h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:3px;background:var(--accent-orange)}.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:3rem;max-width:1200px;width:100%}.service-card{background:var(--white);padding:2rem;border-radius:12px;box-shadow:var(--shadow-small);text-align:center}.service-card i{color:var(--primary-blue);margin-bottom:1rem;font-size:3rem}.service-card h3{color:var(--primary-blue);margin-bottom:1rem;font-size:1.5rem}#backToTop{position:fixed;bottom:2rem;right:2rem;background:var(--accent-orange);color:var(--white);width:50px;height:50px;border-radius:50%;border:none;display:none;align-items:center;justify-content:center;font-size:1.5rem;z-index:999}.cookie-notice{position:fixed;bottom:0;left:0;width:100%;background:var(--dark-gray);color:var(--white);padding:1.5rem;z-index:1500;display:none;box-shadow:0 -2px 10px rgba(0,0,0,0.2)}.cookie-buttons{display:flex;gap:1rem;margin-top:1rem;justify-content:center;flex-wrap:wrap}.cookie-buttons button{padding:0.8rem 1.5rem;border:none;border-radius:4px;font-weight:600}.cookie-buttons button:first-child{background:var(--accent-orange);color:var(--white)}.cookie-buttons button:not(:first-child){background:var(--light-gray);color:var(--dark-gray)}.section-animate{will-change:opacity,transform}.section-animate:not(.visible){opacity:0;transform:translateY(30px) translateX(30px)}@media (max-width:768px){:root{--section-padding: 60px}section{padding:3rem 1.5rem;margin-bottom:2rem}.header-top{padding:0.5rem;padding-bottom:1rem}.logos-wrapper{padding:0.5rem;padding-bottom:0.5rem}.secondary-logo-container{position:static;text-align:left;margin-top:1rem;margin-bottom:0.5rem}.main-logo{max-width:200px}.secondary-logo{max-width:150px}.header-bottom{padding:0.5rem}nav ul{flex-direction:column;align-items:center;gap:0.5rem}.contact-header{flex-direction:column;align-items:center;gap:0.5rem}h2{font-size:2rem}.services-grid{grid-template-columns:1fr;gap:2rem}#backToTop{bottom:1rem;right:1rem;width:40px;height:40px}}@media (max-width:480px){.header-top{padding:0.5rem}.main-logo{max-width:180px}.secondary-logo{max-width:120px}h2{font-size:1.8rem}.service-card{padding:1rem}section{padding:2rem 1rem;margin-bottom:1.5rem}.services-grid{grid-template-columns:1fr;gap:1.5rem}}
     </style>
     
-    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    <link rel="stylesheet" href="style.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HboPw9WyJoBcDxMUtlR4PfYN5ocwQzgbzZ9yNfTdf2GDwtlJpt2YU+3SjIjIuGzV3K5o7c7F5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
