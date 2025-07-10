@@ -1,8 +1,7 @@
-// Fecha de última actualización: 2025-05-08 07:38:11
+// Fecha de última actualización: 2025-07-10 12:07:07
 // Autor: montesas
 
-// Variables globales y utilidades generales
-//let isScrollingTimer; // Renombrado para mayor claridad, ya que es un timer
+// --- Variables globales y utilidades generales ---
 const header = document.querySelector('header');
 const backToTopButton = document.getElementById('backToTop');
 const sections = document.querySelectorAll('.section-animate');
@@ -11,44 +10,57 @@ const sections = document.querySelectorAll('.section-animate');
 console.log('Elementos con clase section-animate encontrados:', sections.length);
 
 // Asegurar que la página siempre cargue al principio
-if (history.scrollRestoration) {
-    history.scrollRestoration = 'manual';
-}
-window.onbeforeunload = function() {
-    window.scrollTo(0, 0);
-};
+// Es mejor manejar el scroll al inicio una vez en DOMContentLoaded para evitar posibles flashes.
+// history.scrollRestoration = 'manual' y window.onbeforeunload pueden ser problemáticos
+// y a menudo no son la mejor experiencia de usuario.
+// El scroll al inicio ya está en DOMContentLoaded.
 
 // --- Funciones para el Menú Hamburguesa ---
 function setupHamburgerMenu() {
     const menuToggle = document.getElementById('menu-toggle');
-    const navList = document.querySelector('#main-navigation ul'); // Asegura que sea el UL dentro del NAV con el ID
+    const navList = document.querySelector('#main-navigation ul');
 
-    if (menuToggle && navList) {
-        menuToggle.addEventListener('click', function() {
-            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', !expanded);
-            navList.classList.toggle('show');
-        });
-
-        // Opcional: cerrar el menú con ESC y mejorar el foco en móviles
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
-                menuToggle.click(); // Simula un click para cerrar
-                menuToggle.focus(); // Devuelve el foco al botón del menú
-            }
-        });
-    } else {
+    if (!menuToggle || !navList) {
         console.warn('Elementos del menú hamburguesa no encontrados (menu-toggle o #main-navigation ul).');
+        return;
     }
+
+    menuToggle.addEventListener('click', function() {
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', !expanded);
+        navList.classList.toggle('show');
+
+        // Asegurar que el focus se mueve al primer elemento de la lista si el menú se abre
+        if (!expanded) {
+            navList.querySelector('a')?.focus();
+        } else {
+            // Si el menú se cierra, devolver el foco al botón del menú
+            menuToggle.focus();
+        }
+    });
+
+    // Cerrar el menú con ESC y mejorar el foco en móviles
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+            menuToggle.click(); // Simula un click para cerrar
+        }
+    });
 }
 
 // --- Funciones para la Gestión de Cookies ---
-function showCookieConsent() {
-    const cookieNotice = document.getElementById('cookieConsent'); // Usa el ID para mayor precisión
+// Se recomienda manejar los event listeners de los botones de cookies aquí en JavaScript
+// en lugar de usar `onclick` en el HTML, para una mejor separación de preocupaciones y rendimiento.
+function setupCookieConsent() {
+    const cookieNotice = document.getElementById('cookieConsent');
     if (!cookieNotice) {
-        console.error('No se encontró el elemento .cookie-notice (ID cookieConsent)');
+        console.warn('No se encontró el elemento #cookieConsent.');
         return;
     }
+
+    const acceptBtn = cookieNotice.querySelector('.accept-cookies'); // Asume que tienes un botón con esta clase
+    const rejectBtn = cookieNotice.querySelector('.reject-cookies'); // Asume que tienes un botón con esta clase
+
+    // Mostrar u ocultar el aviso según el localStorage
     const cookieConsent = localStorage.getItem('cookieConsent');
     if (!cookieConsent) {
         cookieNotice.style.display = 'block';
@@ -57,32 +69,27 @@ function showCookieConsent() {
         cookieNotice.style.display = 'none';
         cookieNotice.setAttribute('aria-hidden', 'true');
     }
-}
 
-function acceptCookies() {
-    localStorage.setItem('cookieConsent', 'accepted');
-    const cookieNotice = document.getElementById('cookieConsent');
-    if (cookieNotice) {
-        cookieNotice.style.display = 'none';
-        cookieNotice.setAttribute('aria-hidden', 'true');
+    // Añadir event listeners si los botones existen
+    if (acceptBtn) {
+        acceptBtn.addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieNotice.style.display = 'none';
+            cookieNotice.setAttribute('aria-hidden', 'true');
+            console.info('Cookies aceptadas.');
+        });
     }
-    console.info('Cookies aceptadas');
-}
 
-function rejectCookies() {
-    localStorage.setItem('cookieConsent', 'rejected');
-    const cookieNotice = document.getElementById('cookieConsent');
-    if (cookieNotice) {
-        cookieNotice.style.display = 'none';
-        cookieNotice.setAttribute('aria-hidden', 'true');
+    if (rejectBtn) {
+        rejectBtn.addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            cookieNotice.style.display = 'none';
+            cookieNotice.setAttribute('aria-hidden', 'true');
+            console.info('Cookies rechazadas.');
+            // Aquí podrías añadir lógica para bloquear scripts si se rechazan las cookies
+        });
     }
-    console.info('Cookies rechazadas');
 }
-
-// Asegurarse de que estas funciones sean accesibles globalmente (si se llaman desde onclick en HTML)
-window.acceptCookies = acceptCookies;
-window.rejectCookies = rejectCookies;
-
 
 // --- Funciones para el Formulario de Contacto ---
 function esEmailValido(email) {
@@ -95,10 +102,11 @@ function validarFormulario() {
     const emailInput = document.getElementById('email');
     const mensajeInput = document.getElementById('mensaje');
     const gdprCheckbox = document.getElementById('gdpr');
-    const enviarBtn = document.getElementById('btnEnviar'); // Usa el ID del botón
+    const enviarBtn = document.getElementById('btnEnviar');
 
+    // Comprobar que todos los elementos existan antes de continuar
     if (!nombreInput || !emailInput || !mensajeInput || !gdprCheckbox || !enviarBtn) {
-        console.warn('Uno o más elementos del formulario de contacto no se encontraron.');
+        console.warn('Uno o más elementos del formulario de contacto no se encontraron para validarFormulario.');
         return;
     }
 
@@ -116,9 +124,8 @@ function validarFormulario() {
 }
 
 // Función para ser llamada por reCAPTCHA al resolverlo
-window.recaptchaCallback = function() {
-    validarFormulario();
-};
+// Es crucial que esta función esté disponible globalmente si reCAPTCHA la llama directamente.
+window.recaptchaCallback = validarFormulario;
 
 function setupContactForm() {
     const contactForm = document.getElementById('contactForm');
@@ -144,10 +151,14 @@ function setupContactForm() {
 
     // Reset del formulario (incluyendo reCAPTCHA)
     contactForm.addEventListener('reset', function() {
-        btnEnviar.disabled = true;
-        if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
-            grecaptcha.reset();
-        }
+        // Retrasar el reseteo del botón y reCAPTCHA un poco
+        // para asegurar que el DOM se ha reseteado
+        setTimeout(() => {
+            btnEnviar.disabled = true;
+            if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
+                grecaptcha.reset();
+            }
+        }, 0);
     });
 
     // Envío del formulario
@@ -159,13 +170,19 @@ function setupContactForm() {
             console.error('Elemento formStatus no encontrado.');
             return;
         }
-        status.textContent = "";
+        status.textContent = ""; // Limpiar mensaje de estado previo
+
+        // Deshabilitar botón para evitar múltiples envíos
+        btnEnviar.disabled = true;
+        btnEnviar.textContent = 'Enviando...'; // Opcional: mostrar un estado de carga
 
         // Verifica que el captcha esté resuelto
         const recaptchaResponse = typeof grecaptcha !== "undefined" && grecaptcha.getResponse ? grecaptcha.getResponse() : null;
         if (!recaptchaResponse) {
             status.textContent = "Por favor, marque que no es un robot.";
             status.style.color = "red";
+            btnEnviar.disabled = false; // Habilitar botón de nuevo
+            btnEnviar.textContent = 'Enviar Mensaje'; // Restaurar texto original
             return;
         }
 
@@ -188,76 +205,96 @@ function setupContactForm() {
                 if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
                     grecaptcha.reset(); // Restablece el reCAPTCHA
                 }
-                btnEnviar.disabled = true; // Volver a deshabilitar el botón
+                // El botón ya está deshabilitado por el reset, pero lo aseguramos
+                btnEnviar.disabled = true;
             } else {
-                status.textContent = "Ocurrió un error al enviar el formulario. Inténtelo más tarde.";
+                // Si la respuesta no es OK pero aún viene de Formspree (ej. errores de validación)
+                const data = await response.json();
+                if (data.errors) {
+                    status.textContent = data.errors.map(err => err.message).join(', ');
+                } else {
+                    status.textContent = "Ocurrió un error al enviar el formulario. Inténtelo más tarde.";
+                }
                 status.style.color = "red";
             }
         } catch (err) {
+            console.error('Error al enviar el formulario:', err);
             status.textContent = "No se pudo conectar con el servidor. Inténtelo más tarde.";
             status.style.color = "red";
+        } finally {
+            // Asegúrate de restaurar el texto del botón en cualquier caso
+            btnEnviar.textContent = 'Enviar Mensaje';
+            // Validar formulario de nuevo para ajustar el estado del botón si es necesario (ej. si el envío falla)
+            validarFormulario();
         }
     });
 }
 
 
-// FUSIÓN PRINCIPAL DE INICIALIZACIONES
+// --- FUSIÓN PRINCIPAL DE INICIALIZACIONES (DOMContentLoaded) ---
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Debug inicial
     console.info('Iniciando aplicación...');
 
-    // 2. Forzar scroll al inicio
+    // 1. Forzar scroll al inicio (más fiable aquí)
     window.scrollTo(0, 0);
 
-    // 3. Mostrar el aviso de cookies e inicializar botones
-    showCookieConsent();
-    // Los event listeners de acceptCookies y rejectCookies se manejan directamente en el HTML con onclick.
+    // 2. Mostrar el aviso de cookies e inicializar botones (ahora con listeners en JS)
+    setupCookieConsent();
 
-    // 4. Activar animaciones de las secciones visibles inicialmente
+    // 3. Activar animaciones de las secciones visibles inicialmente (se mantiene)
     sections.forEach(section => {
         const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) {
+        // Umbral ligeramente ajustado para mayor visibilidad
+        if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
             section.classList.add('visible');
         }
     });
 
-    // 5. Comprobar modo oscuro (si lo usas)
+    // 4. Comprobar modo oscuro (si lo usas - se mantiene)
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark-mode');
     }
 
-    // 6. Ajuste de margin-top dinámico al alto real del header
+    // 5. Ajuste de margin-top dinámico al alto real del header (se mantiene)
     if(header) {
-        const main = document.querySelector('main'); // Quita .container si no es específico de main
+        const main = document.querySelector('main');
         if(main) main.style.marginTop = header.offsetHeight + "px";
     }
 
-    // 7. Back to Top (botón)
+    // 6. Back to Top (botón - se mantiene)
     if (backToTopButton) {
         backToTopButton.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
-    // 8. Scroll + mostrar botón Back to Top + animaciones de sección
+    // 7. Scroll + mostrar botón Back to Top + animaciones de sección
+    // Se ha eliminado la variable isScrollingTimer ya que no se estaba usando.
     window.addEventListener('scroll', function() {
-        // La variable isScrollingTimer se limpia y se podría usar si quisieras un efecto
-        // que solo ocurra *después* de que el usuario deje de hacer scroll.
-        // Como actualmente no hace nada, se ha eliminado la asignación para limpiar el código.
-        // Si necesitas una función que se dispare cuando el usuario termine de hacer scroll:
-        // clearTimeout(isScrollingTimer);
-        // isScrollingTimer = setTimeout(() => { /* Tu código aquí */ }, 100);
+        if (backToTopButton) {
+            // Solo actualiza la visibilidad si el estado cambia para evitar re-pintados innecesarios
+            const currentDisplay = backToTopButton.style.display;
+            const newDisplay = window.scrollY > 300 ? 'flex' : 'none';
+            if (currentDisplay !== newDisplay) {
+                backToTopButton.style.display = newDisplay;
+            }
+        }
 
-        if (backToTopButton) backToTopButton.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        // Optimización: Usar IntersectionObserver para animaciones de sección si hay muchas
+        // Para unas pocas, el bucle forEach está bien, pero para muchas puede ser costoso.
+        // Como ya tienes un IntersectionObserver para imágenes, podrías considerar
+        // usar uno también para las secciones si el rendimiento se ve afectado.
         sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) {
-                section.classList.add('visible');
+            if (!section.classList.contains('visible')) { // Solo procesar si no es visible ya
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+                    section.classList.add('visible');
+                }
             }
         });
-    });
+    }, { passive: true }); // Usar { passive: true } para mejorar el rendimiento del scroll
 
-    // 9. Enlaces del menú con scroll ajustado y cierre menú hamburguesa
+    // 8. Enlaces del menú con scroll ajustado y cierre menú hamburguesa (ligeros ajustes)
     document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -270,37 +307,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     const targetPosition = Math.round(
                         targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset
                     );
-                    if (Math.abs(window.scrollY - targetPosition) >= 1) { // Pequeña corrección para evitar scroll si ya está en posición
-                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                    }
+
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+
                     // Actualiza el hash de la URL sin recargar la página
-                    history.pushState(null, '', href);
+                    // Se usa `location.hash = href;` que es más directo para los hash
+                    // y el `scrollRestoration = 'manual'` ya lo gestiona.
+                    // Para `pushState`, la URL completa sería mejor `history.pushState(null, '', location.pathname + href);`
+                    // pero para un simple hash, `location.hash` es suficiente.
+                    location.hash = href;
                 }
             }
             // Cierre menú hamburguesa si está activo (solo para pantallas pequeñas)
             const menuToggle = document.getElementById('menu-toggle');
             const navList = document.querySelector('#main-navigation ul');
-            if (menuToggle && menuToggle.offsetParent !== null && navList && navList.classList.contains('show')) { // Comprueba si el toggle es visible (modo móvil)
-                 menuToggle.click(); // Simula un click para cerrar el menú y actualizar aria-expanded
+            // Comprueba si el toggle es visible (modo móvil) y el menú está abierto
+            if (menuToggle && getComputedStyle(menuToggle).display !== 'none' && navList && navList.classList.contains('show')) {
+                menuToggle.click(); // Simula un click para cerrar el menú y actualizar aria-expanded
             }
         });
     });
 
-    // 10. Inicializar el menú hamburguesa
+    // 9. Inicializar el menú hamburguesa
     setupHamburgerMenu();
 
-    // 11. Inicializar y validar formulario de contacto
+    // 10. Inicializar y validar formulario de contacto
     setupContactForm();
     // Llamar validarFormulario() una vez al inicio para establecer el estado inicial del botón
     validarFormulario();
 
-    // 12. Botón de descarga de software
+    // 11. Botón de descarga de software (se mantiene)
     const downloadBtn = document.querySelector('.download-button');
     if (downloadBtn) {
         downloadBtn.addEventListener('click', function (event) {
             event.preventDefault();
             const link = document.createElement('a');
-            link.href = '/descargas/Soporte%20Infus.exe'; // Asegúrate de que esta URL es correcta y accesible
+            link.href = '/descargas/Soporte%20Infus.exe';
             link.download = 'Soporte_Infus.exe';
             document.body.appendChild(link);
             link.click();
@@ -309,21 +351,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 13. Lazy loading para imágenes .lazy
+    // 12. Lazy loading para imágenes .lazy (se mantiene y mejora levemente)
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                const imgSrc = img.dataset.src || img.getAttribute('src'); // Usa dataset.src o src si dataset.src no existe
+                const imgSrc = img.dataset.src; // Preferir data-src para lazy loading
                 if (imgSrc) {
                     img.src = imgSrc;
                     img.removeAttribute('data-src'); // Limpiar data-src una vez cargada
                 }
-                img.classList.remove('lazy');
+                img.classList.remove('lazy'); // Asegurarse de quitar la clase
                 observer.unobserve(img);
             }
         });
-    });
+    }, { rootMargin: '0px 0px 50px 0px' }); // Opcional: Cargar 50px antes de entrar en el viewport
     document.querySelectorAll('img.lazy').forEach(img => {
         imageObserver.observe(img);
     });
@@ -334,6 +376,6 @@ document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
         document.title = '¡Vuelve pronto! - Tu Servicio Técnico';
     } else {
-        document.title = 'Infus - Servicio Técnico Informático en A Coruña'; // Usar el título original
+        document.title = 'Infus - Servicio Técnico Informático en A Coruña';
     }
 });
