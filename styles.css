@@ -1,5 +1,6 @@
 /* Variables y reset */
-:root {
+/* ESTAS VARIABLES YA ESTÁN EN CRITICAL.CSS, POR ESO SE ELIMINAN DE AQUÍ */
+/* :root {
     --primary-blue: #1a4b8c;
     --secondary-blue: #2c7ac9;
     --Tertiary-blue: #2c3e50;
@@ -12,26 +13,28 @@
     --shadow-small: 0 2px 10px rgba(0,0,0,0.1);
     --shadow-medium: 0 4px 20px rgba(0,0,0,0.15);
     --transition: all 0.3s ease;
-}
+} */
 
-* {
+/* EL RESET UNIVERSAL YA ESTÁ EN CRITICAL.CSS */
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
 .container {
     max-width: 800px;
     margin: 0 auto;
 }
 
-.visually-hidden {
+/* VISUALLY-HIDDEN YA ESTÁ EN CRITICAL.CSS */
+/* .visually-hidden {
     position: absolute !important;
     width: 1px; height: 1px;
     padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0,0,0,0);
     border: 0;
-}
+} */
 
 .visually-hidden.focusable:focus {
     position: static !important;
@@ -43,128 +46,43 @@
     z-index: 10000;
 }
 
-html {
+/* HTML Y BODY YA ESTÁN EN CRITICAL.CSS */
+/* html {
     scroll-behavior: smooth;
 }
-
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: var(--dark-gray);
     background-color: var(--light-gray);
-}
+} */
 
-/* Header Styles */
-header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    background: var(--white);
-    box-shadow: var(--shadow-medium);
-}
-
-.header-top {
-    background: var(--white);
-    padding: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.logos-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    padding: 0.5rem;
-}
-
-.main-logo-container {
-    text-align: center;
-}
-
-.secondary-logo-container {
-    position: relative; /* Cambiar de absolute a relative */
-    display: flex; /* Permitir flexbox para alinear contenido */
-    align-items: center;
-    justify-content: space-between; /* Espaciado entre logo e información */
-    margin-bottom: 0; /* Ajusta a 0 o un valor menor */
-    padding-bottom: 0; /* Ajusta a 0 o un valor menor */
-}
-
-.main-logo {
-    max-width: 200px;
-    height: auto;
-}
-
-.secondary-logo {
-    max-width: 180px;
-    height: auto;
-}
-
-.header-bottom {
-    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-    color: var(--white);
-    padding: 1rem;
-}
+/* Header Styles - La mayoría ya está en critical.css, solo mantenemos los :hover o :focus */
+/* HEADER, HEADER-TOP, LOGOS-WRAPPER, ETC. YA ESTÁN EN CRITICAL.CSS */
 
 /* --- ACCESIBLE MENÚ HAMBURGUESA --- */
 
-/* El botón hamburguesa siempre existe, pero solo es visible en móvil */
-.menu-toggle {
-    min-width: 48px;
-    min-height: 48px;
-    background: none;
-    border: none;
-    color: var(--main-blue, #2c3e50);
-    cursor: pointer;
-    display: none; /* Oculto por defecto, visible en media query */
-    align-items: center;
-    justify-content: center;
-}
+/* MENU-TOGGLE Y NAV UL BÁSICO YA ESTÁN EN CRITICAL.CSS */
 
 .menu-toggle:focus {
     outline: 3px solid var(--accent-orange);
     outline-offset: 2px;
 }
 
-/* Menú accesible: oculto por defecto en móvil, visible en escritorio */
 nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    gap: 2rem;
-    margin: 0.5rem 0;
-    flex-wrap: wrap;
-    transition: all 0.3s;
+    transition: all 0.3s; /* Mantenemos la transición aquí, no en el crítico */
 }
+
 nav ul.show {
     display: block;
 }
+
 @media (max-width: 800px) {
-    .menu-toggle {
-        display: flex;
-    }
-    /* El menú se muestra en columna y oculto por defecto */
-    .header-bottom nav ul {
-        display: none;
-        flex-direction: column;
-        background: #fff;
-        position: absolute;
-        width: 100vw;
-        left: 0;
-        top: 100%;
-        z-index: 1001;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        margin: 0;
-        padding: 0;
-    }
+    /* MENU-TOGGLE, HEADER-BOTTOM NAV UL BÁSICO YA ESTÁN EN CRITICAL.CSS */
     .header-bottom nav ul.show {
-        display: flex;
+        display: flex; /* Esta es la regla específica para cuando se muestra en móvil, no es duplicada */
     }
-    .header-bottom nav ul li {
-        text-align: left;
-        padding: 12px 20px;
-        border-bottom: 1px solid #eee;
-    }
+    /* HEADER-BOTTOM NAV UL LI YA ESTÁ EN CRITICAL.CSS */
 }
 
 /* Mejora el foco visible en los botones del menú y cookies */
@@ -177,104 +95,23 @@ nav ul.show {
 /* --------- */
 
 nav a {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: var(--transition);
+    transition: var(--transition); /* Mantenemos la transición aquí */
 }
 
 nav a:hover {
     background-color: var(--accent-orange); /* Efecto hover */
 }
 
-.contact-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem; /* Espacio horizontal entre teléfono y contacto */
-}
-
-.contact-header a {
-    color: var(--primary-blue); /* O el color que prefieras */
-    text-decoration: none;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5em; /* Espacio entre icono y texto */
-}
-
 .contact-header a:hover {
     color: var(--accent-orange); /* Efecto hover */
 }
 
-@media (max-width: 480px) {
-    .contact-header {
-        gap: 0.75rem;
-        font-size: 0.95rem;
-    }
-}
+/* Main Content - La mayoría de los estilos base de section y h2 ya están en critical.css */
+/* MAIN, SECTION, SECTION:NTH-CHILD(EVEN), H2, H2::AFTER YA ESTÁN EN CRITICAL.CSS */
 
-/* Main Content */
-main {
-    margin-top: var(--header-height);
-}
-
-section {
-    position: relative;
-    scroll-margin-top: calc(var(--header-height) + 20px); /* Ajuste para el desplazamiento */
-    padding: 4rem 2rem; /* Incrementa el relleno general para dar más espacio */
-    min-height: 80vh; /* Asegura que cada sección ocupe al menos el alto de la ventana */
-    display: flex; /* Flexbox para centrar contenido */
-    flex-direction: column; /* Alinea elementos en columna */
-    justify-content: flex-start; /* Comienza desde la parte superior */
-    align-items: center; /* Centra horizontalmente */
-    background: var(--white); /* Fondo blanco */
-    margin-bottom: 2rem; /* Espaciado inferior */
-}
-
-section:nth-child(even) {
-    background: var(--light-gray);
-}
-
-h2 {
-    /* Propiedades comunes para todos los h2 */
-    font-size: 2.5rem;
-    text-align: center;
-    color: var(--primary-blue);
-    margin: 0; /* Elimina márgenes superiores e inferiores por defecto */
-    padding: 1rem 0; /* Espaciado interno opcional para claridad */
-    position: relative; /* Necesario para el pseudo-elemento ::after */
-    margin-bottom: 2rem; /* Aplicado a todos los h2, asumiendo que siempre lo necesitarán */
-}
-
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: var(--accent-orange);
-}
-
-/* Services Section */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem; /* Incrementa el espacio entre los elementos del grid */
-    max-width: 1200px;
-    width: 100%;
-}
-
+/* Services Section - Estilos base ya en critical.css, mantenemos hovers y transiciones */
 .service-card {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-small);
-    text-align: center;
-    transition: var(--transition);
+    transition: var(--transition); /* Mantenemos la transición */
 }
 
 .service-card:hover {
@@ -283,20 +120,11 @@ h2::after {
 }
 
 .service-card i {
-    color: var(--primary-blue);
     transition: var(--transition); /* Usando la variable global para consistencia */
-    margin-bottom: 1rem;
-    font-size: 3rem;
 }
 
 .service-card:hover i {
     color: var(--accent-orange); /* Cambia el color al pasar el ratón */
-}
-
-.service-card h3 {
-    color: var(--primary-blue);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
 }
 
 /* Devices Section */
@@ -627,26 +455,7 @@ button[type="submit"]:not(:disabled):hover {
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
-/* Back to Top Button */
-#backToTop {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--accent-orange);
-    color: var(--white);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    transition: var(--transition);
-    z-index: 999;
-}
-
+/* Back to Top Button - Estilos base ya en critical.css */
 #backToTop:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
@@ -654,7 +463,7 @@ button[type="submit"]:not(:disabled):hover {
 
 /* Footer */
 footer {
-    background: var(--Tertiary-blue);
+    background: var(--tertiary-blue); /* Corregido el typo aquí también */
     color: var(--white);
     padding: 1rem 2rem;
 }
@@ -745,45 +554,9 @@ footer {
     color: var(--accent-orange);
 }
 
-/* Cookie Notice */
-.cookie-notice {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: var(--dark-gray);
-    color: var(--white);
-    padding: 1.5rem;
-    z-index: 1500;
-    display: none;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-}
-
-.cookie-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
+/* Cookie Notice - La mayoría ya está en critical.css */
 .cookie-buttons button {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-.cookie-buttons button:first-child {
-    background: var(--accent-orange);
-    color: var(--white);
-}
-
-.cookie-buttons button:not(:first-child) {
-    background: var(--light-gray);
-    color: var(--dark-gray);
+    transition: var(--transition); /* Mantenemos la transición */
 }
 
 .cookie-buttons button:hover {
@@ -791,84 +564,28 @@ footer {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-/* Section Animation */
+/* Section Animation - Estilos base ya en critical.css */
 .section-animate {
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Esta regla tiene la transición completa aquí */
 }
 .section-animate.visible {
     opacity: 1;
     transform: translateY(0) translateX(0);
 }
-.section-animate:not(.visible) {
+/* .section-animate:not(.visible) { Ya está en critical.css
     opacity: 0;
     transform: translateY(30px) translateX(30px);
-}
+} */
 
-/* Responsive Design */
 
-/* Menú hamburguesa: ya incluido arriba */
+/* Responsive Design - Ajustes responsivos ya en critical.css */
 
-/* Ajustes responsivos para todo el sitio */
+/* Eliminados todos los @media queries que ya están en critical.css para evitar duplicados. */
+/* Solo se mantienen los que tienen reglas nuevas o modificadas. */
+
 @media (max-width: 768px) {
-    :root {
-        --section-padding: 60px;
-    }
-    section {
-        padding: 3rem 1.5rem; /* Reduce ligeramente el relleno en pantallas pequeñas */
-        margin-bottom: 2rem; /* Ajusta el espacio entre secciones */
-    }
-
-    .header-top {
-        padding: 0.5rem;
-        padding-bottom: 1rem;
-    }
-
-    .logos-wrapper {
-        padding: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-
-    .secondary-logo-container {
-        position: static;
-        text-align: left;
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .main-logo {
-        max-width: 200px;
-    }
-
-    .secondary-logo {
-        max-width: 150px;
-    }
-
-    .header-bottom {
-        padding: 0.5rem;
-    }
-
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .contact-header {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    .services-grid,
-    .devices-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
+    /* Las variables de :root y la sección principal ya están en critical.css, no se duplican. */
+    /* Lo mismo para header-top, logos-wrapper, secondary-logo-container, main-logo, secondary-logo, header-bottom, nav ul, contact-header, h2, services-grid, backToTop. */
 
     .contact-form {
         padding: 1.5rem;
@@ -881,14 +598,7 @@ footer {
     }
 
     .footer-section a:hover {
-        transform: none;
-    }
-
-    #backToTop {
-        bottom: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
+        transform: none; /* Desactivar la animación de hover en móvil si no es deseada */
     }
 
     .modal-content {
@@ -898,34 +608,14 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .header-top {
-        padding: 0.5rem;
-    }
-
-    .main-logo {
-        max-width: 180px;
-    }
-
-    .secondary-logo {
-        max-width: 120px;
-    }
-
-    h2 {
-        font-size: 1.8rem;
-    }
-
-    .service-card,
-    .device-card {
-        padding: 1rem;
-    }
+    /* header-top, main-logo, secondary-logo, h2, service-card, section, services-grid ya están en critical.css */
 
     .contact-form {
         padding: 1rem;
     }
 
-    section {
-        padding: 2rem 1rem; /* Reduce aún más el relleno en pantallas muy pequeñas */
-        margin-bottom: 1.5rem; /* Ajusta el espacio entre secciones */
+    .device-card {
+        padding: 1rem;
     }
 
     .footer-content {
@@ -933,12 +623,8 @@ footer {
         text-align: center; /* Centra el texto del footer */
     }
 
-    .services-grid {
-        grid-template-columns: 1fr; /* Asegura que haya una sola columna */
-        gap: 1.5rem; /* Ajusta el espacio entre los elementos */
-    }
-
     .footer-copyright {
         font-size: 0.8rem; /* Reduce el tamaño del texto del copyright */
         padding-top: 0.5rem; /* Ajusta el espacio entre la línea y el texto */
     }
+}
