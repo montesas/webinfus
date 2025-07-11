@@ -32,12 +32,18 @@
         <div class="header-top">
             <div class="logos-wrapper">
                 <div class="main-logo-container">
-                    <a href="index.html#top">
-                        <img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo">
+                    <a href="#top">
+                        <picture>
+                            <source srcset="infus.webp" type="image/webp">
+                            <img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo" width="200" height="70">
+                        </picture>
                     </a>
                 </div>
                 <div class="secondary-logo-container">
-                    <img src="montella.png" alt="Montella-Infus Soluciones Informáticas" class="secondary-logo">
+                    <picture>
+                        <source srcset="montella.webp" type="image/webp">
+                        <img src="montella.png" alt="Montella-Infus Soluciones Informáticas" class="secondary-logo" width="180" height="33">
+                    </picture>
                     <div class="contact-header">
                         <a href="tel:+34981928212"><i class="fas fa-phone"></i>981 928 212</a>
                         <a href="#contacto"><i class="fas fa-envelope"></i>Contacto</a>
@@ -46,8 +52,11 @@
             </div>
         </div>
         <div class="header-bottom" style="position:relative;">
-            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú de navegación" aria-controls="main-menu" aria-expanded="false">
-                <i class="fas fa-bars" aria-hidden="true"></i>
+            <button class="menu-toggle" id="menu-toggle"
+                aria-label="Abrir menú de navegación"
+                aria-controls="main-navigation"
+                aria-expanded="false">
+                <i class="fas fa-bars"></i>
             </button>
             <nav>
                 <ul id="main-menu">
