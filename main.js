@@ -1,4 +1,4 @@
-// Fecha de última actualización: 2025-07-10 12:07:07
+// Fecha de última actualización: 2025-07-11 12:42:52
 // Autor: montesas
 
 // --- Variables globales y utilidades generales ---
@@ -9,16 +9,11 @@ const sections = document.querySelectorAll('.section-animate');
 // Debug inicial
 console.log('Elementos con clase section-animate encontrados:', sections.length);
 
-// Asegurar que la página siempre cargue al principio
-// Es mejor manejar el scroll al inicio una vez en DOMContentLoaded para evitar posibles flashes.
-// history.scrollRestoration = 'manual' y window.onbeforeunload pueden ser problemáticos
-// y a menudo no son la mejor experiencia de usuario.
-// El scroll al inicio ya está en DOMContentLoaded.
-
 // --- Funciones para el Menú Hamburguesa ---
 function setupHamburgerMenu() {
     const menuToggle = document.getElementById('menu-toggle');
-    const navList = document.querySelector('#main-navigation ul');
+    // CORRECCIÓN CLAVE: Seleccionar el ul dentro de nav#main-navigation
+    const navList = document.querySelector('#main-navigation ul'); 
 
     if (!menuToggle || !navList) {
         console.warn('Elementos del menú hamburguesa no encontrados (menu-toggle o #main-navigation ul).');
@@ -48,8 +43,6 @@ function setupHamburgerMenu() {
 }
 
 // --- Funciones para la Gestión de Cookies ---
-// Se recomienda manejar los event listeners de los botones de cookies aquí en JavaScript
-// en lugar de usar `onclick` en el HTML, para una mejor separación de preocupaciones y rendimiento.
 function setupCookieConsent() {
     const cookieNotice = document.getElementById('cookieConsent');
     if (!cookieNotice) {
@@ -57,8 +50,10 @@ function setupCookieConsent() {
         return;
     }
 
-    const acceptBtn = cookieNotice.querySelector('.accept-cookies'); // Asume que tienes un botón con esta clase
-    const rejectBtn = cookieNotice.querySelector('.reject-cookies'); // Asume que tienes un botón con esta clase
+    // CAMBIO: Seleccionar botones por clase para mejor organización
+    const acceptBtn = cookieNotice.querySelector('.accept-cookies'); 
+    const rejectBtn = cookieNotice.querySelector('.reject-cookies'); 
+    const moreInfoBtn = cookieNotice.querySelector('.more-info'); // Para el botón de "Más información" si quieres añadirle un listener aquí
 
     // Mostrar u ocultar el aviso según el localStorage
     const cookieConsent = localStorage.getItem('cookieConsent');
@@ -87,6 +82,13 @@ function setupCookieConsent() {
             cookieNotice.setAttribute('aria-hidden', 'true');
             console.info('Cookies rechazadas.');
             // Aquí podrías añadir lógica para bloquear scripts si se rechazan las cookies
+        });
+    }
+
+    // Si el botón "Más información" redirige a 'cookies.html', se puede añadir un listener si se gestiona de forma diferente
+    if (moreInfoBtn) {
+        moreInfoBtn.addEventListener('click', function() {
+            window.location.href = 'cookies.html'; // Redirige a la política de cookies
         });
     }
 }
@@ -230,15 +232,14 @@ function setupContactForm() {
     });
 }
 
-
-// --- FUSIÓN PRINCIPAL DE INICIALIZACIONES (DOMContentLoaded) ---
+// --- FUSIÓN PRINCIPAL DE Inicializaciones (DOMContentLoaded) ---
 document.addEventListener('DOMContentLoaded', function() {
     console.info('Iniciando aplicación...');
 
     // 1. Forzar scroll al inicio (más fiable aquí)
     window.scrollTo(0, 0);
 
-    // 2. Mostrar el aviso de cookies e inicializar botones (ahora con listeners en JS)
+    // 2. Mostrar el aviso de cookies e inicializar botones
     setupCookieConsent();
 
     // 3. Activar animaciones de las secciones visibles inicialmente (se mantiene)
@@ -269,7 +270,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 7. Scroll + mostrar botón Back to Top + animaciones de sección
-    // Se ha eliminado la variable isScrollingTimer ya que no se estaba usando.
     window.addEventListener('scroll', function() {
         if (backToTopButton) {
             // Solo actualiza la visibilidad si el estado cambia para evitar re-pintados innecesarios
@@ -280,10 +280,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Optimización: Usar IntersectionObserver para animaciones de sección si hay muchas
-        // Para unas pocas, el bucle forEach está bien, pero para muchas puede ser costoso.
-        // Como ya tienes un IntersectionObserver para imágenes, podrías considerar
-        // usar uno también para las secciones si el rendimiento se ve afectado.
         sections.forEach(section => {
             if (!section.classList.contains('visible')) { // Solo procesar si no es visible ya
                 const rect = section.getBoundingClientRect();
@@ -309,18 +305,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     );
 
                     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-
-                    // Actualiza el hash de la URL sin recargar la página
-                    // Se usa `location.hash = href;` que es más directo para los hash
-                    // y el `scrollRestoration = 'manual'` ya lo gestiona.
-                    // Para `pushState`, la URL completa sería mejor `history.pushState(null, '', location.pathname + href);`
-                    // pero para un simple hash, `location.hash` es suficiente.
                     location.hash = href;
                 }
             }
             // Cierre menú hamburguesa si está activo (solo para pantallas pequeñas)
             const menuToggle = document.getElementById('menu-toggle');
-            const navList = document.querySelector('#main-navigation ul');
+            // CORRECCIÓN CLAVE: Seleccionar el ul dentro de nav#main-navigation
+            const navList = document.querySelector('#main-navigation ul'); 
+            
             // Comprueba si el toggle es visible (modo móvil) y el menú está abierto
             if (menuToggle && getComputedStyle(menuToggle).display !== 'none' && navList && navList.classList.contains('show')) {
                 menuToggle.click(); // Simula un click para cerrar el menú y actualizar aria-expanded
@@ -369,13 +361,4 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('img.lazy').forEach(img => {
         imageObserver.observe(img);
     });
-});
-
-// Manejo de la visibilidad de la página (fuera de DOMContentLoaded)
-document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-        document.title = '¡Vuelve pronto! - Tu Servicio Técnico';
-    } else {
-        document.title = 'Infus - Servicio Técnico Informático en A Coruña';
-    }
 });
