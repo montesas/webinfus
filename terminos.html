@@ -8,17 +8,69 @@
     
     <style>
         :root{--primary-blue: #1a4b8c;--secondary-blue: #2c7ac9;--tertiary-blue: #2c3e50;--accent-orange: #ff6b35;--light-gray: #f5f5f5;--dark-gray: #333333;--white: #ffffff;--header-height: 200px;--section-padding: 100px;--shadow-small: 0 2px 10px rgba(0,0,0,0.1);--shadow-medium: 0 4px 20px rgba(0,0,0,0.15)}*{margin:0;padding:0;box-sizing:border-box}.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}html{scroll-behavior:smooth}body{font-family:'Roboto',sans-serif;line-height:1.6;color:var(--dark-gray);background-color:var(--light-gray)}header{position:fixed;width:100%;top:0;z-index:1000;background:var(--white);box-shadow:var(--shadow-medium)}.header-top{background:var(--white);padding:1rem;border-bottom:1px solid rgba(0,0,0,0.1)}.logos-wrapper{max-width:1200px;margin:0 auto;position:relative;padding:0.5rem}.main-logo-container{text-align:center}.secondary-logo-container{position:relative;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;padding-bottom:0}.main-logo{max-width:200px;height:auto}.secondary-logo{max-width:180px;height:auto}.header-bottom{background:linear-gradient(135deg,var(--primary-blue),var(--secondary-blue));color:var(--white);padding:1rem}.menu-toggle{min-width:48px;min-height:48px;background:none;border:none;color:var(--primary-blue);display:none;align-items:center;justify-content:center}nav ul{display:flex;justify-content:center;list-style:none;gap:2rem;margin:0.5rem 0;flex-wrap:wrap}@media (max-width:800px){.menu-toggle{display:flex}.header-bottom nav ul{display:none;flex-direction:column;background:#fff;position:absolute;width:100vw;left:0;top:100%;z-index:1001;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin:0;padding:0}.header-bottom nav ul li{text-align:left;padding:12px 20px;border-bottom:1px solid #eee}}nav a{color:var(--white);text-decoration:none;font-weight:500;padding:0.5rem 1rem;border-radius:4px}.contact-header{display:flex;align-items:center;gap:1.5rem}.contact-header a{color:var(--primary-blue);text-decoration:none;font-size:1rem;display:flex;align-items:center;gap:0.5em}@media (max-width:480px){.contact-header{gap:0.75rem;font-size:0.95rem}}main{margin-top:var(--header-height)}section{position:relative;scroll-margin-top:calc(var(--header-height) + 20px);padding:4rem 2rem;min-height:80vh;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;background:var(--white);margin-bottom:2rem}section:nth-child(even){background:var(--light-gray)}h2{font-size:2.5rem;text-align:center;color:var(--primary-blue);margin:0;padding:1rem 0;position:relative;margin-bottom:2rem}h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:3px;background:var(--accent-orange)}.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:3rem;max-width:1200px;width:100%}.service-card{background:var(--white);padding:2rem;border-radius:12px;box-shadow:var(--shadow-small);text-align:center}.service-card i{color:var(--primary-blue);margin-bottom:1rem;font-size:3rem}.service-card h3{color:var(--primary-blue);margin-bottom:1rem;font-size:1.5rem}#backToTop{position:fixed;bottom:2rem;right:2rem;background:var(--accent-orange);color:var(--white);width:50px;height:50px;border-radius:50%;border:none;display:none;align-items:center;justify-content:center;font-size:1.5rem;z-index:999}.cookie-notice{position:fixed;bottom:0;left:0;width:100%;background:var(--dark-gray);color:var(--white);padding:1.5rem;z-index:1500;display:none;box-shadow:0 -2px 10px rgba(0,0,0,0.2)}.cookie-buttons{display:flex;gap:1rem;margin-top:1rem;justify-content:center;flex-wrap:wrap}.cookie-buttons button{padding:0.8rem 1.5rem;border:none;border-radius:4px;font-weight:600}.cookie-buttons button:first-child{background:var(--accent-orange);color:var(--white)}.cookie-buttons button:not(:first-child){background:var(--light-gray);color:var(--dark-gray)}.section-animate{will-change:opacity,transform}.section-animate:not(.visible){opacity:0;transform:translateY(30px) translateX(30px)}@media (max-width:768px){:root{--section-padding: 60px}section{padding:3rem 1.5rem;margin-bottom:2rem}.header-top{padding:0.5rem;padding-bottom:1rem}.logos-wrapper{padding:0.5rem;padding-bottom:0.5rem}.secondary-logo-container{position:static;text-align:left;margin-top:1rem;margin-bottom:0.5rem}.main-logo{max-width:200px}.secondary-logo{max-width:150px}.header-bottom{padding:0.5rem}nav ul{flex-direction:column;align-items:center;gap:0.5rem}.contact-header{flex-direction:column;align-items:center;gap:0.5rem}h2{font-size:2rem}.services-grid{grid-template-columns:1fr;gap:2rem}#backToTop{bottom:1rem;right:1rem;width:40px;height:40px}}@media (max-width:480px){.header-top{padding:0.5rem}.main-logo{max-width:180px}.secondary-logo{max-width:120px}h2{font-size:1.8rem}.service-card{padding:1rem}section{padding:2rem 1rem;margin-bottom:1.5rem}.services-grid{grid-template-columns:1fr;gap:1.5rem}}
+
+        /* --- INICIO CAMBIO: CSS crítico del footer movido aquí para asegurar visibilidad --- */
+        footer {
+            background: linear-gradient(135deg, var(--primary-blue), var(--tertiary-blue)); /* Fondo degradado */
+            color: var(--white); /* Color del texto del pie de página */
+            padding: 3rem 2rem; /* Espaciado interno */
+            margin-top: 4rem; /* Espacio entre la última sección y el pie de página */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra superior */
+            text-align: center; /* Centrar el texto */
+        }
+        .footer-content {
+            display: grid; /* Cambiado a grid para mayor flexibilidad, si era flexbox, también es válido */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            justify-content: space-around; /* O 'center' si grid */
+            gap: 3rem; /* Espaciado entre columnas */
+            max-width: 1200px;
+            margin: 0 auto 2rem auto; /* Centrado y margen inferior */
+        }
+        .footer-section h3 {
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+            font-size: 1.3rem; /* Ajustado el tamaño según el CSS externo */
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-section ul li a {
+            color: var(--white);
+            text-decoration: none;
+            display: block; /* Para que cada enlace ocupe su propia línea y sea clicable */
+            padding: 0.3rem 0;
+        }
+        .footer-copyright {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            padding-top: 1rem;
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Media queries cruciales para el layout del footer en críticos */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr; /* Columna única en móviles */
+                gap: 2rem;
+                text-align: center;
+            }
+        }
+        /* --- FIN CAMBIO: CSS crítico del footer --- */
     </style>
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
-    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
     <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet"></noscript>
 
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet"></noscript>
-
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=optional" rel="stylesheet"></noscript>
     <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
 
@@ -43,8 +95,7 @@
         <div class="header-top">
             <div class="logos-wrapper">
                 <div class="main-logo-container">
-                    <a href="index.html##top">
-                        <picture>
+                    <a href="index.html#servicios"> <picture>
                             <source srcset="infus.webp" type="image/webp">
                             <img src="infus.png" alt="Infus - Servicio Técnico Informático" class="main-logo" width="200" height="70">
                         </picture>
