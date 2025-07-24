@@ -182,11 +182,16 @@ nav a:hover {
 }
 
 .about-image img {
-    width: 100%;
-    max-width: 125px;
-    height: auto;
+    width: 100%; /* Esta línea es la clave: la imagen ocupa el 100% de su contenedor */
+    max-width: 125px; /* Y su ancho máximo es 125px */
+    height: auto; /* La altura se ajusta para mantener la proporción */
     transition: var(--transition);
     padding-top: 3px;
+    /* --- INICIO DE LA CORRECCIÓN CLS POR IMAGEN --- */
+    /* Calcula: ancho (125) / alto (74) = 1.689189... */
+    aspect-ratio: 125 / 74; /* Define la relación de aspecto para reservar el espacio */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del espacio sin recortarse */
+    /* --- FIN DE LA CORRECCIÓN CLS POR IMAGEN --- */
 }
 
 .about-image img:hover {
