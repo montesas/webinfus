@@ -1,4 +1,4 @@
-// Fecha de última actualización: 2025-07-25 17:46:33
+// Fecha de última actualización: 2025-07-25 18:00:00
 // Autor: montesas
 
 // --- Variables globales y utilidades generales ---
@@ -116,6 +116,7 @@ function validarFormulario() {
     enviarBtn.disabled = !(nombreValido && emailValido && mensajeValido && gdprAceptado && captchaOk);
 }
 
+// Esta función debe estar disponible globalmente para que reCAPTCHA pueda llamarla.
 window.recaptchaCallback = validarFormulario;
 
 function setupContactForm() {
@@ -231,6 +232,42 @@ function setupSectionAnimations() {
     });
 }
 
+// --- Carga Diferida de Scripts de Terceros ---
+// Variable para controlar si reCAPTCHA ya se ha cargado
+let recaptchaLoaded = false;
+// Función para cargar el script de reCAPTCHA
+function loadRecaptchaScript() {
+    if (recaptchaLoaded) return; // Si ya está cargado, no hacer nada
+
+    const script = document.createElement('script');
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.defer = true; // Mantener defer para no bloquear el renderizado
+    document.head.appendChild(script);
+    recaptchaLoaded = true;
+    console.log('Script de reCAPTCHA cargado dinámicamente.');
+}
+
+// Variable para controlar si gtag.js ya se ha cargado
+let gtmLoaded = false;
+function loadGtagScript() {
+    if (gtmLoaded) return;
+
+    const script = document.createElement('script');
+    script.src = "https://www.googletagmanager.com/gtag/js?id=G-15548643";
+    script.async = true;
+    document.head.appendChild(script);
+
+    // Inicialización de gtag.js una vez que el script se ha añadido
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-15548643');
+
+    gtmLoaded = true;
+    console.log('Script de gtag.js cargado dinámicamente.');
+}
+
 
 // --- FUSIÓN PRINCIPAL DE Inicializaciones (DOMContentLoaded) ---
 document.addEventListener('DOMContentLoaded', function() {
@@ -288,8 +325,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset
                     );
                     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                    // Solo actualiza hash después del scroll, no inmediatamente
-                    // location.hash = href; // Se puede omitir si el scroll suave ya es el objetivo principal
                 }
             }
             const menuToggle = document.getElementById('menu-toggle');
@@ -307,6 +342,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // 8. Inicializar y validar formulario de contacto
     setupContactForm();
     validarFormulario(); // Llamar una vez al inicio para establecer el estado inicial del botón
+
+    // **AÑADIR ESTO: Carga diferida de reCAPTCHA**
+    const contactSection = document.getElementById('contacto'); // Asumiendo que el formulario está en una sección con id="contacto"
+    if (contactSection) {
+        // Cargar reCAPTCHA cuando la sección de contacto esté cerca del viewport
+        const recaptchaObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadRecaptchaScript();
+                    observer.unobserve(entry.target); // Dejar de observar una vez cargado
+                }
+            });
+        }, { rootMargin: '0px 0px -100px 0px' }); // Cargar 100px antes de que entre en vista
+        recaptchaObserver.observe(contactSection);
+
+        // Alternativamente, cargar al interactuar con cualquier campo del formulario
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('focusin', loadRecaptchaScript, { once: true }); // Solo una vez
+        }
+    }
 
     // 9. Botón de descarga de software
     const downloadBtn = document.querySelector('.download-button');
@@ -327,9 +383,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSectionAnimations();
 
     // 11. Lazy loading para imágenes con 'loading="lazy"' en HTML (simplificación si usas el atributo nativo)
-    // Si estás usando `loading="lazy"` directamente en tus etiquetas <img> y <picture>,
-    // este bloque de código para `imageObserver` es redundante y puede ser eliminado.
-    // Solo mantenlo si tienes imágenes que *no* usan `loading="lazy"` y sí usan `data-src` y la clase `lazy`.
     const lazyImages = document.querySelectorAll('img.lazy[data-src]');
     if (lazyImages.length > 0) {
         console.warn('Hay imágenes con la clase .lazy y data-src. Se recomienda usar el atributo loading="lazy" nativo en su lugar.');
@@ -349,13 +402,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { rootMargin: '0px 0px 50px 0px' });
         lazyImages.forEach(img => imageObserver.observe(img));
     }
+
+    // **AÑADIR ESTO: Carga diferida de gtag.js**
+    const delayLoadGtag = setTimeout(loadGtagScript, 5000); // Cargar después de 5 segundos
+
+    // Cargar en la primera interacción (scroll, click, mousemove, keydown)
+    ['scroll', 'mousemove', 'click', 'keydown', 'touchstart'].forEach(eventType => {
+        document.addEventListener(eventType, () => {
+            clearTimeout(delayLoadGtag); // Cancela el retraso si hay interacción temprana
+            loadGtagScript();
+        }, { once: true, passive: true }); // passive: true para no bloquear el scroll/eventos
+    });
 });
 
 // Nota: La comprobación del modo oscuro no requiere un listener constante, se hace una vez al cargar.
-// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-//     document.body.classList.add('dark-mode');
-// }
-// Si deseas cambiar dinámicamente si el usuario cambia el tema del sistema, necesitarías un listener:
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
     if (event.matches) {
         document.body.classList.add('dark-mode');
