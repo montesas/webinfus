@@ -1,10 +1,12 @@
-// Fecha de última actualización: 2025-07-11 12:42:52
+// Fecha de última actualización: 2025-07-25 17:46:33
 // Autor: montesas
 
 // --- Variables globales y utilidades generales ---
 const header = document.querySelector('header');
 const backToTopButton = document.getElementById('backToTop');
-const sections = document.querySelectorAll('.section-animate');
+// Nota: 'sections' ahora se usa con IntersectionObserver, que es más eficiente para animaciones.
+// Mantener la referencia por si se usa en otro lugar, pero su uso directo en scroll ha cambiado.
+const sections = document.querySelectorAll('.section-animate'); 
 
 // Debug inicial
 console.log('Elementos con clase section-animate encontrados:', sections.length);
@@ -12,8 +14,7 @@ console.log('Elementos con clase section-animate encontrados:', sections.length)
 // --- Funciones para el Menú Hamburguesa ---
 function setupHamburgerMenu() {
     const menuToggle = document.getElementById('menu-toggle');
-    // CORRECCIÓN CLAVE: Seleccionar el ul dentro de nav#main-navigation
-    const navList = document.querySelector('#main-navigation ul'); 
+    const navList = document.querySelector('#main-navigation ul');
 
     if (!menuToggle || !navList) {
         console.warn('Elementos del menú hamburguesa no encontrados (menu-toggle o #main-navigation ul).');
@@ -25,19 +26,16 @@ function setupHamburgerMenu() {
         menuToggle.setAttribute('aria-expanded', !expanded);
         navList.classList.toggle('show');
 
-        // Asegurar que el focus se mueve al primer elemento de la lista si el menú se abre
         if (!expanded) {
             navList.querySelector('a')?.focus();
         } else {
-            // Si el menú se cierra, devolver el foco al botón del menú
             menuToggle.focus();
         }
     });
 
-    // Cerrar el menú con ESC y mejorar el foco en móviles
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
-            menuToggle.click(); // Simula un click para cerrar
+            menuToggle.click();
         }
     });
 }
@@ -50,12 +48,10 @@ function setupCookieConsent() {
         return;
     }
 
-    // CAMBIO: Seleccionar botones por clase para mejor organización
-    const acceptBtn = cookieNotice.querySelector('.accept-cookies'); 
-    const rejectBtn = cookieNotice.querySelector('.reject-cookies'); 
-    const moreInfoBtn = cookieNotice.querySelector('.more-info'); // Para el botón de "Más información" si quieres añadirle un listener aquí
+    const acceptBtn = cookieNotice.querySelector('.accept-cookies');
+    const rejectBtn = cookieNotice.querySelector('.reject-cookies');
+    const moreInfoBtn = cookieNotice.querySelector('.more-info');
 
-    // Mostrar u ocultar el aviso según el localStorage
     const cookieConsent = localStorage.getItem('cookieConsent');
     if (!cookieConsent) {
         cookieNotice.style.display = 'block';
@@ -65,7 +61,6 @@ function setupCookieConsent() {
         cookieNotice.setAttribute('aria-hidden', 'true');
     }
 
-    // Añadir event listeners si los botones existen
     if (acceptBtn) {
         acceptBtn.addEventListener('click', function() {
             localStorage.setItem('cookieConsent', 'accepted');
@@ -81,14 +76,12 @@ function setupCookieConsent() {
             cookieNotice.style.display = 'none';
             cookieNotice.setAttribute('aria-hidden', 'true');
             console.info('Cookies rechazadas.');
-            // Aquí podrías añadir lógica para bloquear scripts si se rechazan las cookies
         });
     }
 
-    // Si el botón "Más información" redirige a 'cookies.html', se puede añadir un listener si se gestiona de forma diferente
     if (moreInfoBtn) {
         moreInfoBtn.addEventListener('click', function() {
-            window.location.href = 'cookies.html'; // Redirige a la política de cookies
+            window.location.href = 'cookies.html';
         });
     }
 }
@@ -106,7 +99,6 @@ function validarFormulario() {
     const gdprCheckbox = document.getElementById('gdpr');
     const enviarBtn = document.getElementById('btnEnviar');
 
-    // Comprobar que todos los elementos existan antes de continuar
     if (!nombreInput || !emailInput || !mensajeInput || !gdprCheckbox || !enviarBtn) {
         console.warn('Uno o más elementos del formulario de contacto no se encontraron para validarFormulario.');
         return;
@@ -117,7 +109,6 @@ function validarFormulario() {
     const mensajeValido = mensajeInput.value.trim() !== '';
     const gdprAceptado = gdprCheckbox.checked;
 
-    // Asegurarse de que grecaptcha exista y la respuesta del captcha sea válida
     const captchaOk = typeof grecaptcha !== "undefined" &&
                       grecaptcha.getResponse &&
                       grecaptcha.getResponse().length > 0;
@@ -125,8 +116,6 @@ function validarFormulario() {
     enviarBtn.disabled = !(nombreValido && emailValido && mensajeValido && gdprAceptado && captchaOk);
 }
 
-// Función para ser llamada por reCAPTCHA al resolverlo
-// Es crucial que esta función esté disponible globalmente si reCAPTCHA la llama directamente.
 window.recaptchaCallback = validarFormulario;
 
 function setupContactForm() {
@@ -139,7 +128,6 @@ function setupContactForm() {
         return;
     }
 
-    // Escucha cambios en los campos para habilitar/deshabilitar el botón
     const formFields = [
         document.getElementById('nombre'),
         document.getElementById('email'),
@@ -151,10 +139,7 @@ function setupContactForm() {
     });
     gdprCheckbox.addEventListener('change', validarFormulario);
 
-    // Reset del formulario (incluyendo reCAPTCHA)
     contactForm.addEventListener('reset', function() {
-        // Retrasar el reseteo del botón y reCAPTCHA un poco
-        // para asegurar que el DOM se ha reseteado
         setTimeout(() => {
             btnEnviar.disabled = true;
             if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
@@ -163,7 +148,6 @@ function setupContactForm() {
         }, 0);
     });
 
-    // Envío del formulario
     contactForm.addEventListener("submit", async function(event) {
         event.preventDefault();
 
@@ -172,27 +156,23 @@ function setupContactForm() {
             console.error('Elemento formStatus no encontrado.');
             return;
         }
-        status.textContent = ""; // Limpiar mensaje de estado previo
+        status.textContent = "";
 
-        // Deshabilitar botón para evitar múltiples envíos
         btnEnviar.disabled = true;
-        btnEnviar.textContent = 'Enviando...'; // Opcional: mostrar un estado de carga
+        btnEnviar.textContent = 'Enviando...';
 
-        // Verifica que el captcha esté resuelto
         const recaptchaResponse = typeof grecaptcha !== "undefined" && grecaptcha.getResponse ? grecaptcha.getResponse() : null;
         if (!recaptchaResponse) {
             status.textContent = "Por favor, marque que no es un robot.";
             status.style.color = "red";
-            btnEnviar.disabled = false; // Habilitar botón de nuevo
-            btnEnviar.textContent = 'Enviar Mensaje'; // Restaurar texto original
+            btnEnviar.disabled = false;
+            btnEnviar.textContent = 'Enviar Mensaje';
             return;
         }
 
-        // Prepara los datos del formulario
         const formData = new FormData(contactForm);
         formData.append("g-recaptcha-response", recaptchaResponse);
 
-        // Envía los datos a Formspree
         try {
             const response = await fetch(contactForm.action, {
                 method: "POST",
@@ -205,12 +185,10 @@ function setupContactForm() {
                 status.style.color = "green";
                 contactForm.reset();
                 if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
-                    grecaptcha.reset(); // Restablece el reCAPTCHA
+                    grecaptcha.reset();
                 }
-                // El botón ya está deshabilitado por el reset, pero lo aseguramos
                 btnEnviar.disabled = true;
             } else {
-                // Si la respuesta no es OK pero aún viene de Formspree (ej. errores de validación)
                 const data = await response.json();
                 if (data.errors) {
                     status.textContent = data.errors.map(err => err.message).join(', ');
@@ -224,73 +202,79 @@ function setupContactForm() {
             status.textContent = "No se pudo conectar con el servidor. Inténtelo más tarde.";
             status.style.color = "red";
         } finally {
-            // Asegúrate de restaurar el texto del botón en cualquier caso
             btnEnviar.textContent = 'Enviar Mensaje';
-            // Validar formulario de nuevo para ajustar el estado del botón si es necesario (ej. si el envío falla)
             validarFormulario();
         }
     });
 }
 
+// --- Funciones para animaciones de sección con IntersectionObserver ---
+function setupSectionAnimations() {
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Dejar de observar una vez visible
+            }
+        });
+    }, { rootMargin: '0px 0px -100px 0px' }); // Ajusta el rootMargin para que se active antes o después
+
+    sections.forEach(section => {
+        // Observa la sección para animar cuando entre en el viewport
+        sectionObserver.observe(section);
+        // También verifica si ya está visible en la carga inicial
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+            section.classList.add('visible');
+            sectionObserver.unobserve(section); // Si ya es visible, deja de observarla
+        }
+    });
+}
+
+
 // --- FUSIÓN PRINCIPAL DE Inicializaciones (DOMContentLoaded) ---
 document.addEventListener('DOMContentLoaded', function() {
     console.info('Iniciando aplicación...');
 
-    // 1. Forzar scroll al inicio (más fiable aquí)
+    // 1. Forzar scroll al inicio
     window.scrollTo(0, 0);
 
     // 2. Mostrar el aviso de cookies e inicializar botones
     setupCookieConsent();
 
-    // 3. Activar animaciones de las secciones visibles inicialmente (se mantiene)
-    sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        // Umbral ligeramente ajustado para mayor visibilidad
-        if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
-            section.classList.add('visible');
-        }
-    });
-
-    // 4. Comprobar modo oscuro (si lo usas - se mantiene)
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark-mode');
-    }
-
-    // 5. Ajuste de margin-top dinámico al alto real del header (se mantiene)
-    if(header) {
+    // 3. Ajuste de margin-top dinámico al alto real del header
+    // Utiliza requestAnimationFrame para asegurar que la lectura y escritura se sincronicen con el renderizado
+    if (header) {
         const main = document.querySelector('main');
-        if(main) main.style.marginTop = header.offsetHeight + "px";
+        if (main) {
+            requestAnimationFrame(() => {
+                main.style.marginTop = header.offsetHeight + "px";
+            });
+        }
     }
 
-    // 6. Back to Top (botón - se mantiene)
+    // 4. Back to Top (botón) - Gestionado en el scroll event, solo se inicializa aquí
     if (backToTopButton) {
         backToTopButton.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
-    // 7. Scroll + mostrar botón Back to Top + animaciones de sección
+    // 5. Scroll + mostrar botón Back to Top (solo para el botón, animaciones con Observer)
     window.addEventListener('scroll', function() {
         if (backToTopButton) {
-            // Solo actualiza la visibilidad si el estado cambia para evitar re-pintados innecesarios
             const currentDisplay = backToTopButton.style.display;
             const newDisplay = window.scrollY > 300 ? 'flex' : 'none';
             if (currentDisplay !== newDisplay) {
-                backToTopButton.style.display = newDisplay;
+                // Aquí usamos requestAnimationFrame para asegurarnos de que el DOM se actualice de forma óptima
+                requestAnimationFrame(() => {
+                    backToTopButton.style.display = newDisplay;
+                });
             }
         }
-
-        sections.forEach(section => {
-            if (!section.classList.contains('visible')) { // Solo procesar si no es visible ya
-                const rect = section.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
-                    section.classList.add('visible');
-                }
-            }
-        });
     }, { passive: true }); // Usar { passive: true } para mejorar el rendimiento del scroll
 
-    // 8. Enlaces del menú con scroll ajustado y cierre menú hamburguesa (ligeros ajustes)
+    // 6. Enlaces del menú con scroll ajustado y cierre menú hamburguesa
     document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -298,37 +282,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 const targetSection = document.querySelector(href);
                 if (targetSection) {
-                    const headerHeight = header ? header.offsetHeight : 0;
+                    const headerHeight = header ? header.offsetHeight : 0; // Leer una vez
                     const additionalOffset = 20;
                     const targetPosition = Math.round(
                         targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset
                     );
-
                     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                    location.hash = href;
+                    // Solo actualiza hash después del scroll, no inmediatamente
+                    // location.hash = href; // Se puede omitir si el scroll suave ya es el objetivo principal
                 }
             }
-            // Cierre menú hamburguesa si está activo (solo para pantallas pequeñas)
             const menuToggle = document.getElementById('menu-toggle');
-            // CORRECCIÓN CLAVE: Seleccionar el ul dentro de nav#main-navigation
-            const navList = document.querySelector('#main-navigation ul'); 
-            
-            // Comprueba si el toggle es visible (modo móvil) y el menú está abierto
+            const navList = document.querySelector('#main-navigation ul');
+
             if (menuToggle && getComputedStyle(menuToggle).display !== 'none' && navList && navList.classList.contains('show')) {
-                menuToggle.click(); // Simula un click para cerrar el menú y actualizar aria-expanded
+                menuToggle.click();
             }
         });
     });
 
-    // 9. Inicializar el menú hamburguesa
+    // 7. Inicializar el menú hamburguesa
     setupHamburgerMenu();
 
-    // 10. Inicializar y validar formulario de contacto
+    // 8. Inicializar y validar formulario de contacto
     setupContactForm();
-    // Llamar validarFormulario() una vez al inicio para establecer el estado inicial del botón
-    validarFormulario();
+    validarFormulario(); // Llamar una vez al inicio para establecer el estado inicial del botón
 
-    // 11. Botón de descarga de software (se mantiene)
+    // 9. Botón de descarga de software
     const downloadBtn = document.querySelector('.download-button');
     if (downloadBtn) {
         downloadBtn.addEventListener('click', function (event) {
@@ -342,23 +322,44 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('El software ha sido descargado. Para ejecutarlo, busque el archivo "Soporte_Infus.exe" en su carpeta de descargas y haga doble clic para abrirlo.');
         });
     }
+    
+    // 10. Inicializar animaciones de sección con IntersectionObserver
+    setupSectionAnimations();
 
-    // 12. Lazy loading para imágenes .lazy (se mantiene y mejora levemente)
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                const imgSrc = img.dataset.src; // Preferir data-src para lazy loading
-                if (imgSrc) {
-                    img.src = imgSrc;
-                    img.removeAttribute('data-src'); // Limpiar data-src una vez cargada
+    // 11. Lazy loading para imágenes con 'loading="lazy"' en HTML (simplificación si usas el atributo nativo)
+    // Si estás usando `loading="lazy"` directamente en tus etiquetas <img> y <picture>,
+    // este bloque de código para `imageObserver` es redundante y puede ser eliminado.
+    // Solo mantenlo si tienes imágenes que *no* usan `loading="lazy"` y sí usan `data-src` y la clase `lazy`.
+    const lazyImages = document.querySelectorAll('img.lazy[data-src]');
+    if (lazyImages.length > 0) {
+        console.warn('Hay imágenes con la clase .lazy y data-src. Se recomienda usar el atributo loading="lazy" nativo en su lugar.');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const imgSrc = img.dataset.src;
+                    if (imgSrc) {
+                        img.src = imgSrc;
+                        img.removeAttribute('data-src');
+                    }
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
                 }
-                img.classList.remove('lazy'); // Asegurarse de quitar la clase
-                observer.unobserve(img);
-            }
-        });
-    }, { rootMargin: '0px 0px 50px 0px' }); // Opcional: Cargar 50px antes de entrar en el viewport
-    document.querySelectorAll('img.lazy').forEach(img => {
-        imageObserver.observe(img);
-    });
+            });
+        }, { rootMargin: '0px 0px 50px 0px' });
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
+});
+
+// Nota: La comprobación del modo oscuro no requiere un listener constante, se hace una vez al cargar.
+// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+//     document.body.classList.add('dark-mode');
+// }
+// Si deseas cambiar dinámicamente si el usuario cambia el tema del sistema, necesitarías un listener:
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    if (event.matches) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
 });
