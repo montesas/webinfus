@@ -4,9 +4,7 @@
 // --- Variables globales y utilidades generales ---
 const header = document.querySelector('header');
 const backToTopButton = document.getElementById('backToTop');
-// Nota: 'sections' ahora se usa con IntersectionObserver, que es más eficiente para animaciones.
-// Mantener la referencia por si se usa en otro lugar, pero su uso directo en scroll ha cambiado.
-const sections = document.querySelectorAll('.section-animate'); 
+const sections = document.querySelectorAll('.section-animate');
 
 // Debug inicial
 console.log('Elementos con clase section-animate encontrados:', sections.length);
@@ -268,6 +266,34 @@ function loadGtagScript() {
     console.log('Script de gtag.js cargado dinámicamente.');
 }
 
+// --- Nueva Función para la Carga Diferida del Mapa ---
+function setupMapLazyLoad() {
+    const mapIframe = document.querySelector('#ubicacion .map iframe');
+
+    if (mapIframe && mapIframe.dataset.src) {
+        console.log('Mapa: iframe con data-src encontrado. Configurando IntersectionObserver.');
+        const mapObserverOptions = {
+            root: null, // viewport
+            rootMargin: '0px', // Cargar tan pronto como sea visible
+            threshold: 0.1 // Cargar cuando el 10% del iframe esté visible
+        };
+
+        const mapObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    console.log('Mapa: iframe visible. Cargando src desde data-src.');
+                    mapIframe.src = mapIframe.dataset.src;
+                    observer.unobserve(mapIframe); // Deja de observar una vez cargado
+                }
+            });
+        }, mapObserverOptions);
+
+        mapObserver.observe(mapIframe);
+    } else {
+        console.warn('Mapa: No se encontró el iframe del mapa con data-src o data-src está vacío.');
+    }
+}
+
 
 // --- FUSIÓN PRINCIPAL DE Inicializaciones (DOMContentLoaded) ---
 document.addEventListener('DOMContentLoaded', function() {
@@ -280,7 +306,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupCookieConsent();
 
     // 3. Ajuste de margin-top dinámico al alto real del header
-    // Utiliza requestAnimationFrame para asegurar que la lectura y escritura se sincronicen con el renderizado
     if (header) {
         const main = document.querySelector('main');
         if (main) {
@@ -303,13 +328,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentDisplay = backToTopButton.style.display;
             const newDisplay = window.scrollY > 300 ? 'flex' : 'none';
             if (currentDisplay !== newDisplay) {
-                // Aquí usamos requestAnimationFrame para asegurarnos de que el DOM se actualice de forma óptima
                 requestAnimationFrame(() => {
                     backToTopButton.style.display = newDisplay;
                 });
             }
         }
-    }, { passive: true }); // Usar { passive: true } para mejorar el rendimiento del scroll
+    }, { passive: true });
 
     // 6. Enlaces del menú con scroll ajustado y cierre menú hamburguesa
     document.querySelectorAll('nav a').forEach(anchor => {
@@ -319,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 const targetSection = document.querySelector(href);
                 if (targetSection) {
-                    const headerHeight = header ? header.offsetHeight : 0; // Leer una vez
+                    const headerHeight = header ? header.offsetHeight : 0;
                     const additionalOffset = 20;
                     const targetPosition = Math.round(
                         targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - additionalOffset
@@ -341,26 +365,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 8. Inicializar y validar formulario de contacto
     setupContactForm();
-    validarFormulario(); // Llamar una vez al inicio para establecer el estado inicial del botón
+    validarFormulario();
 
-    // **AÑADIR ESTO: Carga diferida de reCAPTCHA**
-    const contactSection = document.getElementById('contacto'); // Asumiendo que el formulario está en una sección con id="contacto"
+    // Carga diferida de reCAPTCHA
+    const contactSection = document.getElementById('contacto');
     if (contactSection) {
-        // Cargar reCAPTCHA cuando la sección de contacto esté cerca del viewport
         const recaptchaObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     loadRecaptchaScript();
-                    observer.unobserve(entry.target); // Dejar de observar una vez cargado
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { rootMargin: '0px 0px -100px 0px' }); // Cargar 100px antes de que entre en vista
+        }, { rootMargin: '0px 0px -100px 0px' });
         recaptchaObserver.observe(contactSection);
 
-        // Alternativamente, cargar al interactuar con cualquier campo del formulario
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-            contactForm.addEventListener('focusin', loadRecaptchaScript, { once: true }); // Solo una vez
+            contactForm.addEventListener('focusin', loadRecaptchaScript, { once: true });
         }
     }
 
@@ -403,15 +425,17 @@ document.addEventListener('DOMContentLoaded', function() {
         lazyImages.forEach(img => imageObserver.observe(img));
     }
 
-    // **AÑADIR ESTO: Carga diferida de gtag.js**
-    const delayLoadGtag = setTimeout(loadGtagScript, 5000); // Cargar después de 5 segundos
+    // 12. **¡NUEVO! Carga diferida del mapa**
+    setupMapLazyLoad();
 
-    // Cargar en la primera interacción (scroll, click, mousemove, keydown)
+    // Carga diferida de gtag.js
+    const delayLoadGtag = setTimeout(loadGtagScript, 5000);
+
     ['scroll', 'mousemove', 'click', 'keydown', 'touchstart'].forEach(eventType => {
         document.addEventListener(eventType, () => {
-            clearTimeout(delayLoadGtag); // Cancela el retraso si hay interacción temprana
+            clearTimeout(delayLoadGtag);
             loadGtagScript();
-        }, { once: true, passive: true }); // passive: true para no bloquear el scroll/eventos
+        }, { once: true, passive: true });
     });
 });
 
