@@ -125,7 +125,7 @@
 </head>
 <body>
 
-<script async defer src="https://www.googletagmanager.com/gtag/js?id=G-15548643"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-15548643"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -141,14 +141,14 @@
                 <a href="#top">
                     <picture>
                         <source srcset="infus.webp" type="image/webp">
-                        <img src="infus.webp" alt="Infus - Servicio Técnico Informático" class="main-logo" width="180" height="63">
+                        <img src="infus.webp" alt="Infus - Servicio Técnico Informático" class="main-logo" width="200" height="63">
                     </picture>
                 </a>
             </div>
             <div class="secondary-logo-container">
                 <picture>
                     <source srcset="montella.webp" type="image/webp">
-                    <img src="montella.png" alt="Montella-Infus Soluciones Informáticas" class="secondary-logo" width="120" height="33">
+                    <img src="montella.png" alt="Montella-Infus Soluciones Informáticas" class="secondary-logo" width="180" height="33">
                 </picture>
                 <div class="contact-header">
                     <a href="tel:+34981928212"><i class="fas fa-phone"></i>981 928 212</a>
@@ -272,7 +272,7 @@
                         Acepto la política de protección de datos *
                     </label>
                 </div>
-                <div class="g-recaptcha" data-sitekey="6LfKCBwUAAAAAGBcrCEeP8bxEil1hdyyMf6mllKE"></div>
+                <div class="g-recaptcha" data-sitekey="6LfKCBwUAAAAAGBcrCEeP8bxEil1hdyyMf6mllKE" data-callback="recaptchaCallback"></div>
                 <button type="submit" id="btnEnviar" disabled>Enviar Mensaje</button>
                 <div id="formStatus" style="margin-top:10px"></div>
             </form>
@@ -341,64 +341,8 @@
     </div>
 </footer>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="main.js" defer></script>
-
-<script>
-    let recaptchaScriptLoaded = false;
-    const contactSection = document.getElementById('contacto');
-    const formInputs = contactSection.querySelectorAll('input, textarea');
-    const btnEnviar = document.getElementById('btnEnviar');
-
-    function loadRecaptchaScript() {
-        if (!recaptchaScriptLoaded) {
-            const script = document.createElement('script');
-            script.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
-            script.async = true;
-            script.defer = true;
-            document.head.appendChild(script);
-            recaptchaScriptLoaded = true;
-            console.log('reCAPTCHA script loaded dynamically.');
-        }
-    }
-
-    // Callback de reCAPTCHA cuando se carga (se ejecuta globalmente)
-    window.onloadCallback = function() {
-        if (document.querySelector('.g-recaptcha')) { // Asegúrate de que el div existe
-            grecaptcha.render(document.querySelector('.g-recaptcha'), {
-                'sitekey' : '6LfKCBwUAAAAAGBcrCEeP8bxEil1hdyyMf6mllKE',
-                'callback' : 'recaptchaCallback', // Asegúrate de que esta función está definida en main.js o globalmente
-                'theme' : 'light'
-            });
-            console.log('reCAPTCHA widget rendered.');
-        }
-    };
-
-    // Estrategia 1: Cargar reCAPTCHA cuando el usuario interactúa con la sección de contacto
-    let observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                loadRecaptchaScript();
-                observer.unobserve(entry.target); // Dejar de observar una vez que se ha cargado
-            }
-        });
-    }, { rootMargin: '0px 0px -100px 0px' }); // Cargar un poco antes de que la sección sea completamente visible
-
-    if (contactSection) {
-        observer.observe(contactSection);
-    }
-
-    // Estrategia 2 (alternativa/complementaria): Cargar reCAPTCHA al enfocar un campo del formulario
-    formInputs.forEach(input => {
-        input.addEventListener('focus', loadRecaptchaScript, { once: true });
-    });
-
-    // Asegurarse de que el botón de enviar se habilita solo cuando reCAPTCHA está verificado
-    window.recaptchaCallback = function() {
-        if (grecaptcha.getResponse() !== "") {
-            btnEnviar.disabled = false;
-        }
-    };
-</script>
 
 </body>
 </html>
