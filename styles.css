@@ -77,6 +77,22 @@ nav ul.show {
     display: block;
 }
 
+.main-logo {
+  width: 200px;
+  aspect-ratio: 493 / 155;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.secondary-logo {
+  width: 180px;
+  aspect-ratio: 480 / 87;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 @media (max-width: 800px) {
     /* MENU-TOGGLE, HEADER-BOTTOM NAV UL BÁSICO YA ESTÁN EN CRITICAL.CSS */
     .header-bottom nav ul.show {
