@@ -153,6 +153,7 @@ nav a {
 nav a:hover {
     background-color: var(--accent-orange); /* Efecto hover */
     color: var(--white);
+    text-decoration: none;
 }
 
 .contact-header a:hover {
@@ -512,6 +513,7 @@ button[type="submit"]:not(:disabled):hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
     color: var(--white); /* <-- ¡Añade esta línea! */
+    text-decoration: none;
 }
 
 /* Back to Top Button - Estilos base ya en critical.css */
