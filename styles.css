@@ -48,14 +48,44 @@
 
 /* HTML Y BODY YA ESTÁN EN CRITICAL.CSS */
 /* html {
-    scroll-behavior: smooth;
-}
+    scroll-behavior: smooth;*/
 body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: var(--dark-gray);
-    background-color: var(--light-gray);
-} */
+  font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--dark-gray, #333);
+  background-color: var(--light-gray, #f5f5f5);
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+p, li, input, textarea, button {
+  font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+}
+
+a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+a:hover, a:focus {
+  color: var(--accent-orange);
+  text-decoration: underline;
+}
+
+header, main, footer {
+  width: 100%;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
 
 /* Header Styles - La mayoría ya está en critical.css, solo mantenemos los :hover o :focus */
 /* HEADER, HEADER-TOP, LOGOS-WRAPPER, ETC. YA ESTÁN EN CRITICAL.CSS */
