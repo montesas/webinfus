@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada - Infus</title>
+    <style>
+        /* Estilos básicos para que coincida con tu web */
+        :root {
+            --primary-blue: #1a4b8c;
+            --accent-orange: #ff6b35;
+            --dark-gray: #333333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            background-color: var(--white);
+            color: var(--dark-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+            font-size: 8rem;
+            color: var(--primary-blue);
+            margin: 0;
+            line-height: 1;
+        }
+
+        h2 {
+            font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+            font-size: 2rem;
+            color: var(--dark-gray);
+            margin: 10px 0 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: var(--white);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #e55a29; /* Un tono más oscuro */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 6rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <h2>¡Ups! Página no encontrada</h2>
+        <p>Parece que la página que estás buscando no existe. Es posible que la dirección sea incorrecta o que la página se haya movido.</p>
+        <a href="/" class="button">Volver a la página principal</a>
+    </div>
+</body>
+</html>
