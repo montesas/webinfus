@@ -1,0 +1,97 @@
+# ----------------------------------------------------------------------
+# Configuraciones básicas del servidor
+# ----------------------------------------------------------------------
+# Force the character encoding to UTF-8
+AddDefaultCharset UTF-8
+
+# Evita que se pueda ver la lista de archivos de un directorio.
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # ----------------------------------------------------------------------
+    # 1. Redirecciones 301 para SEO (¡Importante!)
+    # ----------------------------------------------------------------------
+    #
+    # Redirige de las URL antiguas de Drupal a las nuevas páginas HTML.
+    # Si tus URL antiguas son diferentes, simplemente cambia la primera parte
+    # de cada línea 'RewriteRule'.
+
+    # Redirige la URL principal de Drupal a la página principal (index.html)
+    RewriteRule ^index$ /index.html [R=301,L]
+    RewriteRule ^home$ /index.html [R=301,L]
+
+    # Redirige la URL de Cookies de Drupal a cookies.html
+    RewriteRule ^cookies$ /cookies.html [R=301,L]
+
+    # Redirige la URL de Términos de Drupal a terminos.html
+    RewriteRule ^terminos$ /terminos.html [R=301,L]
+
+    # Redirige la URL de Privacidad de Drupal a privacidad.html
+    RewriteRule ^privacidad$ /privacidad.html [R=301,L]
+
+    # Redirección de www a no-www (o viceversa) y a HTTPS
+    # Aquí se redirige de www.infus.es a https://infus.es
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    # Redirige siempre a HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+</IfModule>
+
+
+# ----------------------------------------------------------------------
+# 2. Compresión Gzip
+# ----------------------------------------------------------------------
+#
+# Comprime archivos de texto (HTML, CSS, JS, etc.) para que se descarguen más rápido.
+# Si tu proveedor de hosting ya lo hace, puedes omitir esta sección.
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE "text/css" "text/html" "text/javascript" "application/javascript" "application/x-javascript" "application/json" "application/xml" "text/xml" "text/plain" "image/svg+xml"
+</IfModule>
+
+
+# ----------------------------------------------------------------------
+# 3. Caché del navegador
+# ----------------------------------------------------------------------
+#
+# Esta configuración le indica al navegador que guarde los archivos en caché.
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Archivos de imágenes (JPG, WEBP, PNG, SVG): 1 año
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # Fuentes (woff, woff2): 1 año
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+
+    # CSS y JS: 1 mes
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    
+    # HTML: 1 día
+    ExpiresByType text/html "access plus 1 day"
+</IfModule>
+
+
+# ----------------------------------------------------------------------
+# 4. Páginas de error personalizadas
+# ----------------------------------------------------------------------
+#
+# Si un usuario llega a una URL que no existe, se le muestra un error.
+# Asegúrate de crear un archivo '404.html' en la raíz de tu sitio.
+
+ErrorDocument 404 /404.html
