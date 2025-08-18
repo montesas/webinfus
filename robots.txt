@@ -1,0 +1,17 @@
+# Bloquea las carpetas de Drupal que ya no existen
+User-agent: *
+Disallow: /core/
+Disallow: /modules/
+Disallow: /profiles/
+Disallow: /themes/
+Disallow: /includes/
+Disallow: /misc/
+Disallow: /scripts/
+Disallow: /sites/
+
+# Permite el acceso al resto del sitio
+User-agent: *
+Allow: /
+
+# Indica dónde se encuentra tu sitemap 
+Sitemap: https://infus.com/sitemap.xml

@@ -1,286 +1,364 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infus - Servicio Técnico Informático en A Coruña</title>
-  <meta name="description" content="Servicio técnico informático en A Coruña. Reparación e instalación de ordenadores, aparatos electrónicos, redes, copias de seguridad, soporte remoto y mucho más.">
-  <meta name="keywords" content="servicio técnico, informática, reparación ordenadores, redes, soporte remoto, A Coruña, mantenimiento, sistemas de backup">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://infus.es/">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
- 
-  <!-- Preload fuentes locales Inter y Montserrat -->
-  <link rel="preload" href="fonts/inter-v12-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/inter-v12-latin-500.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/inter-v12-latin-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/montserrat-v25-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/montserrat-v25-latin-700.woff2" as="font" type="font/woff2" crossorigin>
- 
-  <!-- FontAwesome (si lo usas) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Fuentes locales -->
-  <link rel="stylesheet" href="css/fonts.css">
-   
-<!-- CSS crítico en línea para renderizado rápido -->
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Infus - Servicio Técnico Informático en A Coruña</title>
+ <meta name="description" content="Servicio técnico informático profesional en A Coruña. Reparación y actualización de ordenadores, redes, copias de seguridad y soporte remoto para empresas y particulares.">
+ <meta name="keywords" content="servicio técnico, informática, reparación ordenadores, redes, soporte remoto, A Coruña, mantenimiento, sistemas de backup">
+ <meta name="robots" content="index, follow">
+ <link rel="canonical" href="https://infus.es/">
+ <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+ <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+ <link rel="manifest" href="/site.webmanifest">
+ <link rel="preload" href="fonts/inter-v12-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+ <link rel="preload" href="fonts/montserrat-v25-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+ <link rel="preload" href="https://infus.es/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
-    <style>     
+<!-- CSS Crítico -->
 
-    :root{--primary-blue:#1a4b8c;--secondary-blue:#2c7ac9;--tertiary-blue:#2c3e50;--accent-orange:#ff6b35;--light-gray:#f5f5f5;--dark-gray:#333333;--white:#ffffff;--header-height:200px;--section-padding:100px;--shadow-small:0 2px 10px rgba(0,0,0,0.1);--shadow-medium:0 4px 20px rgba(0,0,0,0.15)}*{margin:0;padding:0;box-sizing:border-box}.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}html{scroll-behavior:smooth}body{  font-family: 'Inter', 'Montserrat', Arial, sans-serif;line-height: 1.6;color: var(--dark-gray, #333);background-color: var(--light-gray, #f5f5f5);}h1, h2, h3 {font-family: 'Montserrat', 'Inter', Arial, sans-serif;font-weight: 700;letter-spacing: 0.01em;}p, li, input, textarea, button {font-family: 'Inter', 'Montserrat', Arial, sans-serif;}header{position:fixed;width:100%;top:0;z-index:1000;background:var(--white);box-shadow:var(--shadow-medium)}.header-top{background:var(--white);padding:1rem;border-bottom:1px solid rgba(0,0,0,0.1)}.logos-wrapper{max-width:1200px;margin:0 auto;position:relative;padding:0.5rem}.main-logo-container{text-align:center}.secondary-logo-container{position:relative;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;padding-bottom:0}.main-logo{max-width:200px;height:63px;}.secondary-logo{max-width:180px;height:33px;}.header-bottom{background:linear-gradient(135deg,var(--primary-blue),var(--secondary-blue));color:var(--white);padding:1rem}.menu-toggle{min-width:48px;min-height:48px;background:none;border:none;color:var(--primary-blue);display:none;align-items:center;justify-content:center}nav ul{display:flex;justify-content:center;list-style:none;gap:2rem;margin:0.5rem 0;flex-wrap:wrap}@media (max-width:800px){.menu-toggle{display:flex}.header-bottom nav ul{display:none;flex-direction:column;background:#fff;position:absolute;width:100vw;left:0;top:100%;z-index:1001;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin:0;padding:0}.header-bottom nav ul li{text-align:left;padding:12px 20px;border-bottom:1px solid #eee}}nav a{color:var(--white);text-decoration:none;font-weight:500;padding:0.5rem 1rem;border-radius:4px}.contact-header{display:flex;align-items:center;gap:1.5rem}.contact-header a{color:var(--primary-blue);text-decoration:none;font-size:1rem;display:flex;align-items:center;gap:0.5em}.contact-header i {vertical-align: middle; margin-right: 0.25em;} @media (max-width:480px){.contact-header{gap:0.75rem;font-size:0.95rem}}main{margin-top:var(--header-height)}section{position:relative;scroll-margin-top:calc(var(--header-height) + 20px);padding:4rem 2rem;min-height:80vh;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;background:var(--white);margin-bottom:2rem}section:nth-child(even){background:var(--light-gray)}h2{font-size:2.5rem;text-align:center;color:var(--primary-blue);margin:0;padding:1rem 0;position:relative;margin-bottom:2rem}h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:3px;background:var(--accent-orange)}.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:3rem;max-width:1200px;width:100%}.service-card{background:var(--white);padding:2rem;border-radius:12px;box-shadow:var(--shadow-small);text-align:center}.service-card i{color:var(--primary-blue);margin-bottom:1rem;font-size:3rem; /* Tamaño para fa-3x */ vertical-align: middle;}.service-card h3{color:var(--primary-blue);margin-bottom:1rem;font-size:1.5rem}#backToTop{position:fixed;bottom:2rem;right:2rem;background:var(--accent-orange);color:var(--white);width:50px;height:50px;border-radius:50%;border:none;display:none;align-items:center;justify-content:center;font-size:1.5rem;z-index:999}#backToTop i {vertical-align: middle;}.cookie-notice{position:fixed;bottom:0;left:0;width:100%;background:var(--dark-gray);color:var(--white);padding:1.5rem;z-index:1500;display:none;box-shadow:0 -2px 10px rgba(0,0,0,0.2)}.cookie-buttons{display:flex;gap:1rem;margin-top:1rem;justify-content:center;flex-wrap:wrap}.cookie-buttons button{padding:0.8rem 1.5rem;border:none;border-radius:4px;font-weight:600}.cookie-buttons button:first-child{background:var(--accent-orange);color:var(--white)}.cookie-buttons button:not(:first-child){background:var(--light-gray);color:var(--dark-gray)}.section-animate{will-change:opacity,transform}.section-animate:not(.visible){opacity:0;transform:translateY(30px) translateX(30px)}@media (max-width:768px){:root{--section-padding: 60px}section{padding:3rem 1.5rem;margin-bottom:2rem}.header-top{padding:0.5rem;padding-bottom:1rem}.logos-wrapper{padding:0.5rem;padding-bottom:0.5rem}.secondary-logo-container{position:static;text-align:left;margin-top:1rem;margin-bottom:0.5rem}.main-logo{max-width:200px}.secondary-logo{max-width:150px}.header-bottom{padding:0.5rem}nav ul{flex-direction:column;align-items:center;gap:0.5rem}.contact-header{flex-direction:column;align-items:center;gap:0.5rem}h2{font-size:2rem}.services-grid{grid-template-columns:1fr;gap:2rem}#backToTop{bottom:1rem;right:1rem;width:40px;height:40px}}@media (max-width:480px){.header-top{padding:0.5rem}.main-logo{max-width:180px}.secondary-logo{max-width:120px}h2{font-size:1.8rem}.service-card{padding:1rem}section{padding:2rem 1rem;margin-bottom:1.5rem}.services-grid{grid-template-columns:1fr;gap:1.5rem}}footer{background:linear-gradient(135deg,var(--primary-blue),var(--tertiary-blue));color:var(--white);padding:3rem 2rem;margin-top:4rem;box-shadow:0 -2px 10px rgba(0,0,0,0.2);text-align:center}.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));justify-content:space-around;gap:3rem;max-width:1200px;margin:0 auto 2rem auto}.footer-section h3{color:var(--accent-orange);margin-bottom:1rem;font-size:1.3rem}.footer-section ul{list-style:none;padding:0}.footer-section ul li a{color:var(--white);text-decoration:none;display:block;padding:0.3rem 0}.footer-copyright{text-align:center;margin-top:2rem;font-size:0.9rem;color:var(--light-gray);border-top:1px solid rgba(255,107,53,0.2);padding-top:1rem;max-width:fit-content;margin-left:auto;margin-right:auto}.footer-copyright i{vertical-align:middle}@media (max-width:768px){.footer-content{grid-template-columns:1fr;gap:2rem;text-align:center}}.about-image img{width:100%;max-width:125px;height:auto;transition:var(--transition);padding-top:3px;aspect-ratio:125/74;object-fit:contain}
-    </style>
-    
-  <!-- CSS secundario -->
+<style>
+    :root{--primary-blue:#1a4b8c;--secondary-blue:#2c7ac9;--tertiary-blue:#2c3e50;--accent-orange:#ff6b35;--light-gray:#f5f5f5;--dark-gray:#333333;--white:#ffffff;--header-height:200px;--shadow-medium:0 4px 20px rgba(0,0,0,0.15)}
+    * {margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    /* Fuentes */
+    @font-face {font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/inter-v12-latin-regular.woff2') format('woff2')}
+    @font-face {font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/inter-v12-latin-700.woff2') format('woff2')}
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/montserrat-v25-latin-700.woff2') format('woff2')}
+
+    /* Estilos de elementos básicos de la primera vista */
+    body{
+      font-family:'Inter','Montserrat',Arial,sans-serif;
+      line-height:1.6;
+      color:var(--dark-gray,#333);
+      background-color:var(--light-gray,#f5f5f5);
+      /* Solución: Añade font-weight aquí */
+      font-weight: 400; 
+    }
+    h1,h2,h3{font-family:'Montserrat','Inter',Arial,sans-serif;font-weight:700;letter-spacing:0.01em}
+    p,li,input,textarea,button{font-family:'Inter','Montserrat',Arial,sans-serif}
+
+    /* Encabezado y navegación */
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+    header{position:fixed;width:100%;top:0;z-index:1000;background:var(--white);box-shadow:var(--shadow-medium)}
+    .header-top{background:var(--white);padding:0.5rem 1rem;border-bottom:1px solid rgba(0,0,0,0.1)}
+    .logos-wrapper{max-width:1200px;margin:0 auto;position:relative;padding:0.5rem}
+    .main-logo-container{text-align:center}
+    .secondary-logo-container{position:relative;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;padding-bottom:0}
+    .main-logo{max-width:200px;height:63px}
+    .secondary-logo{max-width:180px;height:33px}
+    .header-bottom{background:linear-gradient(135deg,var(--primary-blue),var(--secondary-blue));color:var(--white);padding:1rem}
+    .menu-toggle{min-width:48px;min-height:48px;background:none;border:none;color:var(--primary-blue);display:none;align-items:center;justify-content:center}
+    nav ul{display:flex;justify-content:center;list-style:none;gap:2rem;margin:0.5rem 0;flex-wrap:wrap}
+    nav a{color:var(--white);text-decoration:none;font-weight:500;padding:0.5rem 1rem;border-radius:4px}
+    .contact-header{display:flex;align-items:center;gap:0.7rem}
+    .contact-header a{color:var(--white);text-decoration:none;font-size:1rem;display:flex;align-items:center;gap:0.5em}
+    .whatsapp-link .fa-whatsapp{color:var(--accent-orange);font-size:1.5rem;margin-left:0.75rem}
+
+    /* Hero Banner y primera sección */
+    main{margin-top:var(--header-height)}
+    .hero-banner{background-color:var(--tertiary-blue);color:var(--white);text-align:center;padding:3rem 1rem;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:var(--header-height);width:100%;box-shadow:var(--shadow-medium)}
+    .hero-banner h2{color:var(--accent-orange);font-size:2.5rem;line-height:1.2;max-width:900px;margin:0;text-shadow:1px 1px 2px rgba(0,0,0,0.2)}
+    .hero-banner p{font-size:1.2rem;font-weight:400;max-width:800px;opacity:0.9;margin-top:1rem}
+    .divider-line{width:100px;height:3px;background:var(--accent-orange);margin-top:1.5rem}
+    section{position:relative;scroll-margin-top:calc(var(--header-height) + 20px);padding:4rem 2rem;min-height:80vh;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;background:var(--white);margin-bottom:2rem}
+    section:nth-child(even){background:var(--light-gray)}
+    h2{font-size:2.5rem;text-align:center;color:var(--primary-blue);margin:0;padding:1rem 0;position:relative;margin-bottom:2rem}
+    h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:3px;background:var(--accent-orange)}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:3rem;max-width:1200px;width:100%}
+    .service-card{background:var(--white);padding:2rem;border-radius:12px;box-shadow:var(--shadow-small);text-align:center}
+    .service-card i{color:var(--primary-blue);margin-bottom:1rem;font-size:3rem;vertical-align:middle}
+    .service-card h3{color:var(--primary-blue);margin-bottom:1rem;font-size:1.5rem}
+
+    /* Media Queries para la primera vista */
+    @media (max-width:768px){
+        section{padding:3rem 1.5rem;margin-bottom:2rem}
+        .header-top{padding:0.5rem;padding-bottom:1rem}
+        .logos-wrapper{padding:0.5rem;padding-bottom:0.5rem}
+        .secondary-logo-container{position:static;text-align:left;margin-top:1rem;margin-bottom:0.5rem}
+        .main-logo{max-width:200px}
+        .secondary-logo{max-width:150px}
+        .header-bottom{padding:0.5rem}
+        nav ul{flex-direction:column;align-items:center;gap:0.5rem}
+        .contact-header{flex-direction:column;align-items:center;gap:0.5rem}
+        h2{font-size:2rem}
+        .services-grid{grid-template-columns:1fr;gap:2rem}
+        .hero-banner h2{font-size:1.8rem}
+        .hero-banner p{font-size:1rem}
+        .hero-banner{padding:2rem 1rem}
+    }
+    @media (max-width:480px){
+        .header-top{padding:0.5rem}
+        .main-logo{max-width:180px}
+        .secondary-logo{max-width:120px}
+        h2{font-size:1.8rem}
+        .service-card{padding:1rem}
+        section{padding:2rem 1rem;margin-bottom:1.5rem}
+        .services-grid{grid-template-columns:1fr;gap:1.5rem}
+        .contact-header{gap:0.75rem;font-size:0.95rem}
+    }
+</style>
+  
+    <link rel="preload" href="font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="font-awesome/css/icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="font-awesome/css/icons.css"></noscript>
     <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
 
-    <!-- Schema.org LocalBusiness -->
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Infus Servicio Técnico Informático",
-          "image": "https://infus.es/infus.png",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Rafael Alberti, 8",
-            "addressLocality": "Fonteculler, A Coruña",
-            "addressRegion": "GA",
-            "postalCode": "15174",
-            "addressCountry": "ES"
-          },
-          "url": "https://infus.es/",
-          "telephone": "+34 981 928 212",
-          "openingHours": "Mo-Fr 09:00-19:00",
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 43.3258613,
-            "longitude": -8.3843803
-          }
-        }
-    </script>
+    {
+     "@context": "https://schema.org",
+     "@type": "LocalBusiness",
+     "name": "Infus Servicio Técnico Informático",
+     "image": "https://infus.es/images/infus.webp",
+     "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rafael Alberti, 8",
+      "addressLocality": "Fonteculler, A Coruña",
+      "addressRegion": "GA",
+      "postalCode": "15174",
+      "addressCountry": "ES"
+     },
+     "url": "https://infus.es/",
+     "telephone": "+34 981 928 212",
+     "openingHours": "Mo-Fr 09:00-19:00",
+     "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.3258613,
+      "longitude": -8.3843803
+     }
+    }
+  </script>
 </head>
 
 <body>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-15548643"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-15548643');
-    </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-15548643');
+  </script>
 
-    <a href="#main" class="visually-hidden focusable">Saltar al contenido principal</a>
-    <header>
-        <div class="header-top">
-            <div class="logos-wrapper">
-                <div class="main-logo-container">
-                    <a href="#top">
-                        <picture>
-                            <source srcset="images/infus.webp" type="image/webp">
-                            <img src="images/infus.webp" alt="Infus - Servicio Técnico Informático" class="main-logo" width="200" height="63" loading="lazy">
-                        </picture>
-                    </a>
-                </div>
-                <div class="secondary-logo-container">
-                    <picture>
-                        <source srcset="images/montella.webp" type="image/webp">
-                        <img src="images/montella.png" alt="Montella-Infus Soluciones Informáticas" class="secondary-logo" width="180" height="33" loading="lazy">
-                    </picture>
-                    <div class="contact-header">
-                        <a href="tel:+34981928212"><i class="fas fa-phone"></i>981 928 212</a>
-                        <a href="#contacto"><i class="fas fa-envelope"></i>Contacto</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header-bottom" style="position:relative;">
-            <button class="menu-toggle" id="menu-toggle"
-                aria-label="Abrir menú de navegación"
-                aria-controls="main-navigation"
-                aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="main-navigation">
-                <ul>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#nosotros">Quiénes Somos</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                    <li><a href="#ubicacion">Dónde Estamos</a></li>
-                    <li><a href="#remoto">Soporte Remoto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <div id="cookieConsent" class="cookie-notice" role="dialog" aria-label="Aviso de cookies" aria-modal="true" aria-live="polite" aria-hidden="true">
-        <p>Utilizamos cookies para mejorar su experiencia en nuestra web. Al continuar navegando, acepta nuestra política de cookies.</p>
-        <div class="cookie-buttons">
-            <button class="accept-cookies" aria-label="Aceptar cookies">Aceptar</button>
-            <button class="reject-cookies" aria-label="Rechazar cookies">Rechazar</button>
-            <button onclick="window.location.href='cookies.html'" class="more-info" aria-label="Más información sobre cookies">Más información</button>
-        </div>
-    </div>
-    
-<main id="main">
-    <h1 class="visually-hidden">Servicio Técnico Informático en A Coruña</h1>
-    <section id="servicios" class="section-animate">
-        <h2>Nuestros Servicios</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-laptop fa-3x"></i>
-                <h3>Reparación de Hardware</h3>
-                <p>Problemas en ordenadores, portátiles, tablets, monitores, impresoras, SAI y todo tipo de dispositivos electrónicos.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-network-wired fa-3x"></i>
-                <h3>Redes y Cableados</h3>
-                <p>Instalación, configuración y mantenimiento de redes empresariales y domésticas con las últimas tecnologías.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-database fa-3x"></i>
-                <h3>Copias de Seguridad</h3>
-                <p>Sistemas profesionales de backup locales y remotos para proteger sus datos.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-virus-slash fa-3x"></i>
-                <h3>Seguridad Informática</h3>
-                <p>Protegemos sus equipos y redes contra virus, malware y otras amenazas con soluciones avanzadas.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-play-circle fa-3x"></i>
-                <h3>Marketing digital</h3>
-                <p>Instalación de hardware para emisión dinámica de contenidos digitales.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-cloud fa-3x"></i>
-                <h3>Presencia en Internet</h3>
-                <p>Dominios, hosting, correo electrónico.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-headset fa-3x"></i>
-                <h3>Soporte Técnico</h3>
-                <p>Asistencia presencial y remota para resolver cualquier incidencia en sus dispositivos y sistemas.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-desktop fa-3x"></i>
-                <h3>Venta y mantenimiento</h3>
-                <p>Ordenadores y periféricos de las mejores marcas.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="nosotros" class="section-animate">
-        <h2>Quiénes Somos</h2>
-        <div class="about-container">
-            <div class="about-image">
-                <picture>
-                    <source srcset="images/ok!infus.webp" type="image/webp">
-                    <img src="images/ok!infus.png" alt="Nosotros" width="125" height="74" loading="lazy">
-                </picture>
-            </div>
-            <div class="about-text">
-                <p>En **Infus** llevamos desde el año 2008 ofreciendo soluciones tecnológicas integrales a empresas y particulares. Nuestro equipo está formado por profesionales con amplia experiencia en el sector.</p>
-                <p>Nos caracterizamos por ofrecer un servicio personalizado, rápido y eficiente, adaptándonos a las necesidades específicas de cada cliente. Trabajamos con las mejores marcas y tecnologías del mercado.</p>
-                <p>Nuestra misión es mantener sus equipos y sistemas funcionando de manera óptima para que pueda centrarse en lo que realmente importa: su negocio o sus actividades diarias.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contacto" class="section-animate">
-        <h2>Contacto</h2>
-        <div class="remote-support contact-form-wrapper">
-            <form id="contactForm" action="https://formspree.io/f/mqabjlvb" method="POST" class="contact-form">
-                <div class="form-group">
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="nombre">Nombre *</label>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" required>
-                    <label for="email">Email *</label>
-                </div>
-                <div class="form-group">
-                    <textarea id="mensaje" name="mensaje" required></textarea>
-                    <label for="mensaje">Mensaje *</label>
-                </div>
-                <div class="form-group checkbox">
-                    <label for="gdpr">
-                        <input type="checkbox" id="gdpr" name="gdpr" required>
-                        Acepto la política de protección de datos *
-                    </label>
-                </div>
-                <div class="g-recaptcha" data-sitekey="6LfKCBwUAAAAAGBcrCEeP8bxEil1hdyyMf6mllKE" data-callback="recaptchaCallback"></div>
-                <button type="submit" id="btnEnviar" disabled>Enviar Mensaje</button>
-                <div id="formStatus" style="margin-top:10px"></div>
-            </form>
-        </div>
-    </section>
-    
-    <section id="ubicacion" class="section-animate">
-        <h2>Dónde Estamos</h2>
-        <div class="location-container">
-            <div class="map">
-                <iframe data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d182.41521523582063!2d-8.381825518941604!3d43.325942613734675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e64b3deff9735%3A0x7c07ae1fb4b1f74!2sINFUS%20%7C%20Montella%20Soluciones%20Inform%C3%A1ticas!5e0!3m2!1ses!2ses!4v1753525688064!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Infus en Google Maps">
-                </iframe>
-            </div>
-            <div class="location-info">
-                <h3>Dirección</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Rafael Alberti, 8</p>
-                <p>15174 Fonteculler (La Coruña)</p>
-                <p><i class="fas fa-phone"></i> 981 928 212</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="remoto" class="section-animate">
-        <h2>Soporte Remoto</h2>
-        <div class="remote-support">
+  <a href="#main" class="visually-hidden focusable">Saltar al contenido principal</a>
+  <header>
+    <div class="header-top">
+      <div class="logos-wrapper">
+        <div class="main-logo-container">
+          <a href="#top">
             <picture>
-                <source srcset="images/Soporte_Infus.webp" type="image/webp">
-                <img src="images/Soporte_Infus.png" alt="Soporte Remoto" class="hover-effect" loading="lazy" width="400" height="280"> 
+              <source srcset="images/infus.webp" type="image/webp">
+              <img src="images/infus.webp" alt="Infus - Servicio Técnico Informático" class="main-logo" width="200" height="63" loading="lazy">
             </picture>
-            <p>Permítenos ayudarle sin necesidad de desplazamientos. Con nuestra herramienta de asistencia remota, podremos solucionar muchos problemas directamente desde nuestras oficinas.</p>
-            <a href="descargas/Soporte Infus.exe" class="download-button">
-                <i class="fas fa-download"></i> Descargar Software
-            </a>
+          </a>
         </div>
-    </section>
+        <div class="secondary-logo-container">
+          <picture>
+            <source srcset="images/montella.webp" type="image/webp">
+            <img src="images/montella.png" alt="Infus-Montella Soluciones Informáticas" class="secondary-logo" width="180" height="33" loading="lazy">
+          </picture>
+          <div class="contact-header">
+              <a href="tel:+34981928212"><i class="fas fa-phone"></i>981 92 82 12</a>
+              <a href="https://wa.me/34981928212" target="_blank" aria-label="WhatsApp" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
+              <a href="#contacto"><i class="fas fa-envelope"></i>Contacto</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-bottom" style="position:relative;">
+      <button class="menu-toggle" id="menu-toggle"
+        aria-label="Abrir menú de navegación"
+        aria-controls="main-navigation"
+        aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav id="main-navigation">
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotros">Quiénes Somos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#ubicacion">Dónde Estamos</a></li>
+          <li><a href="#remoto">Soporte Remoto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="cookieConsent" class="cookie-notice" role="dialog" aria-label="Aviso de cookies" aria-modal="true" aria-live="polite" aria-hidden="true">
+    <p>Utilizamos cookies para mejorar tu experiencia en nuestra web. Al continuar navegando, aceptas nuestra política de cookies.</p>
+    <div class="cookie-buttons">
+      <button class="accept-cookies" aria-label="Aceptar cookies">Aceptar</button>
+      <button class="reject-cookies" aria-label="Rechazar cookies">Rechazar</button>
+      <button onclick="window.location.href='cookies.html'" class="more-info" aria-label="Más información sobre cookies">Más información</button>
+    </div>
+  </div>
+
+<main id="main">
+  <div class="hero-banner">
+    <h2>En informática, electrónica y tecnología somos tu servicio técnico</h2>
+    <p>Reparamos, instalamos y asesoramos a particulares y empresas</p>
+  </div>
+
+  <h1 class="visually-hidden">Servicio Técnico Informático en A Coruña</h1>
+  <section id="servicios" class="section-animate">
+    <h2>Nuestros Servicios</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-laptop fa-3x"></i>
+        <h3>Reparación de Hardware</h3>
+        <p>Problemas en ordenadores, portátiles, tablets, monitores, impresoras, SAI y todo tipo de dispositivos electrónicos.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-network-wired fa-3x"></i>
+        <h3>Redes y Cableados</h3>
+        <p>Redes locales empresariales y domésticas. Ampliación de cobertura WIFI ¿Necesitas teletrabajar? pregúntanos.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-database fa-3x"></i>
+        <h3>Copias de Seguridad</h3>
+        <p>Sistemas profesionales de backup locales y remotos para proteger tus datos.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-virus-slash fa-3x"></i>
+        <h3>Seguridad Informática</h3>
+        <p>Protegemos tus equipos y redes contra virus, malware y otras amenazas con soluciones avanzadas.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-play-circle fa-3x"></i>
+        <h3>Marketing digital</h3>
+        <p>Instalación de hardware para emisión dinámica de contenidos digitales.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-cloud fa-3x"></i>
+        <h3>Presencia en Internet</h3>
+        <p>Dominios, hosting, correo electrónico.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-headset fa-3x"></i>
+        <h3>Soporte Técnico</h3>
+        <p>Asistencia presencial y remota para resolver cualquier incidencia en tus dispositivos y sistemas.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-desktop fa-3x"></i>
+        <h3>Venta y mantenimiento</h3>
+        <p>Ordenadores y periféricos de las mejores marcas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros" class="section-animate">
+    <h2>Quiénes Somos</h2>
+    <div class="about-container">
+      <div class="about-image">
+        <picture>
+          <source srcset="images/ok!infus.webp" type="image/webp">
+          <img src="images/ok!infus.png" alt="Nosotros" width="125" height="74" loading="lazy">
+        </picture>
+      </div>
+      <div class="about-text">
+        <p>En <strong>Infus</strong> llevamos desde el año 2008 ofreciendo soluciones tecnológicas integrales a empresas y particulares. Nuestro equipo está formado por profesionales con amplia experiencia en este sector.</p>
+        <p>Nos caracterizamos por ofrecer un servicio personalizado, rápido y eficiente, adaptándonos a las necesidades específicas de cada cliente. Trabajamos con las mejores marcas y tecnologías del mercado.</p>
+        <p>Nuestra misión es mantener tus equipos y sistemas funcionando de manera óptima para que pueda centrarse en lo que realmente importa: tu negocio o tus actividades diarias.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="section-animate">
+    <h2>Contacto</h2>
+    <div style="width:100%; display:flex; justify-content:center;">
+    <form id="contactForm" action="https://formspree.io/f/mqabjlvb" method="POST" class="contact-form">
+        <div class="form-group">
+          <input type="text" id="nombre" name="nombre" required>
+          <label for="nombre">Nombre *</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" name="email" required>
+          <label for="email">Email *</label>
+        </div>
+        <div class="form-group">
+          <textarea id="mensaje" name="mensaje" required></textarea>
+          <label for="mensaje">Mensaje *</label>
+        </div>
+        <div class="form-group checkbox">
+          <label for="gdpr">
+            <input type="checkbox" id="gdpr" name="gdpr" required>
+            Acepto la política de protección de datos *
+          </label>
+        </div>
+        <div class="g-recaptcha" data-sitekey="6LfKCBwUAAAAAGBcrCEeP8bxEil1hdyyMf6mllKE" data-callback="recaptchaCallback"></div>
+        <button type="submit" id="btnEnviar" disabled>Enviar Mensaje</button>
+        <div id="formStatus" style="margin-top:10px"></div>
+      </form>
+    </div>
+  </section>
+ 
+  <section id="ubicacion" class="section-animate">
+    <h2>Dónde Estamos</h2>
+    <div class="location-container">
+      <div class="map">
+        <iframe data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d182.41521523582063!2d-8.381825518941604!3d43.325942613734675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e64b3deff9735%3A0x7c07ae1fb4b1f74!2sINFUS%20%7C%20Montella%20Soluciones%20Inform%C3%A1ticas!5e0!3m2!1ses!2ses!4v1753525688064!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Infus en Google Maps">
+        </iframe>
+      </div>
+      <div class="location-info">
+        <h3>Dirección</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Rafael Alberti, 8</p>
+        <p>15174 Fonteculler (La Coruña)</p>
+        <p><a href="tel:+34981928212"><i class="fas fa-phone"></i>  981 92 82 12     </a>
+              <a href="https://wa.me/34981928212" target="_blank" aria-label="WhatsApp" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="remoto" class="section-animate">
+    <h2>Soporte Remoto</h2>
+    <div class="remote-support">
+      <picture>
+        <source srcset="images/Soporte_Infus.webp" type="image/webp">
+        <img src="images/Soporte_Infus.png" alt="Soporte Remoto" class="hover-effect" loading="lazy" width="400" height="280">
+      </picture>
+      <p>Permítenos ayudarte sin necesidad de desplazamientos. Con nuestra herramienta de asistencia remota, podremos solucionar muchos problemas directamente desde nuestras oficinas. Sigue las instrucciones de nuestros técnicos.</p>
+      <a href="descargas/Soporte Infus.exe" class="download-button">
+        <i class="fas fa-download"></i> Descargar Software
+      </a>
+    </div>
+  </section>
 </main>
 
 <button id="backToTop" aria-label="Volver arriba">
-    <i class="fas fa-arrow-up"></i>
+  <i class="fas fa-arrow-up"></i>
 </button>
 
 <footer>
-    <div class="footer-content">
-        <div class="footer-section">
-        <h3>Información Legal</h3>
-            <ul>
-                <li><a href="privacidad.html">Política de Privacidad</a></li>
-                <li><a href="terminos.html">Términos y Condiciones</a></li>
-                <li><a href="cookies.html">Política de Cookies</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Horario</h3>
-            <p>Lunes a Jueves: 9:00 - 14:00 y 16:00 - 19:00</p>
-            <p>Viernes: 09:00 - 14:00</p>
-        </div>
-        <div class="footer-section">
-            <h3>Contacto</h3>
-            <p>981 928 212</p>
-            <p>Rafael Alberti, 8</p>
-            <p>15174 Fonteculler (La Coruña)</p>
-        </div>
+  <div class="footer-content">
+    <div class="footer-section">
+    <h3>Información Legal</h3>
+      <ul>
+        <li><a href="privacidad.html">Política de Privacidad</a></li>
+        <li><a href="terminos.html">Términos y Condiciones</a></li>
+        <li><a href="cookies.html">Política de Cookies</a></li>
+      </ul>
     </div>
-    <div class="footer-copyright">
-        <p>© 2025 Infus - Todos los derechos reservados | Diseñado con <i class="fas fa-heart" style="color: var(--accent-orange);"></i> para ofrecer el mejor servicio</p>
+    <div class="footer-section">
+      <h3>Horario</h3>
+      <p>Lunes a Jueves: 9:00 - 14:00 y 16:00 - 19:00</p>
+      <p>Viernes: 09:00 - 14:00</p>
     </div>
+    <div class="footer-section">
+      <h3>Encuéntranos</h3>
+      <p><a href="tel:+34981928212"><i class="fas fa-phone"></i> 981 92 82 12</a><a href="https://wa.me/34981928212" target="_blank" aria-label="WhatsApp"class="whatsapp-link"><i class="fab fa-whatsapp"></i></a></p>
+      <p>Rafael Alberti, 8</p>
+      <p>15174 Fonteculler (La Coruña)</p>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <p>© 2025 Infus - Todos los derechos reservados | Diseñado con <i class="fas fa-heart" style="color: var(--accent-orange);"></i> para ofrecer el mejor servicio</p>
+  </div>
 </footer>
 
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!--<script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
 <script src="js/main.js" defer></script>
 
 </body>
