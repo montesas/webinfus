@@ -3,17 +3,17 @@
 
 // --- Variables globales y utilidades generales ---
 const header = document.querySelector('header');
+const main = document.querySelector('main');
 const backToTopButton = document.getElementById('backToTop');
 const sections = document.querySelectorAll('.section-animate');
+const menuToggle = document.getElementById('menu-toggle');
+const navList = document.querySelector('#main-navigation ul');
 
 // Debug inicial
 console.log('Elementos con clase section-animate encontrados:', sections.length);
 
 // --- Funciones para el Menú Hamburguesa ---
 function setupHamburgerMenu() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const navList = document.querySelector('#main-navigation ul');
-
     if (!menuToggle || !navList) {
         console.warn('Elementos del menú hamburguesa no encontrados (menu-toggle o #main-navigation ul).');
         return;
@@ -38,31 +38,27 @@ function setupHamburgerMenu() {
     });
 }
 
-// --- Funciones para la Gestión de Cookies ---
+// --- Funciones para la Gestión de Cookies (CORREGIDA) ---
 function setupCookieConsent() {
     const cookieNotice = document.getElementById('cookieConsent');
     if (!cookieNotice) {
-        console.warn('No se encontró el elemento #cookieConsent.');
+        console.warn('Elementos del aviso de cookies no encontrados (cookieConsent).');
         return;
+    }
+
+    const cookieConsent = localStorage.getItem('cookieConsent');
+    if (!cookieConsent) {
+        // Muestra el aviso añadiendo la clase 'show' para activar la animación CSS
+        cookieNotice.classList.add('show');
     }
 
     const acceptBtn = cookieNotice.querySelector('.accept-cookies');
     const rejectBtn = cookieNotice.querySelector('.reject-cookies');
-    const moreInfoBtn = cookieNotice.querySelector('.more-info');
-
-    const cookieConsent = localStorage.getItem('cookieConsent');
-    if (!cookieConsent) {
-        cookieNotice.style.display = 'block';
-        cookieNotice.setAttribute('aria-hidden', 'false');
-    } else {
-        cookieNotice.style.display = 'none';
-        cookieNotice.setAttribute('aria-hidden', 'true');
-    }
 
     if (acceptBtn) {
         acceptBtn.addEventListener('click', function() {
             localStorage.setItem('cookieConsent', 'accepted');
-            cookieNotice.style.display = 'none';
+            cookieNotice.classList.remove('show');
             cookieNotice.setAttribute('aria-hidden', 'true');
             console.info('Cookies aceptadas.');
         });
@@ -71,20 +67,27 @@ function setupCookieConsent() {
     if (rejectBtn) {
         rejectBtn.addEventListener('click', function() {
             localStorage.setItem('cookieConsent', 'rejected');
-            cookieNotice.style.display = 'none';
+            cookieNotice.classList.remove('show');
             cookieNotice.setAttribute('aria-hidden', 'true');
             console.info('Cookies rechazadas.');
-        });
-    }
-
-    if (moreInfoBtn) {
-        moreInfoBtn.addEventListener('click', function() {
-            window.location.href = 'cookies.html';
         });
     }
 }
 
 // --- Funciones para el Formulario de Contacto ---
+
+// Función para la carga diferida de reCAPTCHA
+let recaptchaLoaded = false;
+function loadRecaptchaScript() {
+    if (recaptchaLoaded) return;
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js?render=TU_CLAVE_DE_RECAPTCHA&onload=recaptchaCallback';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+    recaptchaLoaded = true;
+}
+
 function esEmailValido(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
@@ -98,7 +101,7 @@ function validarFormulario() {
     const enviarBtn = document.getElementById('btnEnviar');
 
     if (!nombreInput || !emailInput || !mensajeInput || !gdprCheckbox || !enviarBtn) {
-        console.warn('Uno o más elementos del formulario de contacto no se encontraron para validarFormulario.');
+        console.warn('Uno o más elementos del formulario de contacto no se encontraron.');
         return;
     }
 
@@ -114,7 +117,6 @@ function validarFormulario() {
     enviarBtn.disabled = !(nombreValido && emailValido && mensajeValido && gdprAceptado && captchaOk);
 }
 
-// Esta función debe estar disponible globalmente para que reCAPTCHA pueda llamarla.
 window.recaptchaCallback = validarFormulario;
 
 function setupContactForm() {
@@ -123,7 +125,6 @@ function setupContactForm() {
     const gdprCheckbox = document.getElementById('gdpr');
 
     if (!contactForm || !btnEnviar || !gdprCheckbox) {
-        console.warn('Elementos del formulario de contacto no encontrados para setupContactForm.');
         return;
     }
 
@@ -213,116 +214,76 @@ function setupSectionAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Dejar de observar una vez visible
+                observer.unobserve(entry.target);
             }
         });
-    }, { rootMargin: '0px 0px -100px 0px' }); // Ajusta el rootMargin para que se active antes o después
+    }, { rootMargin: '0px 0px -100px 0px' });
 
     sections.forEach(section => {
-        // Observa la sección para animar cuando entre en el viewport
         sectionObserver.observe(section);
-        // También verifica si ya está visible en la carga inicial
         const rect = section.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
             section.classList.add('visible');
-            sectionObserver.unobserve(section); // Si ya es visible, deja de observarla
+            sectionObserver.unobserve(section);
         }
     });
 }
 
-// --- Carga Diferida de Scripts de Terceros ---
-// Variable para controlar si reCAPTCHA ya se ha cargado
-let recaptchaLoaded = false;
-// Función para cargar el script de reCAPTCHA
-function loadRecaptchaScript() {
-    if (recaptchaLoaded) return; // Si ya está cargado, no hacer nada
-
-    const script = document.createElement('script');
-    script.src = "https://www.google.com/recaptcha/api.js";
-    script.async = true;
-    script.defer = true; // Mantener defer para no bloquear el renderizado
-    document.head.appendChild(script);
-    recaptchaLoaded = true;
-    console.log('Script de reCAPTCHA cargado dinámicamente.');
-}
-
-// Variable para controlar si gtag.js ya se ha cargado
-let gtmLoaded = false;
-function loadGtagScript() {
-    if (gtmLoaded) return;
-
-    const script = document.createElement('script');
-    script.src = "https://www.googletagmanager.com/gtag/js?id=G-15548643";
-    script.async = true;
-    document.head.appendChild(script);
-
-    // Inicialización de gtag.js una vez que el script se ha añadido
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-15548643');
-
-    gtmLoaded = true;
-    console.log('Script de gtag.js cargado dinámicamente.');
-}
-
-// --- Nueva Función para la Carga Diferida del Mapa ---
+// --- Función para la Carga Diferida del Mapa (Corregida) ---
 function setupMapLazyLoad() {
     const mapIframe = document.querySelector('#ubicacion .map iframe');
-
-    if (mapIframe && mapIframe.dataset.src) {
-        console.log('Mapa: iframe con data-src encontrado. Configurando IntersectionObserver.');
-        const mapObserverOptions = {
-            root: null, // viewport
-            rootMargin: '0px', // Cargar tan pronto como sea visible
-            threshold: 0.1 // Cargar cuando el 10% del iframe esté visible
-        };
-
-        const mapObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    console.log('Mapa: iframe visible. Cargando src desde data-src.');
-                    mapIframe.src = mapIframe.dataset.src;
-                    observer.unobserve(mapIframe); // Deja de observar una vez cargado
-                }
-            });
-        }, mapObserverOptions);
-
-        mapObserver.observe(mapIframe);
-    } else {
-        console.warn('Mapa: No se encontró el iframe del mapa con data-src o data-src está vacío.');
+    if (!mapIframe || !mapIframe.dataset.src) {
+        console.warn('Mapa: No se encontró el iframe del mapa con data-src.');
+        return;
     }
+    
+    const mapObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                mapIframe.src = mapIframe.dataset.src;
+                observer.unobserve(mapIframe);
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    });
+
+    mapObserver.observe(mapIframe);
 }
 
-
-// --- FUSIÓN PRINCIPAL DE Inicializaciones (DOMContentLoaded) ---
+// --- Lógica Principal al cargar la página ---
 document.addEventListener('DOMContentLoaded', function() {
     console.info('Iniciando aplicación...');
 
-    // 1. Forzar scroll al inicio
-    window.scrollTo(0, 0);
-
-    // 2. Mostrar el aviso de cookies e inicializar botones
-    setupCookieConsent();
-
-    // 3. Ajuste de margin-top dinámico al alto real del header
-    if (header) {
-        const main = document.querySelector('main');
-        if (main) {
-            requestAnimationFrame(() => {
-                main.style.marginTop = header.offsetHeight + "px";
-            });
-        }
+    // Ajuste de margin-top dinámico al alto real del header
+    if (header && main) {
+        requestAnimationFrame(() => {
+            main.style.marginTop = header.offsetHeight + "px";
+        });
     }
 
-    // 4. Back to Top (botón) - Gestionado en el scroll event, solo se inicializa aquí
+    // Inicializar el aviso de cookies
+    setupCookieConsent();
+    
+    // Inicializar el menú hamburguesa
+    setupHamburgerMenu();
+
+    // Inicializar y validar formulario de contacto
+    setupContactForm();
+    validarFormulario();
+
+    // Inicializar animaciones de sección
+    setupSectionAnimations();
+
+    // Botón de volver arriba
     if (backToTopButton) {
         backToTopButton.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
-    // 5. Scroll + mostrar botón Back to Top (solo para el botón, animaciones con Observer)
     window.addEventListener('scroll', function() {
         if (backToTopButton) {
             const currentDisplay = backToTopButton.style.display;
@@ -335,11 +296,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, { passive: true });
 
-    // 6. Enlaces del menú con scroll ajustado y cierre menú hamburguesa
+    // Enlaces del menú con scroll ajustado
     document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href && href.startsWith('#')) {
+        const href = anchor.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetSection = document.querySelector(href);
                 if (targetSection) {
@@ -350,23 +311,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     );
                     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                 }
-            }
-            const menuToggle = document.getElementById('menu-toggle');
-            const navList = document.querySelector('#main-navigation ul');
-
-            if (menuToggle && getComputedStyle(menuToggle).display !== 'none' && navList && navList.classList.contains('show')) {
-                menuToggle.click();
-            }
-        });
+                if (menuToggle && getComputedStyle(menuToggle).display !== 'none' && navList && navList.classList.contains('show')) {
+                    menuToggle.click();
+                }
+            });
+        }
     });
-
-    // 7. Inicializar el menú hamburguesa
-    setupHamburgerMenu();
-
-    // 8. Inicializar y validar formulario de contacto
-    setupContactForm();
-    validarFormulario();
-
+    
     // Carga diferida de reCAPTCHA
     const contactSection = document.getElementById('contacto');
     if (contactSection) {
@@ -386,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 9. Botón de descarga de software
+    // Botón de descarga de software
     const downloadBtn = document.querySelector('.download-button');
     if (downloadBtn) {
         downloadBtn.addEventListener('click', function (event) {
@@ -401,45 +352,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 10. Inicializar animaciones de sección con IntersectionObserver
-    setupSectionAnimations();
-
-    // 11. Lazy loading para imágenes con 'loading="lazy"' en HTML (simplificación si usas el atributo nativo)
-    const lazyImages = document.querySelectorAll('img.lazy[data-src]');
-    if (lazyImages.length > 0) {
-        console.warn('Hay imágenes con la clase .lazy y data-src. Se recomienda usar el atributo loading="lazy" nativo en su lugar.');
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    const imgSrc = img.dataset.src;
-                    if (imgSrc) {
-                        img.src = imgSrc;
-                        img.removeAttribute('data-src');
-                    }
-                    img.classList.remove('lazy');
-                    observer.unobserve(img);
-                }
-            });
-        }, { rootMargin: '0px 0px 50px 0px' });
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
-
-    // 12. **¡NUEVO! Carga diferida del mapa**
+    // Carga diferida del mapa
     setupMapLazyLoad();
-
-    // Carga diferida de gtag.js
-    const delayLoadGtag = setTimeout(loadGtagScript, 5000);
-
-    ['scroll', 'mousemove', 'click', 'keydown', 'touchstart'].forEach(eventType => {
-        document.addEventListener(eventType, () => {
-            clearTimeout(delayLoadGtag);
-            loadGtagScript();
-        }, { once: true, passive: true });
-    });
 });
 
-// Nota: La comprobación del modo oscuro no requiere un listener constante, se hace una vez al cargar.
+// Nota: La carga de gtag.js a través de JS no es necesaria si ya está en el HTML.
+// Esto evita llamadas redundantes.
+// La comprobación del modo oscuro es un buen extra.
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
     if (event.matches) {
         document.body.classList.add('dark-mode');

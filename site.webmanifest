@@ -1,0 +1,21 @@
+{
+  "name": "Infus-Montella Soluciones Informáticas",
+  "short_name": "Infus",
+  "description": "Servicio técnico informático en Fonteculler, A Coruña. Venta, reparación y mantenimiento de equipos informáticos.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF5722",
+  "icons": [
+    {
+      "src": "images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
